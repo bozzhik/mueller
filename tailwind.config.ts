@@ -1,4 +1,5 @@
 import type {Config} from 'tailwindcss'
+import {fontFamily} from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
 
 export default {
@@ -9,6 +10,10 @@ export default {
       lg: {max: '1280px'},
       // md: {max: '1024px'},
       sm: {max: '500px'},
+    },
+    fontFamily: {
+      playfair: ['var(--font-playfair-display)', ...fontFamily.serif],
+      kaius: ['var(--font-kaius)', ...fontFamily.serif],
     },
     colors: {
       white: {

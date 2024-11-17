@@ -25,7 +25,7 @@ function DesktopHeader() {
         <Image src={MuellerLogo} className="object-contain w-[85%]" alt="Mueller Wagner logo" />
       </Link>
 
-      <nav className="flex items-center justify-center col-span-6 gap-8 xl:gap-4 -mt-1.5">
+      <nav className="flex items-center justify-center col-span-6 gap-8 xl:gap-4 -mt-1.5 xl:-mt-0.5">
         {Object.entries(websitePaths).map(([key, label]) => (
           <Link href={`/#${key}`} className="text-xl uppercase duration-200 border-b border-transparent xl:text-base hover:border-foreground" key={key}>
             {label}
@@ -33,7 +33,7 @@ function DesktopHeader() {
         ))}
       </nav>
 
-      <Link href="presentation.pdf" target="_blank" className="group grid col-span-2 bg-blue place-items-center -mt-1.5">
+      <Link href="presentation.pdf" target="_blank" className="group grid col-span-2 bg-blue place-items-center -mt-1.5 xl:-mt-0.5">
         <div className="flex items-center gap-2">
           <Text className="text-white" />
           <span className="pb-1 text-2xl text-white duration-500 xl:text-lg group-hover:translate-x-1">Скачать презентацию</span>

@@ -1,7 +1,13 @@
+'use client'
+
 import AdvantagesImage from '$/index/advantages.jpg'
 import DepositIcon from '$/index/success/deposit.svg'
 import ChessPiecesIcon from '$/index/success/chess-pieces.svg'
 import ChessBoardIcon from '$/index/success/chess-board.svg'
+
+import {useEffect} from 'react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/src/ScrollTrigger'
 
 import Image from 'next/image'
 import {H2, H3, H4, H6, P} from '~/UI/Typography'
@@ -32,6 +38,22 @@ const specializationData = {
 }
 
 export default function Advantages() {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    gsap.to('[data-gsap="fixed-image"]', {
+      scrollTrigger: {
+        trigger: '[data-gsap="fixed-image"]', // When the section containing the image enters the viewport
+        start: 'top top', // When the top of the section reaches the top of the viewport
+        end: 'bottom center', // When the bottom of the section reaches the top of the viewport
+        pin: true, // Pin the image for the duration of the section
+        scrub: true, // Allow smooth scrolling
+        markers: false, // Scroll markers (dev)
+        pinSpacing: false, // I disabled this shit because it added some fucking element with a random padding
+      },
+    })
+  }, [])
+
   return (
     <section data-section="advantages-index" className="relative grid grid-cols-2 sm:grid-cols-1">
       <div>
@@ -83,8 +105,8 @@ export default function Advantages() {
         </div>
       </div>
 
-      <div className="h-screen sm:hidden">
-        <Image className="block object-cover w-full h-full" src={AdvantagesImage} alt="" />
+      <div data-gsap="fixed-image" className="sm:hidden">
+        <Image className="block object-cover w-full h-screen" src={AdvantagesImage} alt="" />
       </div>
     </section>
   )

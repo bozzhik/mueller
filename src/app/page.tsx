@@ -1,3 +1,11 @@
+import {headerPadding} from '@/lib/constants'
+
+import Hero from '~~/index/Hero'
+
 export default function HomePage() {
-  return <mark>привет</mark>
+  return (
+    <main className={headerPadding}>
+      <Hero />
+    </main>
+  )
 }

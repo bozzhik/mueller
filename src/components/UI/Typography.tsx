@@ -10,10 +10,10 @@ type TypoTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'p'
 
 export const typoClasses = {
   h1: 'text-8xl xl:text-[66px] sm:text-4xl uppercase font-bold font-kaius', // H1 96px
-  h2: 'text-[44px] uppercase font-bold font-kaius', // H2 44px
-  h3: 'text-[28px] uppercase font-bold font-kaius', // H3 28px
+  h2: 'text-[44px] xl:text-3xl sm:text-2xl uppercase font-bold font-kaius', // H2 44px
+  h3: 'text-[28px] sm:text-[26px] sm:leading-[1.2] uppercase font-bold font-kaius', // H3 28px
 
-  h4: 'text-2xl font-playfair', // H3 24px
+  h4: 'text-2xl xl:text-xl font-playfair', // H3 24px
   h6: 'text-2xl xl:text-xl sm:text-lg font-light font-playfair', // Subscript[1] 24px
   p: 'text-3xl xl:text-2xl sm:text-xl font-light font-playfair', // Paragraph 28px
 }

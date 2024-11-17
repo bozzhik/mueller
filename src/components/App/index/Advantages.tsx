@@ -33,41 +33,45 @@ const specializationData = {
 
 export default function Advantages() {
   return (
-    <section data-section="advantages-index" className="relative grid grid-cols-2">
+    <section data-section="advantages-index" className="relative grid grid-cols-2 sm:grid-cols-1">
       <div>
         <div>
-          <div className="py-10 text-white px-7 bg-blue">
-            <H2>НАШИ ПРЕИМУЩЕСТВА</H2>
+          <div className="py-10 text-white sm:px-5 sm:py-4 xl:py-8 px-7 bg-blue">
+            <H2 className="sm:max-w-[20ch]">НАШИ ПРЕИМУЩЕСТВА</H2>
           </div>
 
           <div className="divide-y divide-gray">
             {Object.entries(advantagesData).map(([key, value]) => (
-              <div key={key} className="flex px-10 gap-7 py-14">
-                <H6 className="text-3xl leading-none">{key}</H6>
+              <div key={key} className="flex px-10 sm:pl-3 sm:pr-6 gap-7 xl:gap-6 py-14 xl:py-10 sm:py-7">
+                <H6 className="text-3xl !leading-none xl:text-2xl sm:text-xl">{key}</H6>
                 <P className="uppercase">{value}</P>
               </div>
             ))}
           </div>
         </div>
 
+        <div className="h-[40vh] hidden sm:block">
+          <Image className="block object-cover w-full h-full" src={AdvantagesImage} alt="" />
+        </div>
+
         <div>
-          <div className="py-10 text-white px-7 bg-blue">
-            <H2>НАША СПЕЦИАЛИЗАЦИЯ</H2>
+          <div className="py-10 text-white sm:px-5 sm:py-4 xl:py-8 px-7 bg-blue">
+            <H2 className="sm:max-w-[20ch]">НАША СПЕЦИАЛИЗАЦИЯ</H2>
           </div>
 
           <div className="divide-y divide-gray">
             {Object.entries(specializationData).map(([key, {heading, content, image}]) => (
-              <div key={key} className="flex items-start gap-10 px-10 py-14">
-                <div>
+              <div key={key} className="flex items-start gap-10 px-10 sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7">
+                <div className="s-32 xl:s-20 sm:s-16">
                   <Image className="block object-contain w-full h-full" src={image} alt={heading} />
                 </div>
 
-                <div className="space-y-0">
+                <div className="sm:space-y-1">
                   <H3>{heading}</H3>
 
-                  <div className="space-y-4 divide-y divide-gray">
+                  <div className="space-y-4 divide-y sm:space-y-3 divide-gray sm:divide-gray/30">
                     {content.map((item, index) => (
-                      <H4 className="uppercase max-w-[40ch] pt-4" key={index}>
+                      <H4 className="uppercase max-w-[40ch] pt-4 sm:pt-2.5" key={index}>
                         {item}
                       </H4>
                     ))}
@@ -79,7 +83,7 @@ export default function Advantages() {
         </div>
       </div>
 
-      <div className="h-screen">
+      <div className="h-screen sm:hidden">
         <Image className="block object-cover w-full h-full" src={AdvantagesImage} alt="" />
       </div>
     </section>

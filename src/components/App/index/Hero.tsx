@@ -16,14 +16,14 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-col justify-between pt-7 sm:gap-5">
-        <P className="uppercase px-10 sm:px-3 xl:px-7">Адвокатская коллегия нового поколения, в которую входят европейские и российские адвокаты.</P>
+        <P className="px-10 uppercase sm:px-3 xl:px-7">Адвокатская коллегия нового поколения, в которую входят европейские и российские адвокаты.</P>
 
         <div className="space-y-7 xl:space-y-5">
           <H1 className="px-10 xl:px-7 sm:px-3">Мы знаем правила игры</H1>
 
-          <div className="grid grid-cols-3 border-t border-gray divide-x divide-gray">
+          <div className="grid grid-cols-3 border-t divide-x border-gray divide-gray">
             {cities.map((city, index) => (
-              <div className="grid place-items-center py-2 sm:py-1" key={index}>
+              <div className="grid py-2 place-items-center sm:py-1 sm:pb-1.5" key={index}>
                 <H6>{city}</H6>
               </div>
             ))}

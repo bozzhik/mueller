@@ -45,7 +45,7 @@ function DesktopHeader() {
 
 function MobileHeader() {
   return (
-    <header className="fixed flex items-center justify-between w-full">
+    <header className="fixed flex items-center justify-between w-full z-[99] bg-white">
       <Link href="/" className="grid w-56 pl-3 place-items-center">
         <Image src={MuellerLogo} className="object-contain w-full h-full" alt="Mueller Wagner logo" />
       </Link>

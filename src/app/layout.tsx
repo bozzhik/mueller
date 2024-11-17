@@ -19,6 +19,8 @@ const kaius = localFont({
   variable: '--font-kaius',
 })
 
+import Header from '~/Global/Header'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`bg-white text-foreground font-playfair antialiased ${playfairDisplay.variable} ${kaius.variable}`}>{children}</body>
+      <body className={`bg-white text-foreground font-playfair antialiased ${playfairDisplay.variable} ${kaius.variable}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }

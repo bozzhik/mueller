@@ -9,9 +9,9 @@ type Props = {
 type TypoTypes = 'h1' | 'h6' | 'p'
 
 export const typoClasses = {
-  h1: 'text-8xl xl:text-[66px] uppercase font-kaius font-bold', // H1 96px
-  h6: 'text-2xl xl:text-xl font-light font-playfair', // Subscript[1] 24px
-  p: 'text-3xl xl:text-2xl font-light font-playfair', // Paragraph 28px
+  h1: 'text-8xl xl:text-[66px] sm:text-4xl uppercase font-kaius font-bold', // H1 96px
+  h6: 'text-2xl xl:text-xl sm:text-lg font-light font-playfair', // Subscript[1] 24px
+  p: 'text-3xl xl:text-2xl sm:text-xl font-light font-playfair', // Paragraph 28px
 }
 
 function Typography({type, className, children}: Props) {

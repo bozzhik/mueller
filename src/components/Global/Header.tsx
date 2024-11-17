@@ -20,7 +20,7 @@ const websitePaths = {
 
 function DesktopHeader() {
   return (
-    <header className={'fixed grid w-full h-[9vh] grid-cols-10 bg-white border-b border-gray'}>
+    <header className={'fixed z-[99] grid w-full h-[9vh] grid-cols-10 bg-white border-b border-gray'}>
       <Link href="/" className="grid col-span-2 border-r place-items-center border-gray">
         <Image src={MuellerLogo} className="object-contain w-[85%]" alt="Mueller Wagner logo" />
       </Link>

@@ -1,11 +1,10 @@
-import {headerPadding} from '@/lib/constants'
-
+import Container from '~/Global/Container'
 import Hero from '~~/index/Hero'
 
 export default function HomePage() {
   return (
-    <main className={headerPadding}>
+    <Container>
       <Hero />
-    </main>
+    </Container>
   )
 }

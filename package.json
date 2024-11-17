@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "explorer http://localhost:2000 & next dev -p 2000",
+    "dev:host": "explorer http://10.99.13.27:2000 & next dev -p 2000 -H 10.99.13.27",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

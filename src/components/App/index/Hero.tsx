@@ -1,7 +1,9 @@
-import {cn} from '@/lib/utils'
-import Image from 'next/image'
-
 import HeroImage from '$/index/hero.jpg'
+
+import {cn} from '@/lib/utils'
+
+import Image from 'next/image'
+import {H1, P} from '~/UI/Typography'
 
 export default function Hero() {
   const blockHeight = 'h-[91vh]'
@@ -13,8 +15,8 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-col justify-between px-10 py-7">
-        <p className="text-3xl uppercase">Адвокатская коллегия нового поколения, в которую входят европейские и российские адвокаты.</p>
-        <h1 className="uppercase text-8xl font-kaius">Мы знаем правила игры</h1>
+        <P className="uppercase">Адвокатская коллегия нового поколения, в которую входят европейские и российские адвокаты.</P>
+        <H1>Мы знаем правила игры</H1>
       </div>
     </section>
   )

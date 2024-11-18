@@ -1,4 +1,5 @@
-import {Rule, SchemaTypeDefinition} from 'sanity'
+import {defineType, Rule} from 'sanity'
+import {Text} from 'lucide-react'
 import {isDev} from 'sanity'
 
 export type TDetailType = 'Преимущества' | 'Специализация' | 'Успехи'
@@ -6,10 +7,11 @@ const detailBlocks: TDetailType[] = ['Преимущества', 'Специал
 
 const isAllowedValue = (value: unknown): value is TDetailType => typeof value === 'string' && detailBlocks.includes(value as TDetailType)
 
-export const detail: SchemaTypeDefinition = {
+export const detail = defineType({
   name: 'detail',
   title: 'Детали',
   type: 'document',
+  icon: Text,
   fields: [
     {
       name: 'name',
@@ -49,4 +51,4 @@ export const detail: SchemaTypeDefinition = {
       title: 'name',
     },
   },
-}
+})

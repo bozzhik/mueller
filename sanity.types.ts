@@ -74,6 +74,44 @@ export type Slug = {
   source?: string;
 };
 
+export type WorkerItem = {
+  _type: "workerItem";
+  heading?: string;
+  items?: Array<string>;
+};
+
+export type Worker = {
+  _id: string;
+  _type: "worker";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  position?: string;
+  honors?: Array<string>;
+  education?: Array<{
+    _key: string;
+  } & WorkerItem>;
+  career?: Array<{
+    _key: string;
+  } & WorkerItem>;
+  other?: Array<{
+    _key: string;
+  } & WorkerItem>;
+  languages?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type SpecializationItem = {
   _type: "specializationItem";
   heading?: string;
@@ -162,7 +200,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
@@ -176,11 +214,41 @@ export type DETAILS_QUERYResult = Array<{
   } & SpecializationItem> | null;
   achievements: Array<string> | null;
 }>;
+// Variable: WORKER_QUERY
+// Query: *[_type == "worker"]{  _id, name, position, honors, education, career, other, languages, image}
+export type WORKER_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  position: string | null;
+  honors: Array<string> | null;
+  education: Array<{
+    _key: string;
+  } & WorkerItem> | null;
+  career: Array<{
+    _key: string;
+  } & WorkerItem> | null;
+  other: Array<{
+    _key: string;
+  } & WorkerItem> | null;
+  languages: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"detail\"]{\n  _id, name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
+    "*[_type == \"worker\"]{\n  _id, name, position, honors, education, career, other, languages, image\n}": WORKER_QUERYResult;
   }
 }

@@ -1,7 +1,7 @@
 import {Rule, SchemaTypeDefinition} from 'sanity'
 import {isDev} from 'sanity'
 
-type TDetailType = 'Преимущества' | 'Специализация' | 'Успехи'
+export type TDetailType = 'Преимущества' | 'Специализация' | 'Успехи'
 const detailBlocks: TDetailType[] = ['Преимущества', 'Специализация', 'Успехи']
 
 const isAllowedValue = (value: unknown): value is TDetailType => typeof value === 'string' && detailBlocks.includes(value as TDetailType)
@@ -26,8 +26,22 @@ export const detail: SchemaTypeDefinition = {
       name: 'advantages',
       title: 'Преимущества',
       type: 'array',
-      of: [{type: 'text'}],
+      of: [{type: 'text', rows: 5}],
       hidden: ({document}) => (document?.name as TDetailType) !== 'Преимущества',
+    },
+    {
+      name: 'specialization',
+      title: 'Специализация',
+      type: 'array',
+      of: [{type: 'specializationItem'}],
+      hidden: ({document}) => (document?.name as TDetailType) !== 'Специализация',
+    },
+    {
+      name: 'achievements',
+      title: 'Успехи',
+      type: 'array',
+      of: [{type: 'text', rows: 5}],
+      hidden: ({document}) => (document?.name as TDetailType) !== 'Успехи',
     },
   ],
   preview: {

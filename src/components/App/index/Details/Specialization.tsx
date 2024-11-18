@@ -7,8 +7,8 @@ import {H2, H3, H4} from '~/UI/Typography'
 export default function Specialization({data}: {data: SpecializationItem[]}) {
   return (
     <section id="specialization" data-section="details-specialization-index">
-      <div className="py-10 text-white sm:px-5 sm:py-4 xl:py-8 px-7 bg-blue">
-        <H2 className="sm:max-w-[20ch]">НАША СПЕЦИАЛИЗАЦИЯ</H2>
+      <div className="p-10 text-white sm:px-5 sm:py-4 xl:py-8 bg-blue">
+        <H2 className="sm:max-w-[20ch]">Наша специализация</H2>
       </div>
 
       <div className="divide-y divide-gray">
@@ -16,7 +16,7 @@ export default function Specialization({data}: {data: SpecializationItem[]}) {
           const imageUrl = image?.asset ? urlFor(image).url() : null
 
           return (
-            <div key={idx} className="flex items-start gap-10 px-10 sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7">
+            <div className="flex items-start gap-10 px-10 sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7" key={idx}>
               {imageUrl && (
                 <div className="s-32 xl:s-20 sm:s-16">
                   <Image className="block object-contain w-full h-full" src={imageUrl} alt={heading || ''} width={128} height={128} />

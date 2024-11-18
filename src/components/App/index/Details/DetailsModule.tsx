@@ -1,6 +1,6 @@
 'use client'
 
-import DetailsModuleImage from '$/index/advantages.jpg'
+import DetailsModuleImage from '$/index/details.jpg'
 
 import {cn} from '#/src/lib/utils'
 import {SpecializationItem} from '#/sanity.types'
@@ -25,7 +25,7 @@ export default function DetailsModule({advantages, specialization}: {advantages:
       scrollTrigger: {
         trigger: '[data-gsap="fixed-image"]',
         start: 'top top',
-        end: 'bottom center',
+        end: 'bottom bottom',
         pin: true,
         scrub: true,
         markers: false,
@@ -35,7 +35,7 @@ export default function DetailsModule({advantages, specialization}: {advantages:
   }, [])
 
   return (
-    <section data-section="details-index" className="relative grid grid-cols-2 sm:grid-cols-1">
+    <section data-section="details-index" className="overflow-hidden relative grid grid-cols-2 sm:grid-cols-1">
       <div>
         <Advantages data={advantages} />
 

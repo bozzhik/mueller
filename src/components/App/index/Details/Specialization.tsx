@@ -6,7 +6,7 @@ import {H2, H3, H4} from '~/UI/Typography'
 
 export default function Specialization({data}: {data: SpecializationItem[]}) {
   return (
-    <section data-section="details-specialization-index">
+    <section id="specialization" data-section="details-specialization-index">
       <div className="py-10 text-white sm:px-5 sm:py-4 xl:py-8 px-7 bg-blue">
         <H2 className="sm:max-w-[20ch]">НАША СПЕЦИАЛИЗАЦИЯ</H2>
       </div>

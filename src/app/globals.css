@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 #sanity {
-  position: relative;
-  z-index: 9999;
+  @apply relative z-[9999];
+}
+
+#advantages,
+#specialization {
+  @apply scroll-mt-20;
 }

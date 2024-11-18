@@ -9,7 +9,7 @@ import MuellerLogo from '$/logo.svg'
 import {Text, MenuIcon} from 'lucide-react'
 
 const websitePaths = {
-  services: 'Преимущества',
+  advantages: 'Преимущества',
   specialization: 'Специализация',
   achievements: 'Успехи',
   offices: 'Офисы',

@@ -2,7 +2,7 @@ import {H2, H6, P} from '~/UI/Typography'
 
 export default function Advantages({data}: {data: string[]}) {
   return (
-    <section data-section="details-advantages-index">
+    <section id="advantages" data-section="details-advantages-index">
       <div className="py-10 text-white sm:px-5 sm:py-4 xl:py-8 px-7 bg-blue">
         <H2 className="sm:max-w-[20ch]">НАШИ ПРЕИМУЩЕСТВА</H2>
       </div>

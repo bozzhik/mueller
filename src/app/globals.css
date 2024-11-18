@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#sanity {
+  position: relative;
+  z-index: 9999;
+}

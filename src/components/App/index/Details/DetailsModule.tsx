@@ -4,10 +4,7 @@ import DetailsModuleImage from '$/index/details.jpg'
 
 import {cn} from '#/src/lib/utils'
 import {SpecializationItem} from '#/sanity.types'
-
-import {useEffect} from 'react'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/src/ScrollTrigger'
+import {useScrollTrigger} from '#/src/hooks/useScrollTrigger'
 
 import Image from 'next/image'
 import Advantages from '~~/index/Details/Advantages'
@@ -18,24 +15,10 @@ const DetailsImage = ({className}: {className?: string}) => {
 }
 
 export default function DetailsModule({advantages, specialization}: {advantages: string[]; specialization: SpecializationItem[]}) {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-    gsap.to('[data-gsap="fixed-image"]', {
-      scrollTrigger: {
-        trigger: '[data-gsap="fixed-image"]',
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: true,
-        scrub: true,
-        markers: false,
-        pinSpacing: false,
-      },
-    })
-  }, [])
+  useScrollTrigger({selector: 'fixed-image'})
 
   return (
-    <section data-section="details-index" className="overflow-hidden relative grid grid-cols-2 sm:grid-cols-1">
+    <section data-section="details-index" className="relative grid grid-cols-2 overflow-hidden sm:grid-cols-1">
       <div>
         <Advantages data={advantages} />
 
@@ -46,7 +29,7 @@ export default function DetailsModule({advantages, specialization}: {advantages:
         <Specialization data={specialization} />
       </div>
 
-      <div data-gsap="fixed-image" className="sm:hidden">
+      <div data-scroll-trigger="fixed-image" className="sm:hidden">
         <DetailsImage className="h-screen" />
       </div>
     </section>

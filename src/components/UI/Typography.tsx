@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode
 }
 
-type TypoTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'p'
+export type TypoTypes = keyof typeof typoClasses
 
 export const typoClasses = {
   h1: 'text-8xl xl:text-[66px] sm:text-4xl uppercase font-bold font-kaius', // H1 96px
@@ -16,7 +16,7 @@ export const typoClasses = {
   h4: 'text-2xl xl:text-xl font-playfair', // H3 24px
   h6: 'text-[26px] xl:text-[22px] sm:text-lg font-light font-playfair', // Subscript[1] 24px
   p: 'text-3xl xl:text-2xl sm:text-xl font-light font-playfair', // Paragraph 28px
-}
+} as const
 
 function Typography({type, className, children}: Props) {
   const Element = type

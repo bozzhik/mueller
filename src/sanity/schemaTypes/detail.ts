@@ -2,8 +2,8 @@ import {defineType, Rule} from 'sanity'
 import {Text} from 'lucide-react'
 import {isDev} from 'sanity'
 
-export type TDetailType = 'Преимущества' | 'Специализация' | 'Успехи'
-const detailBlocks: TDetailType[] = ['Преимущества', 'Специализация', 'Успехи']
+type TDetailType = (typeof detailBlocks)[number]
+const detailBlocks = ['Преимущества', 'Специализация', 'Успехи'] as const
 
 const isAllowedValue = (value: unknown): value is TDetailType => typeof value === 'string' && detailBlocks.includes(value as TDetailType)
 

@@ -98,7 +98,6 @@ export type Worker = {
   other?: Array<{
     _key: string;
   } & WorkerItem>;
-  languages?: string;
   id?: number;
   image?: {
     asset?: {
@@ -215,7 +214,7 @@ export type DETAILS_QUERYResult = Array<{
   achievements: Array<string> | null;
 }>;
 // Variable: WORKERS_QUERY
-// Query: *[_type == "worker"]{  id, name, position, honors, education, career, other, languages, image}
+// Query: *[_type == "worker"]{  id, name, position, honors, education, career, other, image}
 export type WORKERS_QUERYResult = Array<{
   id: number | null;
   name: string | null;
@@ -230,7 +229,6 @@ export type WORKERS_QUERYResult = Array<{
   other: Array<{
     _key: string;
   } & WorkerItem> | null;
-  languages: string | null;
   image: {
     asset?: {
       _ref: string;
@@ -249,6 +247,6 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"detail\"]{\n  name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
-    "*[_type == \"worker\"]{\n  id, name, position, honors, education, career, other, languages, image\n}": WORKERS_QUERYResult;
+    "*[_type == \"worker\"]{\n  id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
   }
 }

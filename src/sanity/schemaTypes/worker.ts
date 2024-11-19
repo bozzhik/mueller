@@ -33,6 +33,7 @@ export const worker = defineType({
       of: [{type: 'workerItem'}],
       validation: (rule: Rule) => rule.required(),
     },
+
     defineField({
       name: 'career',
       title: 'Карьера',
@@ -45,12 +46,7 @@ export const worker = defineType({
       type: 'array',
       of: [{type: 'workerItem'}],
     }),
-    {
-      name: 'languages',
-      title: 'Языки',
-      type: 'string',
-      validation: (rule: Rule) => rule.required(),
-    },
+
     {
       name: 'id',
       title: 'ID',

@@ -5,5 +5,5 @@ export const DETAILS_QUERY = defineQuery(`*[_type == "detail"]{
 }`)
 
 export const WORKERS_QUERY = defineQuery(`*[_type == "worker"]{
-  id, name, position, honors, education, career, other, languages, image
+  id, name, position, honors, education, career, other, image
 }`)

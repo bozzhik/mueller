@@ -14,7 +14,7 @@ export default function Blog() {
         <div className="w-full h-8 bg-blue"></div>
 
         <div className="grid grid-cols-4 divide-x divide-gray">
-          <div className="self-end col-span-2 p-8 space-y-6">
+          <div className="self-end col-span-2 p-8 space-y-2">
             <H6>Блог</H6>
             <H2 className="leading-[1.2]">Подпишитесь на наш телеграм-канал «Санкционный дозор»</H2>
           </div>

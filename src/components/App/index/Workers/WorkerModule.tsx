@@ -1,18 +1,25 @@
-import {Worker, WorkerItem} from '#/sanity.types'
+'use client'
+
 import {urlFor} from '#/src/sanity/lib/image'
+import {useScrollTrigger} from '#/src/hooks/useScrollTrigger'
+import {Worker, WorkerItem} from '#/sanity.types'
 
 import Image from 'next/image'
 import {H2, H3, H6, P} from '~/UI/Typography'
 
 export const WorkerModule = ({worker, index}: {worker: Worker; index: number}) => {
-  const {id, name, position, honors, education, career, other, image} = worker
+  useScrollTrigger({selector: `fixed-image-worker-${index}`})
 
+  const {name, position, honors, education, career, other, image} = worker
   const imageUrl = image?.asset ? urlFor(image).url() : null
   const isEven = index % 2 === 0
 
   return (
-    <div className={`flex sm:flex-col-reverse justify-between items-start ${isEven && 'flex-row-reverse'}`} key={id}>
-      <div className="w-1/2 pt-12 space-y-16 xl:space-y-8 sm:space-y-4 xl:pt-10 sm:pt-6 sm:w-full">
+    <div className="relative grid grid-cols-2 overflow-hidden sm:grid-cols-1" key={index}>
+      {imageUrl && <WorkerImage imageUrl={imageUrl} index={null} className="hidden sm:block" />}
+      {isEven && imageUrl && <WorkerImage imageUrl={imageUrl} index={index} className="sm:hidden" />}
+
+      <div className="pt-12 space-y-16 xl:space-y-8 sm:space-y-4 xl:pt-10 sm:pt-6">
         <div className="px-8 space-y-6 xl:px-6 xl:space-y-4 sm:space-y-3 sm:px-3">
           <H6 className="uppercase">{position}</H6>
           <div className="space-y-3 xl:space-y-2 sm:space-y-1">
@@ -36,11 +43,7 @@ export const WorkerModule = ({worker, index}: {worker: Worker; index: number}) =
         </div>
       </div>
 
-      {imageUrl && (
-        <div className="w-[49.6vw] sm:w-full sm:h-[40vh] h-full">
-          <Image quality={100} className="block object-cover h-full" src={imageUrl} alt={name || ''} width={1000} height={1000} />
-        </div>
-      )}
+      {!isEven && imageUrl && <WorkerImage imageUrl={imageUrl} index={index} className="sm:hidden" />}
     </div>
   )
 }
@@ -57,6 +60,14 @@ const WorkerModuleItem = ({data}: {data: WorkerItem}) => {
           </div>
         ))}
       </div>
+    </div>
+  )
+}
+
+const WorkerImage = ({imageUrl, index, className}: {imageUrl: string; index: number | null; className: string}) => {
+  return (
+    <div {...(index !== null && {'data-scroll-trigger': `fixed-image-worker-${index}`})} className={className}>
+      <Image quality={100} className="block object-cover h-screen sm:h-[40vh]" src={imageUrl} width={1000} height={1000} alt="" />
     </div>
   )
 }

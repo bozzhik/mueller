@@ -12,9 +12,8 @@ const websitePaths = {
   advantages: 'Преимущества',
   specialization: 'Специализация',
   achievements: 'Успехи',
-  offices: 'Офисы',
-  media: 'Мы в СМИ',
   blog: 'Блог',
+  media: 'Мы в СМИ',
   contacts: 'Контакты',
 }
 

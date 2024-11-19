@@ -2,6 +2,7 @@ import Container from '~/Global/Container'
 import Hero from '~~/index/Hero'
 import Details from '~~/index/Details/Details'
 import Achievements from '~~/index/Achievements'
+import Blog from '~~/index/Blog'
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
       <Hero />
       <Details />
       <Achievements />
+      <Blog />
     </Container>
   )
 }

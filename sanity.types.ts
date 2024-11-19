@@ -99,6 +99,7 @@ export type Worker = {
     _key: string;
   } & WorkerItem>;
   languages?: string;
+  id?: number;
   image?: {
     asset?: {
       _ref: string;
@@ -204,9 +205,8 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
-// Query: *[_type == "detail"]{  _id, name, advantages, specialization, achievements}
+// Query: *[_type == "detail"]{  name, advantages, specialization, achievements}
 export type DETAILS_QUERYResult = Array<{
-  _id: string;
   name: "\u041F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430" | "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F" | "\u0423\u0441\u043F\u0435\u0445\u0438" | null;
   advantages: Array<string> | null;
   specialization: Array<{
@@ -214,10 +214,10 @@ export type DETAILS_QUERYResult = Array<{
   } & SpecializationItem> | null;
   achievements: Array<string> | null;
 }>;
-// Variable: WORKER_QUERY
-// Query: *[_type == "worker"]{  _id, name, position, honors, education, career, other, languages, image}
-export type WORKER_QUERYResult = Array<{
-  _id: string;
+// Variable: WORKERS_QUERY
+// Query: *[_type == "worker"]{  id, name, position, honors, education, career, other, languages, image}
+export type WORKERS_QUERYResult = Array<{
+  id: number | null;
   name: string | null;
   position: string | null;
   honors: Array<string> | null;
@@ -248,7 +248,7 @@ export type WORKER_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"detail\"]{\n  _id, name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
-    "*[_type == \"worker\"]{\n  _id, name, position, honors, education, career, other, languages, image\n}": WORKER_QUERYResult;
+    "*[_type == \"detail\"]{\n  name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
+    "*[_type == \"worker\"]{\n  id, name, position, honors, education, career, other, languages, image\n}": WORKERS_QUERYResult;
   }
 }

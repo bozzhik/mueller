@@ -52,6 +52,12 @@ export const worker = defineType({
       validation: (rule: Rule) => rule.required(),
     },
     {
+      name: 'id',
+      title: 'ID',
+      type: 'number',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
       name: 'image',
       title: 'Изображение',
       type: 'image',
@@ -60,9 +66,18 @@ export const worker = defineType({
   ],
   preview: {
     select: {
-      title: 'name',
-      subtitle: 'position',
-      media: 'image',
+      name: 'name',
+      position: 'position',
+      id: 'id',
+      image: 'image',
+    },
+    prepare(selection) {
+      const {name, position, id, image} = selection
+      return {
+        title: name,
+        subtitle: `${id} | ${position}`,
+        media: image,
+      }
     },
   },
 })

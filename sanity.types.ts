@@ -74,6 +74,31 @@ export type Slug = {
   source?: string;
 };
 
+export type News = {
+  _id: string;
+  _type: "news";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  caption?: string;
+  publisher?: string;
+  source?: string;
+  id?: number;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
 export type WorkerItem = {
   _type: "workerItem";
   heading?: string;
@@ -200,7 +225,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
@@ -241,6 +266,27 @@ export type WORKERS_QUERYResult = Array<{
     _type: "image";
   } | null;
 }>;
+// Variable: NEWS_QUERY
+// Query: *[_type == "news"]{  id, heading, caption, publisher, source, image}
+export type NEWS_QUERYResult = Array<{
+  id: number | null;
+  heading: string | null;
+  caption: string | null;
+  publisher: string | null;
+  source: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -248,5 +294,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"detail\"]{\n  name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
     "*[_type == \"worker\"]{\n  id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
+    "*[_type == \"news\"]{\n  id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
   }
 }

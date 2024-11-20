@@ -45,7 +45,7 @@ export default function NewsGrid({news, cms}: {news: NewsGridItem[]; cms: boolea
   }, [cms, handleScroll])
 
   return (
-    <section data-section="news-grid" className="grid grid-cols-4 xl:grid-cols-3 sm:grid-cols-1 divide-x divide-gray">
+    <section data-section="news-grid" className="grid grid-cols-4 xl:grid-cols-3 sm:grid-cols-1 border-t border-gray">
       {displayedNews.map((item, index) => (
         <NewsCard key={index} cms={cms} {...item} />
       ))}

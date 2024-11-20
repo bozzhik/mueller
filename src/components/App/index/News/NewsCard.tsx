@@ -41,10 +41,10 @@ export function NewsCard({heading, caption, publisher, source, id, image, media,
     return ''
   }
 
-  const imageStyles = 'border-b border-t border-gray block w-full h-[40vh] xl:h-[35vh] object-cover'
+  const imageStyles = 'border-b border-gray block w-full h-[40vh] xl:h-[35vh] object-cover'
 
   return (
-    <Link href={source || ''} className={`${id == 4 && 'xl:hidden'}`}>
+    <Link href={source || ''} className={`${id == 4 && 'xl:hidden'} border-r border-b border-gray`}>
       {imageUrl &&
         (cms ? (
           <Image

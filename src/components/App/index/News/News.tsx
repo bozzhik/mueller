@@ -1,7 +1,15 @@
+import {sanityFetch} from '@/sanity/lib/live'
+import {NEWS_QUERY} from '@/sanity/lib/queries'
+
 import Link from 'next/link'
 import {H2, H4, H6} from '~/UI/Typography'
+import NewsGrid from '~~/index/News/NewsGrid'
 
-export default function News() {
+export default async function News() {
+  const {data: news} = await sanityFetch({
+    query: NEWS_QUERY,
+  })
+
   return (
     <section id="media" data-section="news-index">
       <div className="grid items-end grid-cols-3 px-8 py-12">
@@ -12,10 +20,12 @@ export default function News() {
           </H2>
         </div>
 
-        <Link className="block duration-300 border-b-2 hover:border-transparent justify-self-end border-foreground" href="/news">
+        <Link className="block mr-12 duration-300 border-b-2 hover:border-transparent justify-self-end border-foreground" href="/news">
           <H4 className="leading-none uppercase font-kaius">Смотреть все</H4>
         </Link>
       </div>
+
+      <NewsGrid news={news} />
     </section>
   )
 }

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import MuellerLogo from '$/logo.svg'
-import {Text, MenuIcon} from 'lucide-react'
+import {MenuIcon} from 'lucide-react'
 
 const websitePaths = {
   advantages: 'Преимущества',
@@ -33,10 +33,7 @@ function DesktopHeader() {
       </nav>
 
       <Link href="presentation.pdf" target="_blank" className="group grid col-span-2 bg-blue place-items-center -mt-1.5 xl:-mt-0.5">
-        <div className="flex items-center gap-2">
-          <Text className="text-white" />
-          <span className="pb-1 text-2xl text-white duration-500 xl:text-lg group-hover:translate-x-1">Скачать презентацию</span>
-        </div>
+        <span className="pb-1 text-2xl text-white duration-500 xl:text-lg group-hover:translate-x-1">Скачать презентацию</span>
       </Link>
     </header>
   )

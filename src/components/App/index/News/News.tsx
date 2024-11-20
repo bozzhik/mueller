@@ -25,7 +25,7 @@ export default async function News() {
         </Link>
       </div>
 
-      <NewsGrid news={data} sort={true} />
+      <NewsGrid news={data} cms={true} />
     </section>
   )
 }

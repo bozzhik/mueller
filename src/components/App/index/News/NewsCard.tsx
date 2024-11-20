@@ -5,15 +5,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {H4, H6} from '~/UI/Typography'
 
-type NewsItem = NEWS_QUERYResult[number]
+type NEWS_QUERYResultItem = NEWS_QUERYResult[number]
 
-export function NewsCard({heading, caption, publisher, source, id, image}: NewsItem) {
-  const imageUrl = image?.asset ? urlFor(image).url() : null
-  // const newsPublisher = publisher || (source ? new URL(source).hostname.replace('www.', '') : '')
+type NewsCardProps = NEWS_QUERYResultItem & {
+  cms: boolean
+  media?: {
+    url: string
+    alt: string
+  }
+}
+
+export function NewsCard({heading, caption, publisher, source, id, image, media, cms}: NewsCardProps) {
+  const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
+  const imageAlt = cms ? image?.alt : media?.alt
 
   return (
     <Link href={source || ''} className={`${id == 4 && 'xl:hidden'}`}>
-      {imageUrl && <Image className="border-b border-gray block w-full h-[40vh] xl:h-[35vh] object-cover" src={imageUrl} alt={image?.alt || heading || 'Новость про Mueller Wagner'} width={300} height={200} />}
+      {imageUrl && <Image quality={100} className="border-b border-gray block w-full h-[40vh] xl:h-[35vh] object-cover" src={imageUrl} alt={imageAlt || 'Новость про Mueller Wagner'} width={300} height={200} />}
 
       <div className="px-6 pt-4 pb-16 xl:px-4 xl:pt-3 xl:pb-14 sm:pt-5 sm:pb-7 space-y-5 xl:space-y-2">
         <H6>{publisher}</H6>

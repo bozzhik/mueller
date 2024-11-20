@@ -1,3 +1,4 @@
+import RunningLine from '#/src/components/App/news/RunningLine'
 import axios from 'axios'
 import Container from '~/Global/Container'
 import NewsGrid from '~~/index/News/NewsGrid'
@@ -30,6 +31,7 @@ export default async function MediaPage() {
 
   return (
     <Container>
+      <RunningLine />
       <NewsGrid news={news} cms={false} />
     </Container>
   )

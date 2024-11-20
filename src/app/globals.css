@@ -11,3 +11,19 @@
 #achievements {
   @apply scroll-mt-20;
 }
+
+.animate-skeleton {
+  animation: skeleton 2s infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    @apply bg-gray-light/50;
+  }
+  50% {
+    @apply bg-gray-light/5;
+  }
+  100% {
+    @apply bg-gray-light/50;
+  }
+}

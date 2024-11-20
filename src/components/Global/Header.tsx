@@ -20,9 +20,10 @@ const websitePaths = {
 function DesktopHeader() {
   return (
     <header className={'fixed z-[99] grid w-full h-[9vh] grid-cols-10 bg-white border-b border-gray'}>
-      <Link href="/" className="grid col-span-2 border-r place-items-center border-gray">
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+      <a href="/" className="grid col-span-2 border-r place-items-center border-gray">
         <Image src={MuellerLogo} className="object-contain w-[85%]" alt="Mueller Wagner logo" />
-      </Link>
+      </a>
 
       <nav className="flex items-center justify-center col-span-6 gap-8 xl:gap-4 -mt-1.5 xl:-mt-0.5">
         {Object.entries(websitePaths).map(([key, label]) => (

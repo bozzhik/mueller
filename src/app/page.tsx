@@ -4,6 +4,7 @@ import Details from '~~/index/Details/Details'
 import Achievements from '~~/index/Achievements'
 import Workers from '~~/index/Workers/Workers'
 import Blog from '~~/index/Blog'
+import News from '~~/index/News/News'
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Achievements />
       <Workers />
       <Blog />
+      <News />
     </Container>
   )
 }

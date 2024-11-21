@@ -5,6 +5,7 @@ import Achievements from '~~/index/Achievements'
 import Workers from '~~/index/Workers/Workers'
 import Blog from '~~/index/Blog'
 import News from '~~/index/News/News'
+import Contacts from '~~/index/Contacts'
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Workers />
       <Blog />
       <News />
+      <Contacts />
     </Container>
   )
 }

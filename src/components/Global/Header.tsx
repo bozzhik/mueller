@@ -28,7 +28,7 @@ function DesktopHeader() {
       </nav>
 
       <Link href="presentation.pdf" target="_blank" className="grid col-span-2 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-1.5 xl:-mt-0.5">
-        <SPAN className="pb-1 text-2xl normal-case">Скачать презентацию</SPAN>
+        <SPAN className="pb-1 text-2xl normal-case xl:text-xl">Скачать презентацию</SPAN>
       </Link>
     </header>
   )

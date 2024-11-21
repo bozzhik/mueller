@@ -40,7 +40,7 @@ export default function Footer() {
             )}
 
             {colIndex === 2 && (
-              <Link href="" className={cn(hoverLinkStyles, 'sm:hidden text-gray-light hover:border-gray-light w-fit')}>
+              <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'sm:hidden text-gray-light hover:border-gray-light w-fit')}>
                 <SPAN>
                   Политика <br /> конфиденциальности
                 </SPAN>
@@ -55,7 +55,7 @@ export default function Footer() {
           <SPAN>Скачать презентацию</SPAN>
         </Link>
 
-        <Link href="" className={cn(hoverLinkStyles, 'text-gray-light hover:border-gray-light w-fit')}>
+        <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'text-gray-light border-gray-light w-fit')}>
           <SPAN>
             Политика <br /> конфиденциальности
           </SPAN>

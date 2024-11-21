@@ -10,6 +10,7 @@ export default async function Details() {
 
   const advantagesData = details.find((item) => item.name === 'Преимущества')?.advantages || []
   const specializationData = details.find((item) => item.name === 'Специализация')?.specialization || []
+  const achievementsData = details.find((item) => item.name === 'Успехи')?.achievements || []
 
-  return <DetailsModule advantages={advantagesData} specialization={specializationData} />
+  return <DetailsModule advantages={advantagesData} specialization={specializationData} achievements={achievementsData} />
 }

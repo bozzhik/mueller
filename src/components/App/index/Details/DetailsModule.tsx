@@ -9,12 +9,13 @@ import {useScrollTrigger} from '#/src/hooks/useScrollTrigger'
 import Image from 'next/image'
 import Advantages from '~~/index/Details/Advantages'
 import Specialization from '~~/index/Details/Specialization'
+import Achievements from '~~/index/Details/Achievements'
 
 const DetailsImage = ({className}: {className?: string}) => {
   return <Image className={cn('block object-cover w-full h-full', className)} src={DetailsModuleImage} alt="Преимущества Muller Wagner" />
 }
 
-export default function DetailsModule({advantages, specialization}: {advantages: string[]; specialization: SpecializationItem[]}) {
+export default function DetailsModule({advantages, specialization, achievements}: {advantages: string[]; specialization: SpecializationItem[]; achievements: string[]}) {
   useScrollTrigger({selector: 'fixed-image'})
 
   return (
@@ -27,6 +28,8 @@ export default function DetailsModule({advantages, specialization}: {advantages:
         </div>
 
         <Specialization data={specialization} />
+
+        <Achievements data={achievements} />
       </div>
 
       <div data-scroll-trigger="fixed-image" className="sm:hidden">

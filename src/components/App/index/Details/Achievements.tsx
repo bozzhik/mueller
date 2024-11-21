@@ -1,21 +1,13 @@
 import AchievementsImage from '$/index/achievements.jpg'
 
 import {cn} from '#/src/lib/utils'
-import {sanityFetch} from '@/sanity/lib/live'
-import {DETAILS_QUERY} from '@/sanity/lib/queries'
 
 import Image from 'next/image'
 import {H2, H6, P} from '~/UI/Typography'
 
-export default async function Achievements() {
-  const {data: details} = await sanityFetch({
-    query: DETAILS_QUERY,
-  })
-
-  const data = details.find((item) => item.name === 'Успехи')?.achievements || []
-
+export default function Achievements({data}: {data: string[]}) {
   return (
-    <section id="achievements" data-section="details-achievements-index" className="grid grid-cols-2 sm:grid-cols-1">
+    <section id="achievements" data-section="details-achievements-index" className="sm:flex sm:flex-col-reverse">
       <div>
         <div className="p-10 text-white sm:px-5 sm:py-4 xl:py-8 bg-blue sm:space-y-2">
           <H2 className="sm:max-w-[20ch]">Наши успехи</H2>
@@ -32,7 +24,7 @@ export default async function Achievements() {
         </div>
       </div>
 
-      <div className="relative">
+      <div className="relative hidden sm:block h-[40vh]">
         <Image quality={100} className="absolute inset-0 object-cover w-full h-full" src={AchievementsImage} alt="" />
       </div>
     </section>

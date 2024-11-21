@@ -16,6 +16,7 @@ export const typoClasses = {
   h4: 'text-2xl xl:text-xl font-playfair', // H3 24px
   h6: 'text-[26px] xl:text-[22px] sm:text-lg font-light font-playfair', // Subscript[1] 24px
   p: 'text-3xl xl:text-2xl sm:text-xl font-light font-playfair', // Paragraph 28px
+  span: 'text-xl xl:text-base uppercase font-light font-playfair', // Link 18px
 } as const
 
 function Typography({type, className, children}: Props) {
@@ -39,3 +40,4 @@ export const H3 = initElement('h3')
 export const H4 = initElement('h4')
 export const H6 = initElement('h6')
 export const P = initElement('p')
+export const SPAN = initElement('span')

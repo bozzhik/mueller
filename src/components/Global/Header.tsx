@@ -1,14 +1,14 @@
 'use client'
 
-import {useMediaQuery} from '@/hooks/useMediaQuery'
-
-import Image from 'next/image'
-import Link from 'next/link'
-
 import MuellerLogo from '$/logo.svg'
 import {MenuIcon} from 'lucide-react'
 
 import {websitePaths} from '@/lib/constants'
+import {useMediaQuery} from '@/hooks/useMediaQuery'
+
+import Image from 'next/image'
+import Link from 'next/link'
+import {SPAN} from '~/UI/Typography'
 
 function DesktopHeader() {
   return (
@@ -20,14 +20,14 @@ function DesktopHeader() {
 
       <nav className="flex items-center justify-center col-span-6 gap-8 xl:gap-4 -mt-1.5 xl:-mt-0.5">
         {Object.entries(websitePaths).map(([key, label]) => (
-          <Link href={`/#${key}`} className="text-xl uppercase duration-200 border-b border-transparent xl:text-base hover:border-foreground" key={key}>
-            {label}
+          <Link href={`/#${key}`} className="duration-200 border-b border-transparent hover:border-foreground" key={key}>
+            <SPAN>{label}</SPAN>
           </Link>
         ))}
       </nav>
 
-      <Link href="presentation.pdf" target="_blank" className="group grid col-span-2 bg-blue place-items-center -mt-1.5 xl:-mt-0.5">
-        <span className="pb-1 text-2xl text-white duration-500 xl:text-lg group-hover:translate-x-1">Скачать презентацию</span>
+      <Link href="presentation.pdf" target="_blank" className="grid col-span-2 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-1.5 xl:-mt-0.5">
+        <SPAN className="pb-1 text-2xl normal-case">Скачать презентацию</SPAN>
       </Link>
     </header>
   )

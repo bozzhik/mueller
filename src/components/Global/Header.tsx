@@ -4,6 +4,7 @@ import MuellerLogo from '$/logo.svg'
 import {MenuIcon} from 'lucide-react'
 
 import {websitePaths} from '@/lib/constants'
+import {hoverLinkStyles} from '~/Global/Footer'
 import {useMediaQuery} from '@/hooks/useMediaQuery'
 
 import Image from 'next/image'
@@ -20,7 +21,7 @@ function DesktopHeader() {
 
       <nav className="flex items-center justify-center col-span-6 gap-8 xl:gap-4 -mt-1.5 xl:-mt-0.5">
         {Object.entries(websitePaths).map(([key, label]) => (
-          <Link href={`/#${key}`} className="duration-200 border-b border-transparent hover:border-foreground" key={key}>
+          <Link href={`/#${key}`} className={hoverLinkStyles} key={key}>
             <SPAN>{label}</SPAN>
           </Link>
         ))}

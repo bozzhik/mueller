@@ -8,14 +8,7 @@ import Link from 'next/link'
 import MuellerLogo from '$/logo.svg'
 import {MenuIcon} from 'lucide-react'
 
-const websitePaths = {
-  advantages: 'Преимущества',
-  specialization: 'Специализация',
-  achievements: 'Успехи',
-  blog: 'Блог',
-  media: 'Мы в СМИ',
-  contacts: 'Контакты',
-}
+import {websitePaths} from '@/lib/constants'
 
 function DesktopHeader() {
   return (

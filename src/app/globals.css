@@ -6,6 +6,10 @@
   @apply relative z-[9999];
 }
 
+.MENU_OVERLAY {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
 #advantages,
 #specialization,
 #achievements {

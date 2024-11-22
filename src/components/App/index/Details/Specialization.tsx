@@ -2,6 +2,7 @@ import {SpecializationItem} from '#/sanity.types'
 import {urlFor} from '#/src/sanity/lib/image'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import {H2, H3, H4} from '~/UI/Typography'
 
 export default function Specialization({data}: {data: SpecializationItem[]}) {
@@ -12,13 +13,13 @@ export default function Specialization({data}: {data: SpecializationItem[]}) {
       </div>
 
       <div className="divide-y divide-gray">
-        {data.map(({heading, list, image}, idx) => {
-          const imageUrl = image?.asset ? urlFor(image).url() : null
+        {data.map(({heading, list, icon, slug}, idx) => {
+          const imageUrl = icon?.asset ? urlFor(icon).url() : null
 
           return (
-            <div className="flex items-start gap-10 px-10 sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7" key={idx}>
+            <Link href={`/specialization/${slug}`} className="group flex items-start gap-10 px-10 sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7" key={idx}>
               {imageUrl && (
-                <div className="s-32 xl:s-20 sm:s-16">
+                <div className="s-32 xl:s-20 sm:s-16 group-hover:scale-[1.07] duration-500">
                   <Image className="block object-contain w-full h-full" src={imageUrl} alt={heading || ''} width={128} height={128} />
                 </div>
               )}
@@ -34,7 +35,7 @@ export default function Specialization({data}: {data: SpecializationItem[]}) {
                   ))}
                 </div>
               </div>
-            </div>
+            </Link>
           )
         })}
       </div>

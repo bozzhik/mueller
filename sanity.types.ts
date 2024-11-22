@@ -241,7 +241,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
-// Query: *[_type == "detail"]{  name, advantages, specialization, achievements}
+// Query: *[_type == "detail"]{    name, advantages, specialization, achievements}
 export type DETAILS_QUERYResult = Array<{
   name: "\u041F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430" | "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F" | "\u0423\u0441\u043F\u0435\u0445\u0438" | null;
   advantages: Array<string> | null;
@@ -251,38 +251,37 @@ export type DETAILS_QUERYResult = Array<{
   achievements: Array<string> | null;
 }>;
 // Variable: SPECIALIZATIONS_QUERY
-// Query: *[_type == "detail" && name == 'Специализация']{  specialization[slug == $slug] {    heading, list, icon, image, slug  }}
-export type SPECIALIZATIONS_QUERYResult = Array<{
-  specialization: Array<{
-    heading: string | null;
-    list: Array<string> | null;
-    icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    slug: string | null;
-  }> | null;
-}>;
+// Query: *[_type == "detail" && name == 'Специализация']{    specialization[slug == $slug][0] {      _type, heading, list, icon, image, slug    }  }[0].specialization
+export type SPECIALIZATIONS_QUERYResult = {
+  _type: "specializationItem";
+  heading: string | null;
+  list: Array<string> | null;
+  icon: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  slug: string | null;
+} | null;
 // Variable: WORKERS_QUERY
-// Query: *[_type == "worker"]{  id, name, position, honors, education, career, other, image}
+// Query: *[_type == "worker"]{    id, name, position, honors, education, career, other, image}
 export type WORKERS_QUERYResult = Array<{
   id: number | null;
   name: string | null;
@@ -310,7 +309,7 @@ export type WORKERS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: NEWS_QUERY
-// Query: *[_type == "news"]{  id, heading, caption, publisher, source, image}
+// Query: *[_type == "news"]{    id, heading, caption, publisher, source, image}
 export type NEWS_QUERYResult = Array<{
   id: number | null;
   heading: string | null;
@@ -335,9 +334,9 @@ export type NEWS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"detail\"]{\n  name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
-    "*[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n  specialization[slug == $slug] {\n    heading, list, icon, image, slug\n  }\n}": SPECIALIZATIONS_QUERYResult;
-    "*[_type == \"worker\"]{\n  id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
-    "*[_type == \"news\"]{\n  id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
+    "\n  *[_type == \"detail\"]{\n    name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
+    "\n  *[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n    specialization[slug == $slug][0] {\n      _type, heading, list, icon, image, slug\n    }\n  }[0].specialization\n": SPECIALIZATIONS_QUERYResult;
+    "\n  *[_type == \"worker\"]{\n    id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
+    "\n  *[_type == \"news\"]{\n    id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
   }
 }

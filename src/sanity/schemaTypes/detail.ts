@@ -1,5 +1,5 @@
 import {defineType, Rule} from 'sanity'
-import {Text} from 'lucide-react'
+import {Layers} from 'lucide-react'
 import {isDev} from 'sanity'
 
 type TDetailType = (typeof detailBlocks)[number]
@@ -9,9 +9,9 @@ const isAllowedValue = (value: unknown): value is TDetailType => typeof value ==
 
 export const detail = defineType({
   name: 'detail',
-  title: 'Детали',
+  title: 'Специализация, Успехи, Преимущества',
   type: 'document',
-  icon: Text,
+  icon: Layers,
   fields: [
     {
       name: 'name',

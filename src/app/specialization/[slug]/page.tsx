@@ -1,28 +1,28 @@
 import {sanityFetch} from '@/sanity/lib/live'
 import {SPECIALIZATIONS_QUERY} from '#/src/sanity/lib/queries'
+
 import {QueryParams} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
+import Hero from '~~/specialization/Hero'
 
 export default async function Page({params}: {params: Promise<QueryParams>}) {
-  const {data: specializations} = await sanityFetch({
+  const {data: specialization} = await sanityFetch({
     query: SPECIALIZATIONS_QUERY,
     params: await params,
   })
 
-  if (!specializations || specializations.length === 0) {
+  if (!specialization) {
     return notFound()
   }
 
+  const {heading, icon, image} = specialization
+
   return (
     <Container>
-      {specializations.map((item, index) => (
-        <div className="space-y-4" key={index}>
-          <h2>{item.heading || 'Без названия'}</h2>
-          <p>Список: {item.list?.join(', ') || 'Нет данных'}</p>
-        </div>
-      ))}
+      {/* @ts-expect-error i think its because sanity new version has some bugs */}
+      <Hero heading={heading} icon={icon} image={image} />
     </Container>
   )
 }

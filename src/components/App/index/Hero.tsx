@@ -5,8 +5,9 @@ import {cn} from '@/lib/utils'
 import Image from 'next/image'
 import {H1, H6, P} from '~/UI/Typography'
 
+export const blockHeight = 'h-[91vh] sm:h-[94vh]'
+
 export default function Hero() {
-  const blockHeight = 'h-[91vh] sm:h-[94vh]'
   const cities = ['Москва', 'Берлин', 'Кирения']
 
   return (

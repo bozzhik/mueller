@@ -1,4 +1,5 @@
 import {cn} from '@/lib/utils'
+import Footer from '~/Global/Footer'
 
 type Props = {
   className?: string
@@ -9,5 +10,10 @@ type Props = {
 const sitePadding = 'pt-[9vh] sm:pt-[6vh]'
 
 export default function Container({className, offset = true, children}: Props) {
-  return <main className={cn(offset && sitePadding, className)}>{children}</main>
+  return (
+    <>
+      <main className={cn(offset && sitePadding, className)}>{children}</main>
+      <Footer />
+    </>
+  )
 }

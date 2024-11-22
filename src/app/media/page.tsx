@@ -1,6 +1,7 @@
-import RunningLine from '#/src/components/App/news/RunningLine'
 import axios from 'axios'
+
 import Container from '~/Global/Container'
+import RunningLine from '~~/news/RunningLine'
 import NewsGrid from '~~/index/News/NewsGrid'
 
 type TFeedItem = {

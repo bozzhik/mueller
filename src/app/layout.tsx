@@ -20,7 +20,6 @@ const kaius = localFont({
 })
 
 import Header from '~/Global/Header'
-import Footer from '~/Global/Footer'
 
 export default function RootLayout({
   children,
@@ -32,7 +31,6 @@ export default function RootLayout({
       <body className={`bg-white text-foreground font-playfair antialiased ${playfairDisplay.variable} ${kaius.variable}`}>
         <Header />
         {children}
-        <Footer />
       </body>
     </html>
   )

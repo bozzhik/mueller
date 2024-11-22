@@ -4,7 +4,7 @@ import ContactsForm from '~~/index/ContactsForm'
 export default function Contacts() {
   return (
     <section id="contacts" data-section="contacts-index" className="border-b border-gray">
-      <div className="grid grid-cols-2 p-10 sm:grid-cols-1 sm:gap-6 sm:px-3 xl:py-8 sm:pb-10">
+      <div className="grid grid-cols-2 px-7 py-10 sm:grid-cols-1 sm:gap-6 sm:px-3 xl:py-8 sm:pb-10">
         <div className="flex flex-col justify-between sm:gap-2.5">
           <H6 className="uppercase">Контакты</H6>
 

@@ -5,6 +5,9 @@ import {QueryParams} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
+import News from '~~/index/News/News'
+import Contacts from '~~/index/Contacts'
+
 import Hero from '~~/specialization/Hero'
 import {P} from '~/UI/Typography'
 
@@ -33,6 +36,9 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
           </div>
         ))}
       </div>
+
+      <News />
+      <Contacts />
     </Container>
   )
 }

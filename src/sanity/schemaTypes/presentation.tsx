@@ -1,7 +1,7 @@
 import {defineType, Rule} from 'sanity'
 import {FileChartLine} from 'lucide-react'
 
-type TFileType = (typeof detailBlocks)[number]
+export type TFileType = (typeof detailBlocks)[number]
 const detailBlocks = ['Общая', 'Банки', 'Ценные бумаги', 'Международные сделки'] as const
 
 const isAllowedValue = (value: unknown): value is TFileType => typeof value === 'string' && detailBlocks.includes(value as TFileType)

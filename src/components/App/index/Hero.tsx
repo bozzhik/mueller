@@ -1,8 +1,4 @@
-import HeroImage from '$/index/hero.jpg'
-
 import {cn} from '@/lib/utils'
-
-import Image from 'next/image'
 import {H1, H6, P} from '~/UI/Typography'
 
 export const blockHeight = 'h-[91vh] sm:h-[94vh]'
@@ -13,7 +9,7 @@ export default function Hero() {
   return (
     <section data-section="hero-index" className={cn('grid grid-cols-2 sm:flex sm:flex-col-reverse', blockHeight)}>
       <div className="overflow-hidden sm:h-[52vh]">
-        <Image quality={100} priority={true} className="block object-cover w-full h-full" src={HeroImage} alt="" />
+        <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25" src="/hero.mp4" />
       </div>
 
       <div className="flex flex-col justify-between pt-7 sm:gap-5">

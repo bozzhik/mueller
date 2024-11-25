@@ -39,6 +39,38 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type Presentation = {
+  _id: string;
+  _type: "presentation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: "\u041E\u0431\u0449\u0430\u044F" | "\u0411\u0430\u043D\u043A\u0438" | "\u0426\u0435\u043D\u043D\u044B\u0435 \u0431\u0443\u043C\u0430\u0433\u0438" | "\u041C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u044B\u0435 \u0441\u0434\u0435\u043B\u043A\u0438";
+  caption?: string;
+  file?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    _type: "file";
+  };
+};
+
 export type SanityFileAsset = {
   _id: string;
   _type: "sanity.fileAsset";
@@ -59,19 +91,6 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type News = {
@@ -238,7 +257,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Presentation | SanityFileAsset | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
@@ -331,6 +350,21 @@ export type NEWS_QUERYResult = Array<{
     _type: "image";
   } | null;
 }>;
+// Variable: PRESENTATIONS_QUERY
+// Query: *[_type == "presentation"]{    name, caption, file}
+export type PRESENTATIONS_QUERYResult = Array<{
+  name: "\u0411\u0430\u043D\u043A\u0438" | "\u041C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u044B\u0435 \u0441\u0434\u0435\u043B\u043A\u0438" | "\u041E\u0431\u0449\u0430\u044F" | "\u0426\u0435\u043D\u043D\u044B\u0435 \u0431\u0443\u043C\u0430\u0433\u0438" | null;
+  caption: string | null;
+  file: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    _type: "file";
+  } | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -340,5 +374,6 @@ declare module "@sanity/client" {
     "\n  *[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n    specialization[slug == $slug][0] {\n      _type, heading, list, advantages, icon, image, slug\n    }\n  }[0].specialization\n": SPECIALIZATIONS_QUERYResult;
     "\n  *[_type == \"worker\"]{\n    id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
     "\n  *[_type == \"news\"]{\n    id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
+    "\n  *[_type == \"presentation\"]{\n    name, caption, file\n}": PRESENTATIONS_QUERYResult;
   }
 }

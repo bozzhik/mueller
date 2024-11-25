@@ -11,6 +11,9 @@ importers:
       '@gsap/react':
         specifier: ^2.1.1
         version: 2.1.1
+      '@sanity/asset-utils':
+        specifier: ^2.2.0
+        version: 2.2.0
       '@sanity/client':
         specifier: ^6.22.4
         version: 6.22.4(debug@4.3.7)
@@ -1322,8 +1325,8 @@ packages:
   '@rushstack/eslint-patch@1.10.4':
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
 
-  '@sanity/asset-utils@2.1.0':
-    resolution: {integrity: sha512-++d7UEnu72eKpBBozXAFwBgsGs/AEB4uc3a3BDin9l/aomdTtI2vJQJhcriQQvUeqJnTTF3Cxa5zl/V1vau/PA==}
+  '@sanity/asset-utils@2.2.0':
+    resolution: {integrity: sha512-QgARESW9SuDJTyWANBhjhDnmFA78LDSGYKbCOLq8XO5yYDCaPtRGdjOhM8KBMm1rxOsZNqWZG74fGjhAkz1/IQ==}
     engines: {node: '>=18'}
 
   '@sanity/bifur-client@0.4.1':
@@ -6210,7 +6213,7 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.4': {}
 
-  '@sanity/asset-utils@2.1.0': {}
+  '@sanity/asset-utils@2.2.0': {}
 
   '@sanity/bifur-client@0.4.1':
     dependencies:
@@ -6331,7 +6334,7 @@ snapshots:
 
   '@sanity/import@3.37.8':
     dependencies:
-      '@sanity/asset-utils': 2.1.0
+      '@sanity/asset-utils': 2.2.0
       '@sanity/generate-help-url': 3.0.0
       '@sanity/mutator': 3.64.1
       '@sanity/uuid': 3.0.2
@@ -9574,7 +9577,7 @@ snapshots:
       '@portabletext/editor': 1.10.0(@sanity/block-tools@3.64.1(debug@4.3.7))(@sanity/schema@3.64.1(debug@4.3.7))(@sanity/types@3.64.1(debug@4.3.7))(@types/react@18.3.12)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(rxjs@7.8.1)(styled-components@6.1.13(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))
       '@portabletext/react': 3.1.0(react@19.0.0-rc-66855b96-20241106)
       '@rexxars/react-json-inspector': 8.0.1(react@19.0.0-rc-66855b96-20241106)
-      '@sanity/asset-utils': 2.1.0
+      '@sanity/asset-utils': 2.2.0
       '@sanity/bifur-client': 0.4.1
       '@sanity/block-tools': 3.64.1(debug@4.3.7)
       '@sanity/cli': 3.64.1(react@19.0.0-rc-66855b96-20241106)

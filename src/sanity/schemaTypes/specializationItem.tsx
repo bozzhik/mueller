@@ -19,6 +19,12 @@ export const specializationItem = defineType({
       validation: (Rule) => Rule.required().min(1).error('Список должен содержать хотя бы один элемент.'),
     }),
     defineField({
+      name: 'advantages',
+      title: 'Преиущества',
+      type: 'array',
+      of: [{type: 'string'}],
+    }),
+    defineField({
       name: 'icon',
       title: 'Иконка',
       type: 'image',

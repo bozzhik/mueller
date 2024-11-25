@@ -141,6 +141,7 @@ export type SpecializationItem = {
   _type: "specializationItem";
   heading?: string;
   list?: Array<string>;
+  advantages?: Array<string>;
   icon?: {
     asset?: {
       _ref: string;
@@ -251,11 +252,12 @@ export type DETAILS_QUERYResult = Array<{
   achievements: Array<string> | null;
 }>;
 // Variable: SPECIALIZATIONS_QUERY
-// Query: *[_type == "detail" && name == 'Специализация']{    specialization[slug == $slug][0] {      _type, heading, list, icon, image, slug    }  }[0].specialization
+// Query: *[_type == "detail" && name == 'Специализация']{    specialization[slug == $slug][0] {      _type, heading, list, advantages, icon, image, slug    }  }[0].specialization
 export type SPECIALIZATIONS_QUERYResult = {
   _type: "specializationItem";
   heading: string | null;
   list: Array<string> | null;
+  advantages: Array<string> | null;
   icon: {
     asset?: {
       _ref: string;
@@ -335,7 +337,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"detail\"]{\n    name, advantages, specialization, achievements\n}": DETAILS_QUERYResult;
-    "\n  *[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n    specialization[slug == $slug][0] {\n      _type, heading, list, icon, image, slug\n    }\n  }[0].specialization\n": SPECIALIZATIONS_QUERYResult;
+    "\n  *[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n    specialization[slug == $slug][0] {\n      _type, heading, list, advantages, icon, image, slug\n    }\n  }[0].specialization\n": SPECIALIZATIONS_QUERYResult;
     "\n  *[_type == \"worker\"]{\n    id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
     "\n  *[_type == \"news\"]{\n    id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
   }

@@ -17,7 +17,7 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-col justify-between pt-7 sm:gap-5">
-        <P className="px-10 uppercase sm:px-3 xl:px-7">Адвокатская коллегия нового поколения, в которую входят европейские и российские адвокаты.</P>
+        <P className="px-10 uppercase sm:px-3 xl:px-7">Коллегия адвокатов нового поколения, в которую входят европейские и российские адвокаты.</P>
 
         <div className="space-y-7 xl:space-y-5">
           <H1 className="px-10 xl:px-7 sm:px-3">Мы знаем правила игры</H1>

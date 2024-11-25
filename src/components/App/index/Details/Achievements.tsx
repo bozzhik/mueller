@@ -10,8 +10,7 @@ export default function Achievements({data}: {data: string[]}) {
     <section id="achievements" data-section="details-achievements-index" className="sm:flex sm:flex-col-reverse">
       <div>
         <div className="p-10 text-white sm:px-5 sm:py-4 xl:py-8 bg-blue sm:space-y-2">
-          <H2 className="sm:max-w-[20ch]">Наши успехи</H2>
-          <H6 className="text-white/60 max-w-[40ch] !leading-[1.2]">Достижения в защите интересов российских клиентов в Европе</H6>
+          <H2 className="sm:max-w-[20ch]">Наши достижения</H2>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-1">

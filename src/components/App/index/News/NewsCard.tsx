@@ -44,7 +44,7 @@ export function NewsCard({heading, caption, publisher, source, id, image, media,
   const imageStyles = 'border-b border-gray block w-full h-[40vh] xl:h-[35vh] object-cover'
 
   return (
-    <Link href={source || ''} className={`${cms && (id === 3 || id === 4) && 'xl:hidden'} border-r border-b border-gray`}>
+    <Link href={source || ''} className={`${cms && (id === 3 ? 'xl:hidden' : id === 4 ? 'sm:hidden' : '')} border-r border-b border-gray`}>
       {imageUrl &&
         (cms ? (
           <Image
@@ -69,7 +69,7 @@ export function NewsCard({heading, caption, publisher, source, id, image, media,
 
         <div className="space-y-2 xl:space-y-1.5">
           <H4 className="leading-[1.2] xl:leading-[1.2] font-bold uppercase font-kaius">{heading}</H4>
-          <H6 className="leading-[1.15] xl:leading-[1.1]">{caption}</H6>
+          <H6 className="leading-[1.15] xl:leading-[1.1] line-clamp-3">{caption}</H6>
         </div>
       </div>
     </Link>

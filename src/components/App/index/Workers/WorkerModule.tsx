@@ -21,7 +21,8 @@ export const WorkerModule = ({worker, index}: {worker: Worker; index: number}) =
 
       <div className="pt-12 space-y-16 xl:space-y-8 sm:space-y-4 xl:pt-10 sm:pt-6">
         <div className="px-8 space-y-6 xl:px-6 xl:space-y-4 sm:space-y-3 sm:px-3">
-          <H6 className="uppercase">{position}</H6>
+          {index == 1 && <H6 className="uppercase">{position}</H6>}
+
           <div className="space-y-3 xl:space-y-2 sm:space-y-1">
             <H2>{name}</H2>
             {honors && (

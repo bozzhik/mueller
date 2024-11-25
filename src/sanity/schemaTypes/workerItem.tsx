@@ -15,7 +15,7 @@ export const workerItem = defineType({
       name: 'items',
       title: 'Элементы',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{type: 'text', rows: 3}],
       validation: (Rule) => Rule.required(),
     }),
   ],

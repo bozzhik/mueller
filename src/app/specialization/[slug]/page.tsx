@@ -9,6 +9,7 @@ import News from '~~/index/News/News'
 import Contacts from '~~/index/Contacts'
 
 import Hero from '~~/specialization/Hero'
+import HeroExtra from '~~/specialization/HeroExtra'
 
 export default async function Page({params}: {params: Promise<QueryParams>}) {
   const {data: specialization} = await sanityFetch({
@@ -20,12 +21,17 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
     return notFound()
   }
 
-  const {heading, list, image} = specialization
+  const {heading, list, advantages, image} = specialization
 
   return (
     <Container>
-      {/* @ts-expect-error i think its because sanity new version has some bugs */}
-      <Hero heading={heading} list={list} image={image} />
+      {advantages ? (
+        /* @ts-expect-error: Sanity type issues */
+        <HeroExtra heading={heading} list={list} advantages={advantages} image={image} />
+      ) : (
+        /* @ts-expect-error: Sanity type issues */
+        <Hero heading={heading} list={list} image={image} />
+      )}
 
       <News />
       <Contacts />

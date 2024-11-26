@@ -17,7 +17,9 @@ export default function NewsGrid({news}: {news: NewsGridItem[]}) {
   const [itemsToLoad, setItemsToLoad] = useState(8)
 
   const handleScroll = useCallback(() => {
-    const bottomReached = window.innerHeight + window.scrollY >= document.body.offsetHeight
+    const buffer = 800
+    const bottomReached = window.innerHeight + window.scrollY + buffer >= document.body.offsetHeight
+
     if (bottomReached) {
       setItemsToLoad((prev) => prev + 8)
     }
@@ -28,10 +30,14 @@ export default function NewsGrid({news}: {news: NewsGridItem[]}) {
   }, [itemsToLoad, news])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    const optimizedHandleScroll = () => {
+      requestAnimationFrame(handleScroll)
+    }
+
+    window.addEventListener('scroll', optimizedHandleScroll)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', optimizedHandleScroll)
     }
   }, [handleScroll])
 

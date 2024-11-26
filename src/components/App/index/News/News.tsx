@@ -16,7 +16,7 @@ export default async function News() {
         <div className="col-span-2 space-y-3 sm:space-y-2">
           <H6>Мы в сми</H6>
           <H2 className="leading-[1.2]">
-            Освещение нашей деятельности <br /> и достижений в ведущих мировых СМИ.
+            Освещение нашей деятельности <br /> и достижений в ведущих мировых СМИ
           </H2>
         </div>
 

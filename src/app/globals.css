@@ -31,3 +31,10 @@
     @apply bg-gray-light/50;
   }
 }
+
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+}

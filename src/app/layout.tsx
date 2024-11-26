@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="scroll-smooth">
-      <body className={`bg-white text-foreground font-playfair antialiased relative overflow-x-hidden ${playfairDisplay.variable} ${kaius.variable}`}>
+      <body className={`bg-white text-foreground font-playfair antialiased relative ${playfairDisplay.variable} ${kaius.variable}`}>
         <Loader />
         <Header />
         {children}

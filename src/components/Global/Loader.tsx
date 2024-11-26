@@ -13,13 +13,13 @@ export default function Loader() {
 
   useEffect(() => {
     if (isVisible) {
-      document.documentElement.style.overflow = 'hidden'
+      document.documentElement.classList.add('no-scroll')
     } else {
-      document.documentElement.style.overflow = ''
+      document.documentElement.classList.remove('no-scroll')
     }
 
     return () => {
-      document.documentElement.style.overflow = ''
+      document.documentElement.classList.remove('no-scroll')
     }
   }, [isVisible])
 
@@ -43,7 +43,7 @@ export default function Loader() {
   return (
     isVisible && (
       <section data-section="loader" className={`fixed grid place-items-center w-screen ${screenHeight} bg-[#000] z-[99999] overflow-hidden duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="w-full h-full aspect-video sm:aspect-[9/16]">
+        <div className="w-full h-full aspect-video sm:aspect-[9/16] pointer-events-none">
           <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25" src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} />
         </div>
 

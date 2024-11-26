@@ -20,6 +20,7 @@ const kaius = localFont({
 })
 
 import Header from '~/Global/Header'
+import Loader from '~/Global/Loader'
 
 export default function RootLayout({
   children,
@@ -28,7 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="scroll-smooth">
-      <body className={`bg-white text-foreground font-playfair antialiased ${playfairDisplay.variable} ${kaius.variable}`}>
+      <body className={`bg-white text-foreground font-playfair antialiased relative overflow-x-hidden ${playfairDisplay.variable} ${kaius.variable}`}>
+        <Loader />
         <Header />
         {children}
       </body>

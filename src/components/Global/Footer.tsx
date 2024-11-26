@@ -15,7 +15,7 @@ export default function Footer() {
   const chunks = Array.from({length: 3}, (_, i) => websitePathsArray.slice(i * chunkSize, i * chunkSize + chunkSize))
 
   return (
-    <footer className="grid grid-cols-4 divide-x sm:flex sm:flex-col sm:gap-8 sm:pb-6 sm:divide-none divide-gray">
+    <footer className="grid grid-cols-4 border-t divide-x sm:flex sm:flex-col sm:gap-8 sm:pb-6 sm:divide-none divide-gray border-gray">
       <div className="flex flex-col justify-between col-span-1 p-6 sm:px-3 sm:pt-5 sm:pb-0 sm:gap-2">
         <Image src={MuellerLogo} className="object-contain w-[80%] sm:w-[66%]" alt="Mueller Wagner logo" />
 

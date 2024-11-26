@@ -7,7 +7,7 @@ import {H4} from '~/UI/Typography'
 
 export default function Loader() {
   const [isVisible, setIsVisible] = useState(true)
-  const [isFading, setIsFading] = useState(false) // Track fading animation
+  const [isFading, setIsFading] = useState(false)
   const [showSkipButton, setShowSkipButton] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
@@ -26,7 +26,7 @@ export default function Loader() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSkipButton(true)
-    }, 1500)
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -38,10 +38,12 @@ export default function Loader() {
     }, 315)
   }
 
+  const screenHeight = 'h-screen !h-svh'
+
   return (
     isVisible && (
-      <section data-section="loader" className={`fixed grid place-items-center w-screen h-screen bg-[#000] z-[99999] overflow-hidden duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="w-full h-full">
+      <section data-section="loader" className={`fixed grid place-items-center w-screen ${screenHeight} bg-[#000] z-[99999] overflow-hidden duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="w-full h-full aspect-video sm:aspect-[9/16]">
           <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25" src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} />
         </div>
 

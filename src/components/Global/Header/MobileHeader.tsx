@@ -4,9 +4,12 @@ import MuellerLogo from '$/logo.svg'
 import {MenuIcon} from 'lucide-react'
 import {X} from 'lucide-react'
 
+import {PresentationData} from '~/Global/Header'
+
 import {useState, useEffect, useRef} from 'react'
 import {useGSAP} from '@gsap/react'
 import {gsap} from 'gsap'
+import {urlForFile} from '#/src/sanity/lib/file'
 
 import {websitePaths} from '@/lib/constants'
 import {hoverLinkStyles} from '~/Global/Footer'
@@ -16,7 +19,7 @@ import Link from 'next/link'
 import {H2, SPAN} from '~/UI/Typography'
 import {cn} from '#/src/lib/utils'
 
-export function MobileHeader() {
+export function MobileHeader({presentationsData}: {presentationsData: PresentationData[]}) {
   const container = useRef<HTMLElement | null>(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -100,9 +103,13 @@ export function MobileHeader() {
             })}
           </div>
 
-          <Link href="presentation.pdf" target="_blank" className="grid w-full pt-3 pb-3.5 MENU_ITEM bg-blue place-items-center">
-            <SPAN className="text-white sm:text-lg">Скачать презентацию</SPAN>
-          </Link>
+          <div className="space-y-2 pb-14">
+            {presentationsData.map(({presentation, name}) => (
+              <Link href={urlForFile(presentation?.file?.asset?._ref || '')} target="_blank" className="grid w-full pt-3 pb-3.5 MENU_ITEM bg-blue place-items-center" key={name}>
+                <SPAN className="text-white sm:text-lg">{presentation?.caption}</SPAN>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </header>

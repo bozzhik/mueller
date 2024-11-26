@@ -1,25 +1,18 @@
 'use client'
 
 import MuellerLogo from '$/logo.svg'
-import {PRESENTATIONS_QUERYResult} from '#/sanity.types'
+
+import {PresentationData} from '~/Global/Header'
+import {urlForFile} from '#/src/sanity/lib/file'
+
 import {websitePaths} from '#/src/lib/constants'
 import {hoverLinkStyles} from '~/Global/Footer'
-import {urlForFile} from '#/src/sanity/lib/file'
 
 import Link from 'next/link'
 import Image from 'next/image'
 import {SPAN} from '~/UI/Typography'
 
-type PresentationData = {
-  presentation: PRESENTATIONS_QUERYResult[number]
-  name: string
-}
-
-interface DesktopHeaderProps {
-  presentationsData: PresentationData[]
-}
-
-export function DesktopHeader({presentationsData}: DesktopHeaderProps) {
+export function DesktopHeader({presentationsData}: {presentationsData: PresentationData[]}) {
   return (
     <header className="sm:hidden fixed z-[99] w-full h-[9vh] flex justify-between bg-white border-b border-gray">
       <div className="flex gap-10 xl:gap-6">

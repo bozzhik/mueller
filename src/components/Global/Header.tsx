@@ -6,7 +6,8 @@ import {DesktopHeader} from '~/Global/Header/DesktopHeader'
 import {MobileHeader} from '~/Global/Header/MobileHeader'
 
 type PRESENTATIONS_QUERYResultItem = PRESENTATIONS_QUERYResult[number]
-type PresentationData = {
+
+export type PresentationData = {
   presentation: PRESENTATIONS_QUERYResultItem
   name: string
 }
@@ -29,7 +30,7 @@ export default async function Header() {
   return (
     <div>
       <DesktopHeader presentationsData={presentationsData} />
-      <MobileHeader />
+      <MobileHeader presentationsData={presentationsData} />
     </div>
   )
 }

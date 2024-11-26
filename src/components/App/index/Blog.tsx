@@ -28,15 +28,9 @@ export default function Blog() {
           </Link>
         </div>
 
-        <section data-section="reach-index" className="text-white bg-blue group">
-          <Link href={links[1]} className="grid grid-cols-4 pt-6 pb-5 xl:grid-cols-2">
-            <H3 className="col-span-2 pr-20 xl:pr-0 xl:col-span-1 text-end">Cвязаться с нами</H3>
-
-            <div className="col-start-4 pl-8 xl:pr-8 xl:col-start-2 xl:flex xl:justify-end">
-              <H3 className="duration-300 border-b-2 border-transparent w-fit xl:text-end group-hover:border-white">@sanctionsexplained</H3>
-            </div>
-          </Link>
-        </section>
+        <Link href={links[1]} className="block pt-5 pb-4 text-center text-white bg-blue group">
+          <H3 className="mx-auto leading-tight duration-200 border-b-2 border-transparent group-hover:border-white w-fit">Подписаться на канал</H3>
+        </Link>
       </div>
 
       <div data-section="mobile-blog-index" className="hidden sm:block">

@@ -2,7 +2,6 @@
 
 import MuellerLogo from '$/logo.svg'
 import {PRESENTATIONS_QUERYResult} from '#/sanity.types'
-
 import {websitePaths} from '#/src/lib/constants'
 import {hoverLinkStyles} from '~/Global/Footer'
 import {urlForFile} from '#/src/sanity/lib/file'
@@ -11,19 +10,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {SPAN} from '~/UI/Typography'
 
-type PRESENTATIONS_QUERYResultItem = PRESENTATIONS_QUERYResult[number]
+type PresentationData = {
+  presentation: PRESENTATIONS_QUERYResult[number]
+  name: string
+}
 
-export function DesktopHeader({action}: {action: PRESENTATIONS_QUERYResultItem[]}) {
-  const generalPresentation = action.find((p: PRESENTATIONS_QUERYResultItem) => p.name === 'Общая')
-  const securitiesPresentation = action.find((p: PRESENTATIONS_QUERYResultItem) => p.name === 'Ценные бумаги')
+interface DesktopHeaderProps {
+  presentationsData: PresentationData[]
+}
 
-  if (!generalPresentation || !securitiesPresentation) return null
-
-  const presentations = [
-    {presentation: generalPresentation, name: 'Общая'},
-    {presentation: securitiesPresentation, name: 'Ценные бумаги'},
-  ]
-
+export function DesktopHeader({presentationsData}: DesktopHeaderProps) {
   return (
     <header className="sm:hidden fixed z-[99] w-full h-[9vh] flex justify-between bg-white border-b border-gray">
       <div className="flex gap-10 xl:gap-6">
@@ -46,7 +42,7 @@ export function DesktopHeader({action}: {action: PRESENTATIONS_QUERYResultItem[]
       </div>
 
       <div className="flex divide-x-[3px] divide-gray-light">
-        {presentations.map(({presentation, name}) => (
+        {presentationsData.map(({presentation, name}) => (
           <Link key={name} href={urlForFile(presentation?.file?.asset?._ref || '')} target="_blank" className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-1.5 xl:-mt-0.5">
             <SPAN className="block pb-1 text-2xl normal-case text-nowrap">{presentation?.caption}</SPAN>
           </Link>

@@ -9,7 +9,11 @@ export default function Hero() {
   return (
     <section data-section="hero-index" className={cn('grid grid-cols-2 sm:flex sm:flex-col-reverse', blockHeight)}>
       <div className="overflow-hidden sm:h-[52vh]">
-        <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25" src="/hero.mp4" />
+        <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25">
+          <source src="/hero.webm" type="video/webm" />
+          <source src="/hero.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
       <div className="flex flex-col justify-between pt-7 sm:gap-5">

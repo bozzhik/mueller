@@ -8,7 +8,7 @@ export const DETAILS_QUERY = defineQuery(`
 export const SPECIALIZATIONS_QUERY = defineQuery(`
   *[_type == "detail" && name == 'Специализация']{
     specialization[slug == $slug][0] {
-      _type, heading, list, advantages, icon, image, slug
+      _type, heading, list, mentions, advantages, icon, image, slug
     }
   }[0].specialization
 `)

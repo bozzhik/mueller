@@ -870,6 +870,13 @@
           },
           "optional": true
         },
+        "mentions": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "advantages": {
           "type": "objectAttribute",
           "value": {

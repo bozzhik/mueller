@@ -1,7 +1,11 @@
-import {NEWS_QUERYResult} from '#/sanity.types'
+import NewsImage1 from '$/news/1.jpg'
+import NewsImage2 from '$/news/2.jpg'
+import NewsImage3 from '$/news/3.jpg'
+import NewsImage4 from '$/news/4.jpg'
 
-import {cn} from '#/src/lib/utils'
+import {NEWS_QUERYResult} from '#/sanity.types'
 import {urlFor} from '#/src/sanity/lib/image'
+import {cn} from '#/src/lib/utils'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,8 +22,18 @@ type NewsCardProps = NEWS_QUERYResultItem & {
   cms?: boolean
 }
 
+const fallbackImages = [NewsImage1, NewsImage2, NewsImage3, NewsImage4]
+let currentImageIndex = 0
+
+function getNextImage(): string {
+  const image = fallbackImages[currentImageIndex].src
+  currentImageIndex = (currentImageIndex + 1) % fallbackImages.length
+  return image
+}
+
 export function NewsCard({heading, caption, publisher, source, image, media, className, cms}: NewsCardProps) {
   const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
+
   const imageAlt = cms ? image?.alt : media?.alt
 
   const DOMAIN_NAME_MAP: Record<string, string> = {
@@ -48,31 +62,23 @@ export function NewsCard({heading, caption, publisher, source, image, media, cla
 
   return (
     <Link href={source || ''} className={cn('border-r border-b border-gray', className)}>
-      {imageUrl &&
-        (cms ? (
-          <Image
-            quality={100}
-            className={imageStyles}
-            src={imageUrl} // src={urlFor(image).url()}
-            alt={imageAlt || 'Новость про Mueller Wagner'}
-            width={300}
-            height={200}
-          />
+      {imageUrl ? (
+        cms ? (
+          <Image quality={100} className={imageStyles} src={imageUrl} alt={imageAlt || 'Новость про Mueller Wagner'} width={300} height={200} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
-            className={imageStyles}
-            src={imageUrl} // src={media?.url}
-            alt={imageAlt || 'Новость про Mueller Wagner'}
-          />
-        ))}
+          <img className={imageStyles} src={imageUrl} alt={imageAlt || 'Новость про Mueller Wagner'} />
+        )
+      ) : (
+        <Image quality={100} className={imageStyles} src={getNextImage()} alt="Фоновое изображение для новости" width={300} height={200} />
+      )}
 
       <div className="px-6 pt-4 pb-16 space-y-5 xl:px-4 xl:pt-3 xl:pb-14 sm:pt-5 sm:pb-7 xl:space-y-2">
         <H6 className="uppercase">{getPublisher(source, publisher)}</H6>
 
         <div className="space-y-2 xl:space-y-1.5">
           <H4 className="leading-[1.2] xl:leading-[1.2] font-bold uppercase font-kaius">{heading}</H4>
-          <H6 className="leading-[1.15] xl:leading-[1.1] line-clamp-3">{caption}</H6>
+          {caption && <H6 className="leading-[1.15] xl:leading-[1.1] line-clamp-3">{caption}</H6>}
         </div>
       </div>
     </Link>

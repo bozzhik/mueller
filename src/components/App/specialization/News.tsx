@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import {H2, H6} from '~/UI/Typography'
-import NewsGrid from '~~/index/News/NewsGrid'
+import NewsGrid from '~~/specialization/NewsGrid'
 
 type TFeedItem = {
   url: string

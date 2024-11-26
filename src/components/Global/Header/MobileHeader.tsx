@@ -88,11 +88,16 @@ export function MobileHeader() {
       <section ref={container} className={`absolute inset-0 z-20 w-screen h-screen ${isMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
         <div className="flex flex-col justify-between h-full px-4 bg-white pb-14 MENU_OVERLAY pt-28 text-background">
           <div className="flex flex-col gap-3.5">
-            {Object.entries(websitePaths).map(([key, label]) => (
-              <Link href={`/#${key}`} className={cn(hoverLinkStyles, 'w-fit MENU_ITEM')} onClick={toggleMenu} key={key}>
-                <H2>{label}</H2>
-              </Link>
-            ))}
+            {Object.entries(websitePaths).map(([key, label]) => {
+              const isMedia = key === 'media'
+              const href = isMedia ? '/media' : `/#${key}`
+
+              return (
+                <Link href={href} className={cn(hoverLinkStyles, 'w-fit MENU_ITEM')} onClick={toggleMenu} key={key}>
+                  <H2>{label}</H2>
+                </Link>
+              )
+            })}
           </div>
 
           <Link href="presentation.pdf" target="_blank" className="grid w-full pt-3 pb-3.5 MENU_ITEM bg-blue place-items-center">

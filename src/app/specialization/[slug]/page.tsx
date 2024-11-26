@@ -5,11 +5,11 @@ import {QueryParams} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
-import News from '~~/index/News/News'
 import Contacts from '~~/index/Contacts'
 
 import Hero from '~~/specialization/Hero'
 import HeroExtra from '~~/specialization/HeroExtra'
+import News from '~~/specialization/News'
 
 export default async function Page({params}: {params: Promise<QueryParams>}) {
   const {data: specialization} = await sanityFetch({
@@ -21,7 +21,7 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
     return notFound()
   }
 
-  const {heading, list, advantages, image} = specialization
+  const {heading, list, mentions, advantages, image} = specialization
 
   return (
     <Container>
@@ -33,7 +33,7 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
         <Hero heading={heading} list={list} image={image} />
       )}
 
-      <News />
+      <News title={heading} feed_url={mentions} />
       <Contacts />
     </Container>
   )

@@ -20,12 +20,12 @@ export default async function News() {
           </H2>
         </div>
 
-        <Link className="block mr-12 sm:mr-0 sm:justify-self-start duration-300 border-b-2 hover:border-transparent justify-self-end border-foreground" href="/media">
+        <Link className="block mr-12 duration-300 border-b-2 sm:mr-0 sm:justify-self-start hover:border-transparent justify-self-end border-foreground" href="/media">
           <H4 className="leading-none uppercase font-kaius">Смотреть все</H4>
         </Link>
       </div>
 
-      <NewsGrid news={data} cms={true} />
+      <NewsGrid news={data} isIndex={true} />
     </section>
   )
 }

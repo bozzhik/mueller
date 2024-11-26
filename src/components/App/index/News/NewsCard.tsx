@@ -1,4 +1,6 @@
 import {NEWS_QUERYResult} from '#/sanity.types'
+
+import {cn} from '#/src/lib/utils'
 import {urlFor} from '#/src/sanity/lib/image'
 
 import Image from 'next/image'
@@ -8,14 +10,15 @@ import {H4, H6} from '~/UI/Typography'
 type NEWS_QUERYResultItem = NEWS_QUERYResult[number]
 
 type NewsCardProps = NEWS_QUERYResultItem & {
-  cms: boolean
   media?: {
     url: string
     alt: string
   }
+  className?: string
+  cms?: boolean
 }
 
-export function NewsCard({heading, caption, publisher, source, id, image, media, cms}: NewsCardProps) {
+export function NewsCard({heading, caption, publisher, source, image, media, className, cms}: NewsCardProps) {
   const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
   const imageAlt = cms ? image?.alt : media?.alt
 
@@ -41,10 +44,10 @@ export function NewsCard({heading, caption, publisher, source, id, image, media,
     return ''
   }
 
-  const imageStyles = 'border-b border-gray block w-full h-[40vh] xl:h-[35vh] object-cover'
+  const imageStyles = 'border-b border-gray block w-full h-[40vh] xl:h-[35vh] sm:h-[40vh] object-cover'
 
   return (
-    <Link href={source || ''} className={`${cms && (id === 3 ? 'xl:hidden' : id === 4 ? 'sm:hidden' : '')} border-r border-b border-gray`}>
+    <Link href={source || ''} className={cn('border-r border-b border-gray', className)}>
       {imageUrl &&
         (cms ? (
           <Image

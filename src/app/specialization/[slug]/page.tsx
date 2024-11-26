@@ -33,7 +33,7 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
         <Hero heading={heading} list={list} image={image} />
       )}
 
-      <News title={heading} feed_url={mentions} />
+      <News feed_url={mentions} />
       <Contacts />
     </Container>
   )

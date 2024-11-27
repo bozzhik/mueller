@@ -13,7 +13,7 @@ export default function Blog() {
       <div data-section="desktop-blog-index" className="sm:hidden">
         <div className="w-full h-8 bg-blue"></div>
 
-        <div className="grid grid-cols-4 divide-x divide-gray">
+        <div className="grid grid-cols-4">
           <div className="self-end col-span-2 p-8 space-y-3">
             <H6>Блог</H6>
             <H2 className="leading-[1.2]">Подпишитесь на наш телеграм-канал «Санкционный дозор»</H2>
@@ -21,7 +21,7 @@ export default function Blog() {
 
           <div></div>
 
-          <Link className="flex flex-col justify-between gap-20 p-8 xl:gap-12 group" href={links[0]} target="_blank">
+          <Link className="flex flex-col justify-between gap-20 p-8 xl:gap-12 group border-l border-gray" href={links[0]} target="_blank">
             <Image className="w-12 xl:w-10 group-hover:scale-[1.07] duration-300" src={TelegramLogo} alt="Телеграм канал Санкционный дозор" />
 
             <H3 className="leading-[1.1] border-b-2 border-transparent group-hover:border-foreground w-fit duration-300">Telegram</H3>

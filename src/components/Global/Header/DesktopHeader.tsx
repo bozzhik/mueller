@@ -34,10 +34,10 @@ export function DesktopHeader({presentationsData}: {presentationsData: Presentat
         </nav>
       </div>
 
-      <div className="flex divide-x-[3px] divide-gray-light">
+      <div className="flex divide-x-2 divide-gray-light">
         {presentationsData.map(({presentation, name}) => (
           <Link key={name} href={urlForFile(presentation?.file?.asset?._ref || '')} target="_blank" className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-1.5 xl:-mt-0.5">
-            <SPAN className="block pb-1 text-2xl normal-case text-nowrap">{presentation?.caption}</SPAN>
+            <SPAN className="block pb-1 text-[22px] text-nowrap uppercase">{presentation?.caption}</SPAN>
           </Link>
         ))}
       </div>

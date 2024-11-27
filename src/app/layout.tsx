@@ -21,6 +21,7 @@ const kaius = localFont({
 
 import Header from '~/Global/Header'
 import Loader from '~/Global/Loader'
+import YandexMetrika from '~/Global/Analytics'
 
 export default function RootLayout({
   children,
@@ -33,6 +34,8 @@ export default function RootLayout({
         <Loader />
         <Header />
         {children}
+
+        {process.env.NODE_ENV === 'production' && <YandexMetrika />}
       </body>
     </html>
   )

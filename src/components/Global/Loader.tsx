@@ -111,7 +111,10 @@ export default function Loader() {
         ) : (
           <div ref={videoContainerRef} className="grid w-full h-full opacity-0">
             <div className="w-full h-full aspect-video sm:aspect-[9/16] pointer-events-none">
-              <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25" src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} />
+              <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25">
+                <source src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} type="video/webm" />
+                <source src={isDesktop ? '/loader/desktop.mp4' : '/loader/mobile.mp4'} type="video/mp4" />
+              </video>
             </div>
 
             {showSkipButton && (

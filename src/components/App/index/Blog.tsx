@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {H2, H3, H6} from '~/UI/Typography'
 
-const links = ['https://t.me/sanctionsexplained', '/#contacts']
+const links = ['https://t.me/sanctionsexplained', '#contacts']
 
 export default function Blog() {
   return (
@@ -43,12 +43,12 @@ export default function Blog() {
           </div>
 
           <div className="space-y-2">
-            <Link className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue" href={links[0]} target="_blank">
+            <Link href={links[0]} className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue" target="_blank">
               <Image className="w-7" src={TelegramInvertLogo} alt="Телеграм канал Санкционный дозор" />
               <H3 className="sm:text-lg">sanctionsexplained</H3>
             </Link>
 
-            <Link className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue" href={links[1]} target="_blank">
+            <Link href={links[1]} className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue">
               <H3 className="sm:text-lg">Связаться с нами</H3>
             </Link>
           </div>

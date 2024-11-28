@@ -1,6 +1,7 @@
 'use client'
 
 import LogoMaxImage from '$/logo-max.svg'
+import {VolumeOff, Volume2} from 'lucide-react'
 
 import gsap from 'gsap'
 import {useEffect, useState, useRef} from 'react'
@@ -15,7 +16,9 @@ export default function Loader() {
   const [showSkipButton, setShowSkipButton] = useState(false)
   const [progress, setProgress] = useState(0)
   const [showVideo, setShowVideo] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
   const videoContainerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
@@ -91,6 +94,13 @@ export default function Loader() {
     }, 315)
   }
 
+  const handleMuteToggle = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
+    }
+  }
+
   const screenHeight = 'h-screen !h-svh'
 
   return (
@@ -111,7 +121,7 @@ export default function Loader() {
         ) : (
           <div ref={videoContainerRef} className="grid w-full h-full opacity-0">
             <div className="w-full h-full aspect-video sm:aspect-[9/16] pointer-events-none">
-              <video autoPlay loop muted playsInline className="block object-cover w-full h-full bg-gray-light/25">
+              <video ref={videoRef} autoPlay loop muted={isMuted} playsInline className="block object-cover w-full h-full bg-gray-light/25">
                 <source src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} type="video/webm" />
                 <source src={isDesktop ? '/loader/desktop.mp4' : '/loader/mobile.mp4'} type="video/mp4" />
               </video>
@@ -122,6 +132,10 @@ export default function Loader() {
                 <H4 className="sm:text-lg">Пропустить видео</H4>
               </button>
             )}
+
+            <button onClick={handleMuteToggle} className="absolute top-6 right-6 sm:top-4 sm:right-4 bg-white text-blue py-2 px-2.5 rounded-md">
+              {isMuted ? <VolumeOff className="s-8 xl:s-6" strokeWidth={1.5} /> : <Volume2 className="s-8 xl:s-6" strokeWidth={1.5} />}
+            </button>
           </div>
         )}
       </section>

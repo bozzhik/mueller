@@ -43,7 +43,7 @@ export default function Loader() {
     tl.to(
       {},
       {
-        duration: 3,
+        duration: 2.5,
         onUpdate: () => {
           const prog = Math.round(tl!.progress() * 100)
           setProgress(prog)

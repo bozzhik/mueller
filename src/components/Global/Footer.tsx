@@ -34,22 +34,39 @@ export default function Footer() {
             </div>
 
             {colIndex === 0 && (
-              <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'sm:hidden text-gray-light hover:border-gray-light w-fit')}>
-                <SPAN>Политика конфиденциальности</SPAN>
-              </Link>
+              <div className="space-y-1.5">
+                <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'block sm:hidden w-fit text-gray-light hover:border-gray-light')}>
+                  <SPAN>Политика конфиденциальности</SPAN>
+                </Link>
+
+                <Link href="mailto:info@muellerwagner.ru" className={cn(hoverLinkStyles, 'block sm:hidden w-fit text-gray-light hover:border-gray-light')}>
+                  <SPAN>info@muellerwagner.ru</SPAN>
+                </Link>
+              </div>
             )}
+
+            {colIndex === 1 && <SPAN className="text-base sm:hidden xl:text-sm text-gray-light hover:border-gray-light">Московская коллегия адвокатов &#34;Мюллер Вагнер&#34; 105066, город Москва, Старая Басманная ул, д. 24, оф. 71 ОГРН 1227700621411 ИНН 9701222022</SPAN>}
           </div>
         ))}
       </div>
 
-      <div className="flex-col hidden gap-2 px-3 sm:flex">
-        <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'text-gray-light border-gray-light w-fit')}>
-          <SPAN>
-            Политика <br /> конфиденциальности
-          </SPAN>
-        </Link>
+      <div className="flex-col hidden gap-8 px-3 sm:flex">
+        <div className="flex flex-col gap-2.5">
+          <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'text-gray-light border-gray-light w-fit')}>
+            <SPAN>
+              Политика <br /> конфиденциальности
+            </SPAN>
+          </Link>
 
-        <SPAN className="text-gray-light">2024, все права защищены</SPAN>
+          <Link href="mailto:info@muellerwagner.ru" className={cn(hoverLinkStyles, 'text-gray-light border-gray-light w-fit')}>
+            <SPAN>info@muellerwagner.ru</SPAN>
+          </Link>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <SPAN className="sm:text-sm text-gray-light">2024, все права защищены</SPAN>
+          <SPAN className="sm:text-sm text-gray-light">Московская коллегия адвокатов &#34;Мюллер Вагнер&#34; 105066, город Москва, Старая Басманная ул, д. 24, оф. 71 ОГРН 1227700621411 ИНН 9701222022</SPAN>
+        </div>
       </div>
     </footer>
   )

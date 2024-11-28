@@ -77,7 +77,8 @@ export default function ContactsForm() {
           Нажимая на кнопку «Отправить», вы соглашаетесь с условиями{' '}
           <Link className="underline hover:no-underline underline-offset-2" href="/privacy-policy">
             политики конфиденциальности
-          </Link>
+          </Link>{' '}
+          и даёте согласие на обработку персональных данных.
         </SPAN>
       </div>
     </form>

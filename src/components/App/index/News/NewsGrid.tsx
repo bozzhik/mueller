@@ -9,7 +9,7 @@ type NewsGridItem = {
 } & NEWS_QUERYResult[number]
 
 export default function NewsGrid({news, isIndex}: {news: NewsGridItem[]; isIndex: boolean}) {
-  const displayedNews = news.sort((a, b) => (a.id ?? 0) - (b.id ?? 0)).slice(0, isIndex ? 4 : news.length)
+  const displayedNews = news.sort((a, b) => (b.id ?? 0) - (a.id ?? 0)).slice(0, isIndex ? 4 : news.length)
 
   return (
     <section data-section="news-grid" className="grid grid-cols-4 border-t sm:grid-cols-1 border-gray">

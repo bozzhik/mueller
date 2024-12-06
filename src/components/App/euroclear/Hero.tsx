@@ -14,7 +14,7 @@ export default function Hero({data}: {data: TEuroclearData}) {
   const {heading, list, achievements, advantages, image} = data
 
   return (
-    <div className={cn('grid grid-cols-2 sm:flex sm:flex-col')}>
+    <div className={cn('grid grid-cols-2 sm:flex sm:flex-col overflow-hidden')}>
       <>
         <div data-scroll-trigger="fixed-euroclear-image" className="sm:hidden">
           <Image quality={100} priority={true} className="block object-cover w-full h-screen" src={image} alt={heading} width={1000} height={1000} />

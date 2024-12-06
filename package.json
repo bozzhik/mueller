@@ -8,7 +8,8 @@
     "studio": "npx sanity@latest schema extract & npx sanity@latest typegen generate",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "email": "explorer http://localhost:3000 & email dev --dir src/app/api/email"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
@@ -36,6 +37,7 @@
     "eslint-config-next": "15.0.3",
     "lucide-react": "^0.460.0",
     "postcss": "^8",
+    "react-email": "3.0.3",
     "react-hook-form": "^7.53.2",
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^3.4.1",

@@ -54,6 +54,6 @@ const paragraph = {
 
 const content = {
   border: '1px solid rgb(0,0,0, 0.1)',
-  borderRadius: '3px',
+  borderRadius: '5px',
   overflow: 'hidden',
 }

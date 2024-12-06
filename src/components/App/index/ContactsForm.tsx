@@ -2,21 +2,21 @@
 
 import {cn} from '@/lib/utils'
 import {useState} from 'react'
+import {usePathname} from 'next/navigation'
 import {useForm} from 'react-hook-form'
 
 import Link from 'next/link'
 import {SPAN} from '~/UI/Typography'
 
-export type TFormFields = {
-  name: string
-  email: string
-  message: string
-}
+import {TFormFields} from '@/app/api/email/route'
 
 export default function ContactsForm() {
   const {register, handleSubmit, reset} = useForm<TFormFields>()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [buttonText, setButtonText] = useState('Отправить')
+
+  const pathname = usePathname()
+  const isEuroclear = pathname.includes('czennye-bumagi')
 
   const onSubmit = async (data: TFormFields) => {
     setIsSubmitting(true)
@@ -27,11 +27,7 @@ export default function ContactsForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          message: data.message,
-        }),
+        body: JSON.stringify(data),
       })
 
       if (!response.ok) {
@@ -46,7 +42,7 @@ export default function ContactsForm() {
     } finally {
       setIsSubmitting(false)
       setTimeout(() => {
-        setButtonText('Отправить форму')
+        setButtonText('Отправить')
       }, 1500)
     }
   }
@@ -64,9 +60,27 @@ export default function ContactsForm() {
         <input type="email" className={inputClasses} placeholder="E-mail" {...register('email', {required: true})} />
       </div>
 
-      <div className={`h-full sm:space-y-3.5 ${boxInputClasses}`}>
-        <textarea className={inputClasses} placeholder="Ваш вопрос" {...register('message')} rows={3} />
-      </div>
+      {isEuroclear && (
+        <div className={boxInputClasses}>
+          <input type="text" className={inputClasses} placeholder="Номер телефона" {...register('phone')} />
+        </div>
+      )}
+
+      {isEuroclear ? (
+        <>
+          <div className={`h-full sm:space-y-3.5 ${boxInputClasses}`}>
+            <textarea id="broker_blocker" className={inputClasses} placeholder="В каких российских брокерах заблокированы Ваши активы?" {...register('broker_blocker')} rows={2} />
+          </div>
+
+          <div className={`h-full sm:space-y-3.5 ${boxInputClasses}`}>
+            <textarea id="blocked_volume" className={inputClasses} placeholder="Примерная стоимость портфеля" {...register('blocked_volume')} rows={2} />
+          </div>
+        </>
+      ) : (
+        <div className={`h-full sm:space-y-3.5 ${boxInputClasses}`}>
+          <textarea className={inputClasses} placeholder="Ваш вопрос" {...register('message')} rows={3} />
+        </div>
+      )}
 
       <div className="space-y-3">
         <button type="submit" disabled={isSubmitting} className={cn('block w-full py-3.5 xl:px-8 sm:pb-4 text-white bg-blue hover:bg-blue/85 duration-500', isSubmitting ? 'bg-blue/85' : '')}>

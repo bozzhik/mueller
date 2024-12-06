@@ -2,7 +2,16 @@ import {NextRequest, NextResponse} from 'next/server'
 import {Resend} from 'resend'
 
 import {EmailTemplate} from '@/app/api/email/Template'
-import {TFormFields} from '~~/index/ContactsForm'
+
+export type TFormFields = {
+  name: string
+  email: string
+  message?: string
+
+  phone?: string
+  broker_blocker?: string
+  blocked_volume?: string
+}
 
 export type TEmailFields = TFormFields & {
   subject: string
@@ -16,9 +25,9 @@ const emailsList = {
 
 export async function POST(req: NextRequest) {
   const body: TEmailFields = await req.json()
-  const {email, message} = body
+  const {email, name} = body
 
-  if (!message || !email) {
+  if (!email || !name) {
     return NextResponse.json({error: 'Missing required fields'}, {status: 400})
   }
 
@@ -31,7 +40,12 @@ export async function POST(req: NextRequest) {
         subject: body.subject,
         name: body.name,
         email: body.email,
+
         message: body.message,
+        phone: body.phone,
+
+        broker_blocker: body.broker_blocker,
+        blocked_volume: body.blocked_volume,
       }),
     })
 

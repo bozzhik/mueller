@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Body, Container, Column, Head, Heading, Html, Preview, Row, Section, Text} from '@react-email/components'
 import {TEmailFields} from '@/app/api/email/route'
 
-export const EmailTemplate = ({subject = 'Новое заполнение формы', name, email, message}: TEmailFields) => {
+export const EmailTemplate = ({subject = 'Новое заполнение формы', name, email, message, phone, broker_blocker, blocked_volume}: TEmailFields) => {
   return (
     <Html>
       <Head />
@@ -17,7 +17,7 @@ export const EmailTemplate = ({subject = 'Новое заполнение фор
                 </Heading>
 
                 {name && (
-                  <Text style={{...paragraph}}>
+                  <Text style={paragraph}>
                     <b>Имя:</b> {name}
                   </Text>
                 )}
@@ -26,12 +26,29 @@ export const EmailTemplate = ({subject = 'Новое заполнение фор
                     <b>E-mail:</b> {email}
                   </Text>
                 )}
-
                 {message && (
                   <Text style={paragraph}>
                     <b>Комментарий:</b> {message}
                   </Text>
                 )}
+
+                <>
+                  {phone && (
+                    <Text style={paragraph}>
+                      <b>Номер телефона:</b> {phone}
+                    </Text>
+                  )}
+                  {broker_blocker && (
+                    <Text style={paragraph}>
+                      <b>Брокер, где заблокированы средства:</b> {broker_blocker}
+                    </Text>
+                  )}
+                  {blocked_volume && (
+                    <Text style={paragraph}>
+                      <b>Объем заблокированных средств:</b> {blocked_volume}
+                    </Text>
+                  )}
+                </>
               </Column>
             </Row>
           </Section>

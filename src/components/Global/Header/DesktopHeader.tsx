@@ -2,17 +2,29 @@
 
 import MuellerLogo from '$/logo.svg'
 
-import {PresentationData} from '~/Global/Header'
+import {usePathname} from 'next/navigation'
 import {urlForFile} from '#/src/sanity/lib/file'
 
-import {websitePaths} from '#/src/lib/constants'
+import {PresentationData} from '~/Global/Header'
 import {hoverLinkStyles} from '~/Global/Footer'
+import {websitePaths} from '#/src/lib/constants'
 
 import Link from 'next/link'
 import Image from 'next/image'
 import {SPAN} from '~/UI/Typography'
 
+function Button({href, target = '_blank', label}: {href: string; target?: '_self' | '_blank'; label: string}) {
+  return (
+    <Link href={href} target={target} className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5">
+      <SPAN className="block pb-1 text-[22px] text-nowrap uppercase">{label}</SPAN>
+    </Link>
+  )
+}
+
 export function DesktopHeader({presentationsData}: {presentationsData: PresentationData[]}) {
+  const pathname = usePathname()
+  const isEuroclear = pathname.includes('euroclear')
+
   return (
     <header className="sm:hidden fixed z-[99] w-full h-[9vh] flex justify-between bg-white border-b border-gray">
       <div className="flex gap-10 xl:gap-6">
@@ -35,11 +47,14 @@ export function DesktopHeader({presentationsData}: {presentationsData: Presentat
       </div>
 
       <div className="flex divide-x-2 divide-gray-light">
-        {presentationsData.map(({presentation, name}) => (
-          <Link key={name} href={urlForFile(presentation?.file?.asset?._ref || '')} target="_blank" className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-1.5 xl:-mt-0.5">
-            <SPAN className="block pb-1 text-[22px] text-nowrap uppercase">{presentation?.caption}</SPAN>
-          </Link>
-        ))}
+        {isEuroclear ? (
+          presentationsData[1] && <Button href={urlForFile(presentationsData[1].presentation?.file?.asset?._ref || '')} label={presentationsData[1].presentation?.caption || ''} />
+        ) : (
+          <>
+            {presentationsData[0] && <Button href={urlForFile(presentationsData[0].presentation?.file?.asset?._ref || '')} label={presentationsData[0].presentation?.caption || ''} />}
+            <Button href="/euroclear" target="_self" label="Euroclear" />
+          </>
+        )}
       </div>
     </header>
   )

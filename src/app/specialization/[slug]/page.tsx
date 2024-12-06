@@ -5,11 +5,11 @@ import {QueryParams} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
-import Contacts from '~~/index/Contacts'
 
 import Hero from '~~/specialization/Hero'
 import HeroExtra from '~~/specialization/HeroExtra'
 import News from '~~/specialization/News'
+import Contacts from '~~/specialization/Contacts'
 
 export default async function Page({params}: {params: Promise<QueryParams>}) {
   const {data: specialization} = await sanityFetch({

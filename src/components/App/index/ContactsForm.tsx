@@ -16,7 +16,7 @@ export default function ContactsForm() {
   const [buttonText, setButtonText] = useState('Отправить')
 
   const pathname = usePathname()
-  const isEuroclear = pathname.includes('czennye-bumagi')
+  const isEuroclear = pathname.includes('euroclear') || pathname.includes('czennye-bumagi')
 
   const onSubmit = async (data: TFormFields) => {
     setIsSubmitting(true)

@@ -11,7 +11,7 @@ import {H1, H2, H6, P} from '~/UI/Typography'
 export default function Hero({data}: {data: TEuroclearData}) {
   useScrollTrigger({selector: 'fixed-euroclear-image'})
 
-  const {heading, list, achievements, image} = data
+  const {heading, list, achievements, advantages, image} = data
 
   return (
     <div className={cn('grid grid-cols-2 sm:flex sm:flex-col')}>
@@ -26,7 +26,7 @@ export default function Hero({data}: {data: TEuroclearData}) {
       </>
 
       <div>
-        <section data-section="hero-specialization" className={cn('flex flex-col gap-[30vh] justify-between sm:gap-4 sm:mt-7')}>
+        <section data-section="hero-specialization" className={cn('flex flex-col gap-[25vh] justify-between sm:gap-4 sm:mt-7')}>
           <H1 className="p-7 sm:p-3">{heading || 'Default Heading'}</H1>
 
           <div className={`flex flex-col sm:pb-1 divide-y divide-gray border-t border-b border-gray ${list?.length && list.length > 2 && 'divide-y'}`}>
@@ -39,14 +39,29 @@ export default function Hero({data}: {data: TEuroclearData}) {
           </div>
         </section>
 
-        <section data-section="hero-specialization">
+        <section data-section="hero-achievements">
           <div className="p-10 text-white sm:px-5 sm:py-4 xl:py-8 bg-blue sm:space-y-2">
             <H2 className="sm:max-w-[20ch]">Наши достижения</H2>
           </div>
 
           <div className="grid grid-cols-2 border-b border-l divide-x sm:divide-x-0 sm:border-l-0 sm:divide-y sm:grid-cols-1 divide-gray border-gray">
-            {achievements.slice(0, 4).map((item, idx) => (
+            {achievements.map((item, idx) => (
               <div className={cn('flex p-7 pb-24 sm:pl-3 sm:pr-6 gap-6 xl:gap-4 xl:p-5 xl:pb-20 sm:py-7')} key={idx}>
+                <H6 className="text-3xl !leading-none xl:text-2xl sm:text-xl">{idx + 1}</H6>
+                <P className="text-[28px] !leading-[1.25]">{item}</P>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section data-section="hero-advantages">
+          <div className="p-10 text-white sm:px-5 sm:py-4 xl:py-8 bg-blue sm:space-y-2">
+            <H2 className="sm:max-w-[20ch]">Наши преимущества</H2>
+          </div>
+
+          <div className="grid grid-cols-2 border-b border-l sm:border-l-0 sm:divide-y sm:grid-cols-1 divide-gray border-gray">
+            {advantages.map((item, idx) => (
+              <div className={cn('flex p-7 pb-24 sm:pl-3 sm:pr-6 gap-6 xl:gap-4 xl:p-5 xl:pb-20 sm:py-7 border-gray', idx == 0 && 'border-r', idx == 2 && 'col-span-2 sm:col-span-1 border-t')} key={idx}>
                 <H6 className="text-3xl !leading-none xl:text-2xl sm:text-xl">{idx + 1}</H6>
                 <P className="text-[28px] !leading-[1.25]">{item}</P>
               </div>

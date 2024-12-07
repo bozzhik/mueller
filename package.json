@@ -27,13 +27,15 @@
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "resend": "^4.0.1",
     "sanity": "3",
-    "styled-components": "6"
+    "styled-components": "6",
+    "three": "^0.171.0"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.170.0",
     "clsx": "^2.1.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",

@@ -1,15 +1,20 @@
+'use client'
+
 import NewsImage1 from '$/news/1.jpg'
 import NewsImage2 from '$/news/2.jpg'
 import NewsImage3 from '$/news/3.jpg'
 import NewsImage4 from '$/news/4.jpg'
 
 import {NEWS_QUERYResult} from '#/sanity.types'
-import {urlFor} from '#/src/sanity/lib/image'
+
 import {cn} from '#/src/lib/utils'
+import {useRef} from 'react'
+import {urlFor} from '#/src/sanity/lib/image'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import {H4, H6} from '~/UI/Typography'
+import HoverText from '~/UI/HoverText'
 
 type NEWS_QUERYResultItem = NEWS_QUERYResult[number]
 
@@ -32,8 +37,9 @@ function getNextImage(): string {
 }
 
 export function NewsCard({heading, caption, publisher, source, image, media, className, cms}: NewsCardProps) {
-  const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
+  const cardRef = useRef<HTMLAnchorElement>(null)
 
+  const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
   const imageAlt = cms ? image?.alt : media?.alt
 
   const DOMAIN_NAME_MAP: Record<string, string> = {
@@ -61,7 +67,7 @@ export function NewsCard({heading, caption, publisher, source, image, media, cla
   const imageStyles = 'border-b border-gray block w-full h-[40vh] xl:h-[35vh] sm:h-[40vh] object-cover'
 
   return (
-    <Link href={source || ''} className={cn('border-r border-b border-gray', className)}>
+    <Link ref={cardRef} href={source || ''} className={cn('border-r border-b border-gray', className)}>
       {imageUrl ? (
         cms ? (
           <Image quality={100} className={imageStyles} src={imageUrl} alt={imageAlt || 'Новость про Mueller Wagner'} width={300} height={200} />
@@ -74,7 +80,9 @@ export function NewsCard({heading, caption, publisher, source, image, media, cla
       )}
 
       <div className="px-6 pt-4 pb-16 space-y-5 xl:px-4 xl:pt-3 xl:pb-14 sm:pt-5 sm:pb-7 xl:space-y-2">
-        <H6 className="uppercase">{getPublisher(source, publisher)}</H6>
+        <HoverText triggerRef={cardRef}>
+          <H6 className="uppercase">{getPublisher(source, publisher)}</H6>
+        </HoverText>
 
         <div className="space-y-2 xl:space-y-1.5">
           <H4 className="leading-[1.2] xl:leading-[1.2] font-bold uppercase font-kaius">{heading}</H4>

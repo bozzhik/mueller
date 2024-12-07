@@ -3,6 +3,7 @@ import {NEWS_QUERY} from '@/sanity/lib/queries'
 
 import Link from 'next/link'
 import {H2, H4, H6} from '~/UI/Typography'
+import HoverText from '~/UI/HoverText'
 import NewsGrid from '~~/index/News/NewsGrid'
 
 export default async function News() {
@@ -21,7 +22,9 @@ export default async function News() {
         </div>
 
         <Link className="block mr-12 duration-300 border-b-2 sm:mr-0 sm:justify-self-start hover:border-transparent justify-self-end border-foreground" href="/media">
-          <H4 className="leading-none uppercase font-kaius">Смотреть все</H4>
+          <HoverText>
+            <H4 className="leading-none uppercase font-kaius">Смотреть все</H4>
+          </HoverText>
         </Link>
       </div>
 

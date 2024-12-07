@@ -1,13 +1,20 @@
+'use client'
+
 import TelegramLogo from '$/index/telegram.svg'
 import TelegramInvertLogo from '$/index/telegram-invert.svg'
+
+import {useRef} from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import {H2, H3, H6} from '~/UI/Typography'
+import HoverText from '~/UI/HoverText'
 
 const links = ['https://t.me/sanctionsexplained', '#contacts']
 
 export default function Blog() {
+  const linkRef = useRef<HTMLAnchorElement>(null)
+
   return (
     <section id="blog" data-section="blog-index">
       <div data-section="desktop-blog-index" className="sm:hidden">
@@ -28,8 +35,10 @@ export default function Blog() {
           </Link>
         </div>
 
-        <Link href={links[1]} className="block pt-5 pb-4 text-center text-white bg-blue group">
-          <H3 className="mx-auto leading-tight duration-200 border-b-2 border-transparent group-hover:border-white w-fit">Подписаться на канал</H3>
+        <Link ref={linkRef} href={links[0]} className="block pt-5 pb-3.5 text-center text-white bg-blue group">
+          <HoverText triggerRef={linkRef}>
+            <H3 className="mx-auto leading-tight duration-200 border-b-2 border-transparent group-hover:border-white w-fit">Подписаться на канал</H3>
+          </HoverText>
         </Link>
       </div>
 
@@ -48,8 +57,8 @@ export default function Blog() {
               <H3 className="sm:text-lg">sanctionsexplained</H3>
             </Link>
 
-            <Link href={links[1]} className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue">
-              <H3 className="sm:text-lg">Связаться с нами</H3>
+            <Link href={links[0]} className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue">
+              <H3 className="sm:text-lg">Подписаться на канал</H3>
             </Link>
           </div>
         </div>

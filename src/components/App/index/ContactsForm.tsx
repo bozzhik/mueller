@@ -1,14 +1,15 @@
 'use client'
 
+import {TFormFields} from '@/app/api/email/route'
+
 import {cn} from '@/lib/utils'
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 import {usePathname} from 'next/navigation'
 import {useForm} from 'react-hook-form'
 
 import Link from 'next/link'
 import {SPAN} from '~/UI/Typography'
-
-import {TFormFields} from '@/app/api/email/route'
+import HoverText from '~/UI/HoverText'
 
 export default function ContactsForm() {
   const {register, handleSubmit, reset} = useForm<TFormFields>()
@@ -17,6 +18,8 @@ export default function ContactsForm() {
 
   const pathname = usePathname()
   const isEuroclear = pathname.includes('euroclear') || pathname.includes('czennye-bumagi')
+
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   const onSubmit = async (data: TFormFields) => {
     setIsSubmitting(true)
@@ -83,13 +86,13 @@ export default function ContactsForm() {
       )}
 
       <div className="space-y-3">
-        <button type="submit" disabled={isSubmitting} className={cn('grid place-items-center w-full pt-3.5 pb-4 xl:px-8 sm:pb-4 text-white bg-blue hover:bg-blue/85 duration-500', isSubmitting ? 'bg-blue/85' : '')}>
+        <button ref={buttonRef} type="submit" disabled={isSubmitting} className={cn('grid place-items-center w-full pt-3 pb-4 xl:px-8 sm:pb-4 text-white bg-blue hover:bg-blue/85 duration-500', isSubmitting ? 'bg-blue/85' : '')}>
           {isSubmitting ? (
             <div className="s-6 animate-spin rounded-full border-2 border-white border-t-blue" />
           ) : (
-            <>
-              <SPAN className="text-2xl leading-none normal-case xl:text-xl">{buttonText}</SPAN>
-            </>
+            <HoverText triggerRef={buttonRef}>
+              <SPAN className="text-2xl normal-case xl:text-xl">{buttonText}</SPAN>
+            </HoverText>
           )}
         </button>
 

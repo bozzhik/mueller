@@ -1,11 +1,17 @@
 'use client'
 
-import SomeImage from '$/euroclear.jpg'
-
 import React, {useEffect, useRef} from 'react'
 import * as THREE from 'three'
 
-export default function ImageShader() {
+import {StaticImageData} from 'next/image'
+
+type Props = {
+  src: string | StaticImageData
+  alt?: string
+  className?: string
+}
+
+export default function ImageShader({src, alt = '', className}: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -52,14 +58,14 @@ export default function ImageShader() {
       }
     `
 
-    const createTextTexture = (): THREE.Texture => {
+    const createTexture = (): THREE.Texture => {
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')!
       canvas.width = 1024
       canvas.height = 1024
 
       const image = new Image()
-      image.src = SomeImage.src
+      image.src = typeof src === 'string' ? src : src.src
 
       const texture = new THREE.CanvasTexture(canvas)
       image.onload = () => {
@@ -78,7 +84,7 @@ export default function ImageShader() {
       camera = new THREE.OrthographicCamera(-1, 1, 1 / aspectRatio, -1 / aspectRatio, 0.1, 1000)
       camera.position.z = 1
 
-      const texture = createTextTexture()
+      const texture = createTexture()
       const shaderUniforms = {
         u_mouse: {value: new THREE.Vector2()},
         u_prevMouse: {value: new THREE.Vector2()},
@@ -149,7 +155,7 @@ export default function ImageShader() {
       container?.removeChild(renderer.domElement)
       window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [src])
 
-  return <div ref={containerRef} style={{width: '100%', height: '100%'}} />
+  return <div ref={containerRef} className={className} style={{width: '100%', height: '100%'}} aria-label={alt} />
 }

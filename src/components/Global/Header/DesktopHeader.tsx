@@ -12,6 +12,7 @@ import {websitePaths} from '#/src/lib/constants'
 import Link from 'next/link'
 import Image from 'next/image'
 import {SPAN} from '~/UI/Typography'
+import HoverText from '~/UI/HoverText'
 
 function Button({href, target = '_blank', label}: {href: string; target?: '_self' | '_blank'; label: string}) {
   return (
@@ -39,7 +40,9 @@ export function DesktopHeader({presentationsData}: {presentationsData: Presentat
 
             return (
               <Link href={href} className={hoverLinkStyles} key={key}>
-                <SPAN>{label}</SPAN>
+                <HoverText>
+                  <SPAN>{label}</SPAN>
+                </HoverText>
               </Link>
             )
           })}

@@ -8,12 +8,16 @@ import Blog from '~~/index/Blog'
 import News from '~~/index/News/News'
 import Contacts from '~~/index/Contacts'
 
+import ImageShader from '~/UI/ImageShader'
+import SomeImage from '$/euroclear.jpg'
+
 export default function HomePage() {
   return (
     <>
       <Loader />
       <Container>
         <Hero />
+        <ImageShader src={SomeImage} alt="Shader Effect Example" className="custom-class" />
         <Details />
         <Workers />
         <Blog />

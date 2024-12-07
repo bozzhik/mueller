@@ -4,6 +4,7 @@ import React, {useEffect, useRef} from 'react'
 import * as THREE from 'three'
 
 import {StaticImageData} from 'next/image'
+import {cn} from '#/src/lib/utils'
 
 type Props = {
   src: string | StaticImageData
@@ -39,10 +40,11 @@ export default function ImageShader({src, alt = '', className}: Props) {
       uniform sampler2D u_texture;
       uniform vec2 u_mouse;
       uniform vec2 u_prevMouse;
+      uniform vec2 u_gridSize;
 
       void main() {
-        vec2 gridUV = floor(vUv * vec2(40.0, 40.0)) / vec2(40.0, 40.0);
-        vec2 centerOfPixel = gridUV + vec2(1.0 / 40.0, 1.0 / 40.0);
+        vec2 gridUV = floor(vUv * u_gridSize) / u_gridSize;
+        vec2 centerOfPixel = gridUV + vec2(1.0 / u_gridSize.x, 1.0 / u_gridSize.y);
 
         vec2 mouseDirection = u_mouse - u_prevMouse;
 
@@ -65,6 +67,7 @@ export default function ImageShader({src, alt = '', className}: Props) {
       canvas.height = 1024
 
       const image = new Image()
+      image.crossOrigin = 'anonymous'
       image.src = typeof src === 'string' ? src : src.src
 
       const texture = new THREE.CanvasTexture(canvas)
@@ -79,8 +82,13 @@ export default function ImageShader({src, alt = '', className}: Props) {
     }
 
     const initializeScene = () => {
+      const container = containerRef.current
+      if (!container) return
+
+      const {clientWidth: width, clientHeight: height} = container
+
       scene = new THREE.Scene()
-      const aspectRatio = window.innerWidth / window.innerHeight
+      const aspectRatio = width / height
       camera = new THREE.OrthographicCamera(-1, 1, 1 / aspectRatio, -1 / aspectRatio, 0.1, 1000)
       camera.position.z = 1
 
@@ -89,6 +97,7 @@ export default function ImageShader({src, alt = '', className}: Props) {
         u_mouse: {value: new THREE.Vector2()},
         u_prevMouse: {value: new THREE.Vector2()},
         u_texture: {value: texture},
+        u_gridSize: {value: new THREE.Vector2(300, 300)},
       }
 
       planeMesh = new THREE.Mesh(
@@ -102,11 +111,10 @@ export default function ImageShader({src, alt = '', className}: Props) {
       scene.add(planeMesh)
 
       renderer = new THREE.WebGLRenderer({antialias: true})
-      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setSize(width, height)
       renderer.setPixelRatio(window.devicePixelRatio)
 
-      const container = containerRef.current
-      container?.appendChild(renderer.domElement)
+      container.appendChild(renderer.domElement)
     }
 
     const animateScene = () => {
@@ -133,14 +141,19 @@ export default function ImageShader({src, alt = '', className}: Props) {
     }
 
     const handleResize = () => {
-      const aspectRatio = window.innerWidth / window.innerHeight
+      const container = containerRef.current
+      if (!container) return
+
+      const {clientWidth: width, clientHeight: height} = container
+
+      const aspectRatio = width / height
       camera.left = -1
       camera.right = 1
       camera.top = 1 / aspectRatio
       camera.bottom = -1 / aspectRatio
       camera.updateProjectionMatrix()
 
-      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setSize(width, height)
     }
 
     const container = containerRef.current
@@ -157,5 +170,5 @@ export default function ImageShader({src, alt = '', className}: Props) {
     }
   }, [src])
 
-  return <div ref={containerRef} className={className} style={{width: '100%', height: '100%'}} aria-label={alt} />
+  return <div ref={containerRef} className={cn('relative', className)} aria-label={alt} style={{width: '100%', height: '100%'}} />
 }

@@ -11,10 +11,10 @@ import {cn} from '#/src/lib/utils'
 import {useRef} from 'react'
 import {urlFor} from '#/src/sanity/lib/image'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import {H4, H6} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
+import ImageShader from '~/UI/ImageShader'
 
 type NEWS_QUERYResultItem = NEWS_QUERYResult[number]
 
@@ -36,11 +36,12 @@ function getNextImage(): string {
   return image
 }
 
-export function NewsCard({heading, caption, publisher, source, image, media, className, cms}: NewsCardProps) {
+export function NewsCard({heading, caption, publisher, source, image, media, className, cms}: NewsCardProps & {index: number}) {
   const cardRef = useRef<HTMLAnchorElement>(null)
 
   const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
   const imageAlt = cms ? image?.alt : media?.alt
+  const fallbackImageSrc = getNextImage()
 
   const DOMAIN_NAME_MAP: Record<string, string> = {
     'rbc.ru': 'РБК',
@@ -64,20 +65,13 @@ export function NewsCard({heading, caption, publisher, source, image, media, cla
     return ''
   }
 
-  const imageStyles = 'border-b border-gray block w-full h-[40vh] xl:h-[35vh] sm:h-[40vh] object-cover'
+  const imageStyles = 'overflow-hidden border-b border-gray block w-full h-[40vh] xl:h-[35vh] sm:h-[40vh] object-cover'
 
   return (
     <Link ref={cardRef} href={source || ''} className={cn('border-r border-b border-gray', className)}>
-      {imageUrl ? (
-        cms ? (
-          <Image quality={100} className={imageStyles} src={imageUrl} alt={imageAlt || 'Новость про Mueller Wagner'} width={300} height={200} />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className={imageStyles} src={imageUrl} alt={imageAlt || 'Новость про Mueller Wagner'} />
-        )
-      ) : (
-        <Image quality={100} className={imageStyles} src={getNextImage()} alt="Фоновое изображение для новости" width={300} height={200} />
-      )}
+      <div className={imageStyles}>
+        <ImageShader src={imageUrl || fallbackImageSrc} alt={imageAlt || 'Новость про Mueller Wagner'} />
+      </div>
 
       <div className="px-6 pt-4 pb-16 space-y-5 xl:px-4 xl:pt-3 xl:pb-14 sm:pt-5 sm:pb-7 xl:space-y-2">
         <HoverText triggerRef={cardRef}>

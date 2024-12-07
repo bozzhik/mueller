@@ -19,7 +19,7 @@ export default function NewsGrid({news}: {news: NewsGridItem[]}) {
   return (
     <section data-section="news-grid" className="grid grid-cols-4 border-t xl:grid-cols-3 sm:grid-cols-1 border-gray">
       {displayedNews.map((item, index) => (
-        <NewsCard cms={false} key={index} {...item} />
+        <NewsCard cms={false} index={index} key={index} {...item} />
       ))}
     </section>
   )

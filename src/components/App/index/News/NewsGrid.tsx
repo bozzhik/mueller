@@ -14,7 +14,7 @@ export default function NewsGrid({news, isIndex}: {news: NewsGridItem[]; isIndex
   return (
     <section data-section="news-grid" className="grid grid-cols-4 border-t sm:grid-cols-1 border-gray">
       {displayedNews.map((item, index) => (
-        <NewsCard className={isIndex ? 'sm:[&:nth-of-type(3)]:hidden sm:[&:nth-of-type(4)]:hidden' : ''} cms={true} key={index} {...item} />
+        <NewsCard className={isIndex ? 'sm:[&:nth-of-type(3)]:hidden sm:[&:nth-of-type(4)]:hidden' : ''} cms={true} index={index} key={index} {...item} />
       ))}
     </section>
   )

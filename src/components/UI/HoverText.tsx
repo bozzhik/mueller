@@ -3,11 +3,18 @@
 import React, {useRef, useEffect} from 'react'
 import {gsap} from 'gsap'
 
-export default function HoverText({children}: {children: React.ReactNode}) {
+type Props = {
+  children: React.ReactNode
+  triggerRef?: React.RefObject<HTMLElement>
+}
+
+export default function HoverText({children, triggerRef}: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return
+    const targetRef = triggerRef || containerRef
+
+    if (!containerRef.current || !targetRef.current) return
 
     const container = containerRef.current
     const originalElement = container.children[0] as HTMLElement
@@ -61,15 +68,16 @@ export default function HoverText({children}: {children: React.ReactNode}) {
       tl.reverse()
     }
 
-    container.addEventListener('mouseenter', handleMouseEnter)
-    container.addEventListener('mouseleave', handleMouseLeave)
+    const triggerElement = targetRef.current
+    triggerElement.addEventListener('mouseenter', handleMouseEnter)
+    triggerElement.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
-      container.removeEventListener('mouseenter', handleMouseEnter)
-      container.removeEventListener('mouseleave', handleMouseLeave)
+      triggerElement.removeEventListener('mouseenter', handleMouseEnter)
+      triggerElement.removeEventListener('mouseleave', handleMouseLeave)
       tl.kill()
     }
-  }, [])
+  }, [triggerRef])
 
   return (
     <div ref={containerRef} className="relative inline-block overflow-hidden">

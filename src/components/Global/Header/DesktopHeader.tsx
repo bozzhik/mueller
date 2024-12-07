@@ -2,6 +2,8 @@
 
 import MuellerLogo from '$/logo.svg'
 
+import {cn} from '@/lib/utils'
+import {useRef} from 'react'
 import {usePathname} from 'next/navigation'
 import {urlForFile} from '#/src/sanity/lib/file'
 
@@ -15,9 +17,13 @@ import {SPAN} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
 
 function Button({href, target = '_blank', label}: {href: string; target?: '_self' | '_blank'; label: string}) {
+  const linkRef = useRef<HTMLAnchorElement>(null)
+
   return (
-    <Link href={href} target={target} className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5">
-      <SPAN className="block pb-1 text-[22px] text-nowrap uppercase">{label}</SPAN>
+    <Link ref={linkRef} href={href} target={target} className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5">
+      <HoverText triggerRef={linkRef}>
+        <span className="block pb-1 text-[22px] text-nowrap uppercase text-blue-500">{label}</span>
+      </HoverText>
     </Link>
   )
 }
@@ -39,7 +45,7 @@ export function DesktopHeader({presentationsData}: {presentationsData: Presentat
             const href = isMedia ? '/media' : `/#${key}`
 
             return (
-              <Link href={href} className={hoverLinkStyles} key={key}>
+              <Link href={href} className={cn(hoverLinkStyles, 'mt-2')} key={key}>
                 <HoverText>
                   <SPAN>{label}</SPAN>
                 </HoverText>

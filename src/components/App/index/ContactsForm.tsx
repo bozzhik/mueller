@@ -83,8 +83,14 @@ export default function ContactsForm() {
       )}
 
       <div className="space-y-3">
-        <button type="submit" disabled={isSubmitting} className={cn('block w-full py-3.5 xl:px-8 sm:pb-4 text-white bg-blue hover:bg-blue/85 duration-500', isSubmitting ? 'bg-blue/85' : '')}>
-          <SPAN className="text-2xl leading-none normal-case xl:text-xl">{buttonText}</SPAN>
+        <button type="submit" disabled={isSubmitting} className={cn('grid place-items-center w-full pt-3.5 pb-4 xl:px-8 sm:pb-4 text-white bg-blue hover:bg-blue/85 duration-500', isSubmitting ? 'bg-blue/85' : '')}>
+          {isSubmitting ? (
+            <div className="s-6 animate-spin rounded-full border-2 border-white border-t-blue" />
+          ) : (
+            <>
+              <SPAN className="text-2xl leading-none normal-case xl:text-xl">{buttonText}</SPAN>
+            </>
+          )}
         </button>
 
         <SPAN className="normal-case !leading-[1.3] block">

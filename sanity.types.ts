@@ -52,6 +52,28 @@ export type Slug = {
   source?: string;
 };
 
+export type Euroclear = {
+  _id: string;
+  _type: "euroclear";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  action?: string;
+  achievements?: Array<string>;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type Presentation = {
   _id: string;
   _type: "presentation";
@@ -258,7 +280,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Presentation | SanityFileAsset | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Euroclear | Presentation | SanityFileAsset | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
@@ -367,6 +389,24 @@ export type PRESENTATIONS_QUERYResult = Array<{
     _type: "file";
   } | null;
 }>;
+// Variable: EUROCLEAR_QUERY
+// Query: *[_type == "euroclear"][0]{      heading, action, achievements, image    }
+export type EUROCLEAR_QUERYResult = {
+  heading: string | null;
+  action: string | null;
+  achievements: Array<string> | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -377,5 +417,6 @@ declare module "@sanity/client" {
     "\n  *[_type == \"worker\"]{\n    id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
     "\n  *[_type == \"news\"]{\n    id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
     "\n  *[_type == \"presentation\"]{\n    name, caption, file\n}": PRESENTATIONS_QUERYResult;
+    "\n  *[_type == \"euroclear\"][0]{\n      heading, action, achievements, image\n    }\n": EUROCLEAR_QUERYResult;
   }
 }

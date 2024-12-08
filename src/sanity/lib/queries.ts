@@ -27,3 +27,9 @@ export const PRESENTATIONS_QUERY = defineQuery(`
   *[_type == "presentation"]{
     name, caption, file
 }`)
+
+export const EUROCLEAR_QUERY = defineQuery(`
+  *[_type == "euroclear"][0]{
+      heading, action, achievements, image
+    }
+`)

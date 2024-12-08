@@ -1,9 +1,9 @@
 'use client'
 
 import {SpecializationItem} from '#/sanity.types'
-import {urlFor} from '#/src/sanity/lib/image'
 
-import {useRef} from 'react'
+import {useState, useEffect, useRef} from 'react'
+import {urlFor} from '#/src/sanity/lib/image'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -11,7 +11,12 @@ import {H2, H3, H4} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
 
 export default function Specialization({data}: {data: SpecializationItem[]}) {
-  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>(Array(data.length).fill(null))
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
 
   return (
     <section id="specialization" data-section="details-specialization-index">
@@ -39,9 +44,11 @@ export default function Specialization({data}: {data: SpecializationItem[]}) {
               )}
 
               <div className="sm:space-y-1">
-                <HoverText triggerRef={{current: itemRefs.current[idx]}}>
-                  <H3>{heading}</H3>
-                </HoverText>
+                {isHydrated && (
+                  <HoverText triggerRef={{current: itemRefs.current[idx]}}>
+                    <H3>{heading}</H3>
+                  </HoverText>
+                )}
 
                 <div className="space-y-4 divide-y sm:space-y-3 divide-gray sm:divide-gray/30">
                   {list?.map((item, index) => (

@@ -16,8 +16,6 @@ export default async function EuroclearPage() {
     return notFound()
   }
 
-  console.log(data)
-
   return (
     <Container>
       {/* @ts-expect-error: Sanity type issues */}

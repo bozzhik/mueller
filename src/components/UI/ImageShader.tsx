@@ -1,10 +1,10 @@
 'use client'
 
-import React, {useEffect, useRef} from 'react'
-import * as THREE from 'three'
-
 import {StaticImageData} from 'next/image'
+
+import React, {useEffect, useRef} from 'react'
 import {cn} from '#/src/lib/utils'
+import * as THREE from 'three'
 
 type Props = {
   src: string | StaticImageData
@@ -62,13 +62,15 @@ export default function ImageShader({src, alt = '', className}: Props) {
         vec2 uvOffset = strength * -mouseDirection * 0.2;
         vec2 uv = vUv - uvOffset;
 
+        uv = clamp(uv, 0.0, 1.0);
+
         vec4 colorR = texture2D(u_texture, uv + vec2(strength * u_aberrationIntensity * 0.01, 0.0));
         vec4 colorG = texture2D(u_texture, uv);
         vec4 colorB = texture2D(u_texture, uv - vec2(strength * u_aberrationIntensity * 0.01, 0.0));
 
         gl_FragColor = vec4(colorR.r, colorG.g, colorB.b, 1.0);
       }
-    `
+`
 
     const createTexture = (): THREE.Texture => {
       const canvas = document.createElement('canvas')
@@ -81,10 +83,30 @@ export default function ImageShader({src, alt = '', className}: Props) {
       image.src = typeof src === 'string' ? src : src.src
 
       const texture = new THREE.CanvasTexture(canvas)
+      texture.wrapS = THREE.ClampToEdgeWrapping
+      texture.wrapT = THREE.ClampToEdgeWrapping
+      texture.minFilter = THREE.LinearFilter
+      texture.magFilter = THREE.LinearFilter
+
       image.onload = () => {
-        ctx.fillStyle = '#ffffff'
+        const imageAspect = image.width / image.height
+        const canvasAspect = canvas.width / canvas.height
+
+        let drawWidth, drawHeight
+        if (imageAspect > canvasAspect) {
+          drawHeight = canvas.height
+          drawWidth = canvas.height * imageAspect
+        } else {
+          drawWidth = canvas.width
+          drawHeight = canvas.width / imageAspect
+        }
+
+        const x = (canvas.width - drawWidth) / 2
+        const y = (canvas.height - drawHeight) / 2
+
+        ctx.fillStyle = '#000000'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+        ctx.drawImage(image, x, y, drawWidth, drawHeight)
         texture.needsUpdate = true
       }
 
@@ -96,9 +118,10 @@ export default function ImageShader({src, alt = '', className}: Props) {
       if (!container) return
 
       const {clientWidth: width, clientHeight: height} = container
+      const aspect = width / height
 
       scene = new THREE.Scene()
-      camera = new THREE.PerspectiveCamera(80, width / height, 0.01, 10)
+      camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 100)
       camera.position.z = 1
 
       const texture = createTexture()
@@ -109,8 +132,10 @@ export default function ImageShader({src, alt = '', className}: Props) {
         u_texture: {value: texture},
       }
 
+      const planeGeometry = new THREE.PlaneGeometry(2, 2)
+
       planeMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(2, 2),
+        planeGeometry,
         new THREE.ShaderMaterial({
           uniforms: shaderUniforms,
           vertexShader,
@@ -121,9 +146,21 @@ export default function ImageShader({src, alt = '', className}: Props) {
 
       renderer = new THREE.WebGLRenderer({antialias: true})
       renderer.setSize(width, height)
-      renderer.setPixelRatio(window.devicePixelRatio)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
       container.appendChild(renderer.domElement)
+      window.addEventListener('resize', handleResize)
+    }
+
+    const handleResize = () => {
+      if (!containerRef.current) return
+      const {clientWidth: width, clientHeight: height} = containerRef.current
+
+      if (camera && renderer) {
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+        renderer.setSize(width, height)
+      }
     }
 
     const animateScene = () => {
@@ -132,13 +169,17 @@ export default function ImageShader({src, alt = '', className}: Props) {
       mousePosition.x += (targetMousePosition.x - mousePosition.x) * easeFactor.current
       mousePosition.y += (targetMousePosition.y - mousePosition.y) * easeFactor.current
 
-      planeMesh.material.uniforms.u_mouse.value.set(mousePosition.x, 1.0 - mousePosition.y)
-      planeMesh.material.uniforms.u_prevMouse.value.set(prevPosition.x, 1.0 - prevPosition.y)
+      if (planeMesh) {
+        planeMesh.material.uniforms.u_mouse.value.set(mousePosition.x, 1.0 - mousePosition.y)
+        planeMesh.material.uniforms.u_prevMouse.value.set(prevPosition.x, 1.0 - prevPosition.y)
+        planeMesh.material.uniforms.u_aberrationIntensity.value = aberrationIntensity
+      }
 
       aberrationIntensity = Math.max(0.0, aberrationIntensity - 0.05)
-      planeMesh.material.uniforms.u_aberrationIntensity.value = aberrationIntensity
 
-      renderer.render(scene, camera)
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera)
+      }
     }
 
     const handleMouseMove = (event: MouseEvent) => {
@@ -154,21 +195,25 @@ export default function ImageShader({src, alt = '', className}: Props) {
       aberrationIntensity = 1.0
     }
 
-    const container = containerRef.current
     initializeScene()
     animateScene()
 
+    const container = containerRef.current
     container?.addEventListener('mousemove', handleMouseMove)
 
     return () => {
-      cancelAnimationFrame(animationFrameId)
-      container?.removeChild(renderer.domElement)
+      window.removeEventListener('resize', handleResize)
+      if (container && renderer) {
+        cancelAnimationFrame(animationFrameId)
+        container.removeChild(renderer.domElement)
+      }
     }
   }, [src])
 
   if (isMobileDevice()) {
+    const imgSrc = typeof src === 'string' ? src : src.src
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={typeof src === 'string' ? src : src.src} alt={alt} className={className} />
+    return <img src={imgSrc} alt={alt} className={cn('object-cover', className)} />
   }
 
   return <div ref={containerRef} className={cn('relative', className)} aria-label={alt} style={{width: '100%', height: '100%'}} />

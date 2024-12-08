@@ -3,15 +3,12 @@
 import MuellerLogo from '$/logo.svg'
 import {websitePaths} from '@/lib/constants'
 
-import {cn} from '#/src/lib/utils'
 import {useRef} from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import {SPAN} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
-
-export const hoverLinkStyles = 'duration-200 border-b border-transparent hover:border-foreground'
 
 export default function Footer() {
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
@@ -47,7 +44,7 @@ export default function Footer() {
                       itemRefs.current[currentIndex] = el
                     }}
                     href={`/#${key}`}
-                    className={cn(hoverLinkStyles, 'w-fit')}
+                    className="w-fit"
                     key={key}
                   >
                     <HoverText triggerRef={{current: itemRefs.current[currentIndex]}}>
@@ -60,13 +57,13 @@ export default function Footer() {
 
             {colIndex === 0 && (
               <div className="space-y-1.5">
-                <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'block sm:hidden w-fit text-gray-light hover:border-gray-light')}>
+                <Link href="/privacy-policy" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
                   <HoverText>
                     <SPAN>Политика конфиденциальности</SPAN>
                   </HoverText>
                 </Link>
 
-                <Link href="mailto:info@muellerwagner.ru" className={cn(hoverLinkStyles, 'block sm:hidden w-fit text-gray-light hover:border-gray-light')}>
+                <Link href="mailto:info@muellerwagner.ru" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
                   <HoverText>
                     <SPAN>info@muellerwagner.ru</SPAN>
                   </HoverText>
@@ -82,7 +79,7 @@ export default function Footer() {
       <div className="flex-col hidden gap-8 px-3 sm:flex">
         <div className="flex flex-col gap-2.5">
           <HoverText>
-            <Link href="/privacy-policy" className={cn(hoverLinkStyles, 'text-gray-light border-gray-light w-fit')}>
+            <Link href="/privacy-policy" className="text-gray-light border-gray-light w-fit">
               <SPAN>
                 Политика <br /> конфиденциальности
               </SPAN>
@@ -90,7 +87,7 @@ export default function Footer() {
           </HoverText>
 
           <HoverText>
-            <Link href="mailto:info@muellerwagner.ru" className={cn(hoverLinkStyles, 'text-gray-light border-gray-light w-fit')}>
+            <Link href="mailto:info@muellerwagner.ru" className="text-gray-light border-gray-light w-fit">
               <SPAN>info@muellerwagner.ru</SPAN>
             </Link>
           </HoverText>

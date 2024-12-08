@@ -2,13 +2,11 @@
 
 import MuellerLogo from '$/logo.svg'
 
-import {cn} from '@/lib/utils'
 import {useRef} from 'react'
 import {usePathname} from 'next/navigation'
 import {urlForFile} from '#/src/sanity/lib/file'
 
 import {PresentationData} from '~/Global/Header'
-import {hoverLinkStyles} from '~/Global/Footer'
 import {websitePaths} from '#/src/lib/constants'
 
 import Link from 'next/link'
@@ -45,7 +43,7 @@ export function DesktopHeader({presentationsData}: {presentationsData: Presentat
             const href = isMedia ? '/media' : `/#${key}`
 
             return (
-              <Link href={href} className={cn(hoverLinkStyles, 'mt-2')} key={key}>
+              <Link href={href} className="mt-2" key={key}>
                 <HoverText>
                   <SPAN>{label}</SPAN>
                 </HoverText>

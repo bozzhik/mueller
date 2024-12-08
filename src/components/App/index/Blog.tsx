@@ -35,9 +35,9 @@ export default function Blog() {
           </Link>
         </div>
 
-        <Link ref={linkRef} href={links[0]} className="block pt-5 pb-3.5 text-center text-white bg-blue group">
+        <Link ref={linkRef} href={links[0]} className="block pt-5 pb-3.5 text-center text-white bg-blue">
           <HoverText triggerRef={linkRef}>
-            <H3 className="mx-auto leading-tight duration-200 border-b-2 border-transparent group-hover:border-white w-fit">Подписаться на канал</H3>
+            <H3 className="mx-auto leading-tight w-fit">Подписаться на канал</H3>
           </HoverText>
         </Link>
       </div>

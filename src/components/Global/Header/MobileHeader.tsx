@@ -12,12 +12,10 @@ import {gsap} from 'gsap'
 import {urlForFile} from '#/src/sanity/lib/file'
 
 import {websitePaths} from '@/lib/constants'
-import {hoverLinkStyles} from '~/Global/Footer'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import {H2, SPAN} from '~/UI/Typography'
-import {cn} from '#/src/lib/utils'
 
 export function MobileHeader({presentationsData}: {presentationsData: PresentationData[]}) {
   const container = useRef<HTMLElement | null>(null)
@@ -96,7 +94,7 @@ export function MobileHeader({presentationsData}: {presentationsData: Presentati
               const href = isMedia ? '/media' : `/#${key}`
 
               return (
-                <Link href={href} className={cn(hoverLinkStyles, 'w-fit MENU_ITEM')} onClick={toggleMenu} key={key}>
+                <Link href={href} className="w-fit MENU_ITEM" onClick={toggleMenu} key={key}>
                   <H2>{label}</H2>
                 </Link>
               )

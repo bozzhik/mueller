@@ -1,5 +1,6 @@
 import {sanityFetch} from '@/sanity/lib/live'
 import {NEWS_QUERY} from '@/sanity/lib/queries'
+import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
 import RunningLine from '~~/news/RunningLine'
@@ -9,6 +10,10 @@ export default async function MediaPage() {
   const {data} = await sanityFetch({
     query: NEWS_QUERY,
   })
+
+  if (!data) {
+    return notFound()
+  }
 
   return (
     <Container>

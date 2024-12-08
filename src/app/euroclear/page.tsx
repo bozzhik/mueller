@@ -1,23 +1,27 @@
-import EuroclearImage from '$/euroclear.jpg'
+import {sanityFetch} from '@/sanity/lib/live'
+import {EUROCLEAR_QUERY} from '@/sanity/lib/queries'
+import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
 
 import Hero from '~~/euroclear/Hero'
 import Contacts from '~~/specialization/Contacts'
 
-const euroclearData = {
-  heading: 'Euroclear',
-  action: 'Успешно помогаем в получении лицензий на разблокировку активов в Euroclear и Clearstream для граждан РФ с ВНЖ в ЕС и без ВНЖ в ЕС',
-  achievements: ['Получено более 40 лицензий', 'Процент одобрения заявок по Euroclear - 90%', 'получены лицензии для граждан РФ без ВНЖ в ЕС', 'Получены лицензии для юридических лиц', 'Получены лицензии для резидентов ЕС, получивших активы по договору дарения'],
-  image: EuroclearImage,
-}
+export default async function EuroclearPage() {
+  const {data} = await sanityFetch({
+    query: EUROCLEAR_QUERY,
+  })
 
-export type TEuroclearData = typeof euroclearData
+  if (!data) {
+    return notFound()
+  }
 
-export default function EuroclearPage() {
+  console.log(data)
+
   return (
     <Container>
-      <Hero data={euroclearData} />
+      {/* @ts-expect-error: Sanity type issues */}
+      <Hero data={data} />
 
       <Contacts />
     </Container>

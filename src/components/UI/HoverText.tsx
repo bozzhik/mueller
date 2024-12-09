@@ -86,7 +86,7 @@ export default function HoverText({children, triggerRef}: Props) {
         React.isValidElement(child)
           ? React.cloneElement(child, {
               ...child.props,
-              className: `absolute top-0 left-0 ${child.props.className || ''}`,
+              className: `sm:hidden absolute top-0 left-0 ${child.props.className || ''}`,
             })
           : child,
       )}

@@ -71,7 +71,11 @@ export default function Footer() {
               </div>
             )}
 
-            {colIndex === 1 && <SPAN className="text-base sm:hidden xl:text-sm text-gray-light hover:border-gray-light">Московская коллегия адвокатов &#34;Мюллер Вагнер&#34; 105066, город Москва, Старая Басманная ул, д. 24, оф. 71 ОГРН 1227700621411 ИНН 9701222022</SPAN>}
+            {colIndex === 1 && (
+              <Link href="https://yandex.ru/maps/-/CHEARNn3" target="_blank">
+                <SPAN className="text-base sm:hidden xl:text-sm text-gray-light hover:border-gray-light">БЦ &#34;Вивальди Плаза&#34; ул. Летниковская, 2 к.1, Москва, Россия, 115114</SPAN>
+              </Link>
+            )}
           </div>
         ))}
       </div>
@@ -95,7 +99,10 @@ export default function Footer() {
 
         <div className="flex flex-col gap-1.5">
           <SPAN className="sm:text-sm text-gray-light">2024, все права защищены</SPAN>
-          <SPAN className="sm:text-sm text-gray-light">Московская коллегия адвокатов &#34;Мюллер Вагнер&#34; 105066, город Москва, Старая Басманная ул, д. 24, оф. 71 ОГРН 1227700621411 ИНН 9701222022</SPAN>
+
+          <Link href="https://yandex.ru/maps/-/CHEARNn3" target="_blank">
+            <SPAN className="sm:text-sm text-gray-light">БЦ &#34;Вивальди Плаза&#34; ул. Летниковская, 2 к.1, Москва, Россия, 115114</SPAN>
+          </Link>
         </div>
       </div>
     </footer>

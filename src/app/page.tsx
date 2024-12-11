@@ -11,7 +11,7 @@ import Contacts from '~~/index/Contacts'
 export default function HomePage() {
   return (
     <>
-      <Loader />
+      {process.env.NODE_ENV === 'production' && <Loader />}
       <Container>
         <Hero />
         <Details />

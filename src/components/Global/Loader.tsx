@@ -3,7 +3,7 @@
 import LogoMaxImage from '$/logo-max.svg'
 import {VolumeOff, Volume2} from 'lucide-react'
 
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import gsap from 'gsap'
 import {useEffect, useState, useRef} from 'react'
 import {useMediaQuery} from '@/hooks/useMediaQuery'
@@ -12,7 +12,7 @@ import Image from 'next/image'
 import {H4} from '~/UI/Typography'
 
 export default function Loader() {
-  const [isVisible, setIsVisible] = useState(true) // Default to true
+  const [isVisible, setIsVisible] = useState(true)
   const [isFading, setIsFading] = useState(false)
   const [showSkipButton, setShowSkipButton] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -25,17 +25,17 @@ export default function Loader() {
 
   const loaderDuration = 1.5
 
-  useEffect(() => {
-    const hasSeenLoader = Cookies.get('hasSeenLoader')
+  // useEffect(() => {
+  //   const hasSeenLoader = Cookies.get('hasSeenLoader')
 
-    if (hasSeenLoader) {
-      setTimeout(() => {
-        setIsVisible(false)
-      }, loaderDuration * 1000)
-    } else {
-      Cookies.set('hasSeenLoader', 'true', {expires: 1})
-    }
-  }, [])
+  //   if (hasSeenLoader) {
+  //     setTimeout(() => {
+  //       setIsVisible(false)
+  //     }, loaderDuration * 1000)
+  //   } else {
+  //     Cookies.set('hasSeenLoader', 'true', {expires: 1})
+  //   }
+  // }, [])
 
   useEffect(() => {
     if (isVisible) {

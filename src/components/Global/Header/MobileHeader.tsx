@@ -5,21 +5,32 @@ import {MenuIcon} from 'lucide-react'
 import {X} from 'lucide-react'
 
 import {PresentationData} from '~/Global/Header'
+import {websitePaths} from '@/lib/constants'
 
 import {useState, useEffect, useRef} from 'react'
+import {usePathname} from 'next/navigation'
+import {urlForFile} from '#/src/sanity/lib/file'
 import {useGSAP} from '@gsap/react'
 import {gsap} from 'gsap'
-import {urlForFile} from '#/src/sanity/lib/file'
-
-import {websitePaths} from '@/lib/constants'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import {H2, SPAN} from '~/UI/Typography'
 
+function Button({href, target = '_blank', label}: {href: string; target?: '_self' | '_blank'; label: string}) {
+  return (
+    <Link href={href} target={target} className="grid w-full pt-3 pb-3.5 MENU_ITEM bg-blue place-items-center">
+      <SPAN className="text-white sm:text-lg">{label}</SPAN>
+    </Link>
+  )
+}
+
 export function MobileHeader({presentationsData}: {presentationsData: PresentationData[]}) {
   const container = useRef<HTMLElement | null>(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const pathname = usePathname()
+  const isEuroclear = pathname.includes('euroclear')
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev)
 
@@ -71,7 +82,7 @@ export function MobileHeader({presentationsData}: {presentationsData: Presentati
   return (
     <header className="hidden sm:block fixed w-full z-[99]">
       <div className="relative z-[999] flex items-center justify-between bg-white border-b border-gray">
-        <Link href="/" className="grid w-56 pl-3 place-items-center">
+        <Link href="/" className="grid w-56 pl-3 place-items-center" onClick={toggleMenu}>
           <Image src={MuellerLogo} className="object-contain w-full h-full" alt="Mueller Wagner logo" />
         </Link>
 
@@ -101,12 +112,15 @@ export function MobileHeader({presentationsData}: {presentationsData: Presentati
             })}
           </div>
 
-          <div className="space-y-2 pb-14">
-            {presentationsData.map(({presentation, name}) => (
-              <Link href={urlForFile(presentation?.file?.asset?._ref || '')} target="_blank" className="grid w-full pt-3 pb-3.5 MENU_ITEM bg-blue place-items-center" key={name}>
-                <SPAN className="text-white sm:text-lg">{presentation?.caption}</SPAN>
-              </Link>
-            ))}
+          <div className="space-y-2 pb-14" onClick={toggleMenu}>
+            {isEuroclear ? (
+              presentationsData[1] && <Button href={urlForFile(presentationsData[1].presentation?.file?.asset?._ref || '')} label={presentationsData[1].presentation?.caption || ''} />
+            ) : (
+              <>
+                {presentationsData[0] && <Button href={urlForFile(presentationsData[0].presentation?.file?.asset?._ref || '')} label={presentationsData[0].presentation?.caption || ''} />}
+                <Button href="/euroclear" target="_self" label="Euroclear" />
+              </>
+            )}
           </div>
         </div>
       </section>

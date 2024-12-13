@@ -56,7 +56,7 @@ export default function Footer() {
             </div>
 
             {colIndex === 0 && (
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <Link href="/privacy-policy" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
                   <HoverText>
                     <SPAN>Политика конфиденциальности</SPAN>
@@ -66,6 +66,12 @@ export default function Footer() {
                 <Link href="mailto:info@muellerwagner.ru" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
                   <HoverText>
                     <SPAN>info@muellerwagner.ru</SPAN>
+                  </HoverText>
+                </Link>
+
+                <Link href="tel:+79647152222" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
+                  <HoverText>
+                    <SPAN>+7 (964) 715 22-22</SPAN>
                   </HoverText>
                 </Link>
               </div>
@@ -84,9 +90,7 @@ export default function Footer() {
         <div className="flex flex-col gap-2.5">
           <HoverText>
             <Link href="/privacy-policy" className="text-gray-light border-gray-light w-fit">
-              <SPAN>
-                Политика <br /> конфиденциальности
-              </SPAN>
+              <SPAN>Политика конфиденциальности</SPAN>
             </Link>
           </HoverText>
 
@@ -95,13 +99,19 @@ export default function Footer() {
               <SPAN>info@muellerwagner.ru</SPAN>
             </Link>
           </HoverText>
+
+          <HoverText>
+            <Link href="mailto:+ 7 (964) 715 22 22" className="text-gray-light border-gray-light w-fit">
+              <SPAN>+7 (964) 715 22-22</SPAN>
+            </Link>
+          </HoverText>
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-2">
           <SPAN className="sm:text-sm text-gray-light">2024, все права защищены</SPAN>
 
           <Link href="https://yandex.ru/maps/-/CHEARNn3" target="_blank">
-            <SPAN className="sm:text-sm text-gray-light">БЦ &#34;Вивальди Плаза&#34; ул. Летниковская, 2 к.1, Москва, Россия, 115114</SPAN>
+            <SPAN className="sm:text-sm text-gray-light sm:leading-[1.1]">БЦ &#34;Вивальди Плаза&#34; ул. Летниковская, 2 к.1, Москва, Россия, 115114</SPAN>
           </Link>
         </div>
       </div>

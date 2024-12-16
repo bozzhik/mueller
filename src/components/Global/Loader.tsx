@@ -31,8 +31,8 @@ export default function Loader() {
         if (stripe) {
           gsap.to(stripe, {
             height: '0%',
-            duration: 0.5,
-            delay: index * 0.25,
+            duration: 0.3,
+            delay: index * 0.15,
             ease: 'power2.out',
 
             onComplete: () => {
@@ -153,7 +153,7 @@ export default function Loader() {
       ) : (
         <>
           {!isVideoHidden && (
-            <div className="grid w-full h-full opacity-100 duration-300 bg-[#000]">
+            <div className="grid w-full h-full opacity-100 duration-300 bg-blue">
               <div ref={videoContainerRef} className="w-full h-full aspect-video sm:aspect-[9/16] pointer-events-none">
                 <video ref={videoRef} autoPlay loop muted={isMuted} playsInline className="block object-cover w-full h-full bg-gray-light/25">
                   <source src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} type="video/webm" />
@@ -178,7 +178,7 @@ export default function Loader() {
               {[...Array(5)].map((_, index) => (
                 <div
                   key={index}
-                  className="bg-[#000] h-full"
+                  className="bg-blue h-full"
                   ref={(el) => {
                     stripeRefs.current[index] = el
                   }}

@@ -46,12 +46,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type Euroclear = {
   _id: string;
   _type: "euroclear";
@@ -124,6 +118,25 @@ export type Blog = {
   heading?: string;
   caption?: string;
   date?: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  slug?: Slug;
   image?: {
     asset?: {
       _ref: string;
@@ -136,6 +149,12 @@ export type Blog = {
     alt?: string;
     _type: "image";
   };
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type News = {
@@ -303,7 +322,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Euroclear | Presentation | SanityFileAsset | Blog | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Euroclear | Presentation | SanityFileAsset | Blog | Slug | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
@@ -398,11 +417,12 @@ export type NEWS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: BLOG_QUERY
-// Query: *[_type == "blog"]{    heading, caption, date, image}
+// Query: *[_type == "blog"]{    heading, caption, date, slug, image}
 export type BLOG_QUERYResult = Array<{
   heading: string | null;
   caption: string | null;
   date: string | null;
+  slug: Slug | null;
   image: {
     asset?: {
       _ref: string;
@@ -416,6 +436,31 @@ export type BLOG_QUERYResult = Array<{
     _type: "image";
   } | null;
 }>;
+// Variable: BLOG_ITEM_QUERY
+// Query: *[_type == "blog" && slug.current == $slug][0] {     heading, date, slug, content  }
+export type BLOG_ITEM_QUERYResult = {
+  heading: string | null;
+  date: string | null;
+  slug: Slug | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+} | null;
 // Variable: PRESENTATIONS_QUERY
 // Query: *[_type == "presentation"]{    name, caption, file}
 export type PRESENTATIONS_QUERYResult = Array<{
@@ -458,7 +503,8 @@ declare module "@sanity/client" {
     "\n  *[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n    specialization[slug == $slug][0] {\n      _type, heading, list, mentions, advantages, icon, image, slug\n    }\n  }[0].specialization\n": SPECIALIZATIONS_QUERYResult;
     "\n  *[_type == \"worker\"]{\n    id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
     "\n  *[_type == \"news\"]{\n    id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
-    "\n  *[_type == \"blog\"]{\n    heading, caption, date, image\n}": BLOG_QUERYResult;
+    "\n  *[_type == \"blog\"]{\n    heading, caption, date, slug, image\n}": BLOG_QUERYResult;
+    "\n  *[_type == \"blog\" && slug.current == $slug][0] { \n    heading, date, slug, content\n  }\n": BLOG_ITEM_QUERYResult;
     "\n  *[_type == \"presentation\"]{\n    name, caption, file\n}": PRESENTATIONS_QUERYResult;
     "\n  *[_type == \"euroclear\"][0]{\n      heading, action, achievements, image\n    }\n": EUROCLEAR_QUERYResult;
   }

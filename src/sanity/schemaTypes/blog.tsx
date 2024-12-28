@@ -27,6 +27,22 @@ export const blog = defineType({
       type: 'string',
       validation: (rule: Rule) => rule.required(),
     },
+    {
+      name: 'content',
+      title: 'Контент',
+      type: 'array',
+      of: [{type: 'block'}],
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      name: 'slug',
+      title: 'Ссылка',
+      type: 'slug',
+      options: {
+        source: 'heading',
+      },
+      validation: (rule: Rule) => rule.required(),
+    },
     defineField({
       name: 'image',
       type: 'image',

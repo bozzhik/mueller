@@ -5,7 +5,7 @@ import NewsImage2 from '$/news/2.jpg'
 import NewsImage3 from '$/news/3.jpg'
 import NewsImage4 from '$/news/4.jpg'
 
-import {NEWS_QUERYResult, BLOG_QUERYResult} from '#/sanity.types'
+import {NEWS_QUERYResult, BLOG_QUERYResult, Slug} from '#/sanity.types'
 
 import {cn} from '#/src/lib/utils'
 import {useRef} from 'react'
@@ -26,6 +26,7 @@ type NewsCardProps = Partial<NEWS_QUERYResultItem> &
       alt: string
     }
     date?: string | null
+    slug?: Slug | null
 
     className?: string
     cms?: boolean
@@ -41,7 +42,7 @@ function getNextImage(): string {
   return image
 }
 
-export function NewsCard({type = 'news', heading, caption, publisher, date, source, image, media, className, cms}: NewsCardProps & {index: number}) {
+export function NewsCard({type = 'news', heading, caption, publisher, date, source, slug, image, media, className, cms}: NewsCardProps & {index: number}) {
   const cardRef = useRef<HTMLAnchorElement>(null)
 
   const imageUrl = cms ? (image?.asset ? urlFor(image).url() : null) : media?.url || null
@@ -73,7 +74,7 @@ export function NewsCard({type = 'news', heading, caption, publisher, date, sour
   const imageStyles = 'overflow-hidden border-b border-gray block w-full h-[40vh] xl:h-[35vh] sm:h-[40vh] object-cover'
 
   return (
-    <Link ref={cardRef} href={type === 'news' && source ? source : '<slug>'} className={cn('border-r border-b border-gray', className)}>
+    <Link ref={cardRef} href={type === 'news' && source ? source : `/blog/${slug?.current}`} className={cn('border-r border-b border-gray', className)}>
       <div className={imageStyles}>
         <ImageShader src={imageUrl || fallbackImageSrc} alt={imageAlt || 'Новость про Mueller Wagner'} />
       </div>

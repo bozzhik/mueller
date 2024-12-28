@@ -25,8 +25,14 @@ export const NEWS_QUERY = defineQuery(`
 
 export const BLOG_QUERY = defineQuery(`
   *[_type == "blog"]{
-    heading, caption, date, image
+    heading, caption, date, slug, image
 }`)
+
+export const BLOG_ITEM_QUERY = defineQuery(`
+  *[_type == "blog" && slug.current == $slug][0] { 
+    heading, date, slug, content
+  }
+`)
 
 export const PRESENTATIONS_QUERY = defineQuery(`
   *[_type == "presentation"]{

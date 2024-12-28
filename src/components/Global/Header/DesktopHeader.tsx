@@ -5,6 +5,7 @@ import MuellerLogo from '$/logo.svg'
 import {useRef} from 'react'
 import {usePathname} from 'next/navigation'
 import {urlForFile} from '#/src/sanity/lib/file'
+import {cn} from '@/lib/utils'
 
 import {PresentationData} from '~/Global/Header'
 import {websitePaths} from '#/src/lib/constants'
@@ -14,13 +15,13 @@ import Image from 'next/image'
 import {SPAN} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
 
-function Button({href, target = '_blank', label}: {href: string; target?: '_self' | '_blank'; label: string}) {
+export function Button({href, target = '_blank', label, className}: {href: string; target?: '_self' | '_blank'; label: string; className?: string}) {
   const linkRef = useRef<HTMLAnchorElement>(null)
 
   return (
-    <Link ref={linkRef} href={href} target={target} className="grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5">
+    <Link ref={linkRef} href={href} target={target} className={cn('grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5', className)}>
       <HoverText triggerRef={linkRef}>
-        <span className="block pb-1 text-[22px] text-nowrap uppercase text-blue-500">{label}</span>
+        <span className="block pb-1 text-[22px] sm:text-lg text-nowrap uppercase text-blue-500">{label}</span>
       </HoverText>
     </Link>
   )

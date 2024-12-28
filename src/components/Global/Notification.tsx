@@ -39,7 +39,7 @@ export default function Notification() {
     }
   }
 
-  const handleMouseEnter = () => {
+  const handleMouseLeave = () => {
     if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
 
     hideTimeoutRef.current = setTimeout(() => {
@@ -50,7 +50,7 @@ export default function Notification() {
   if (!show) return null
 
   return (
-    <section id="notification" className="xl:p-5 w-full fixed bottom-0 left-0 flex p-10 pb-8 z-[99]" onMouseEnter={handleMouseEnter}>
+    <section id="notification" className="xl:p-5 w-full fixed bottom-0 left-0 flex p-10 pb-8 z-[99]" onMouseLeave={handleMouseLeave}>
       <div ref={notificationRef} className="py-3.5 pl-6 pr-3.5 sm:p-3 bg-white sm:w-full grid grid-cols-2 sm:flex sm:flex-col gap-12 sm:gap-3.5 border-blue border ring-blue ring-[0.5px]">
         <H6 className="uppercase !leading-[1.25]">
           Всё о разблокировке <br className="sm:hidden" /> в Euroclear здесь

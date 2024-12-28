@@ -115,6 +115,29 @@ export type SanityFileAsset = {
   source?: SanityAssetSourceData;
 };
 
+export type Blog = {
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  caption?: string;
+  date?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
 export type News = {
   _id: string;
   _type: "news";
@@ -280,7 +303,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Euroclear | Presentation | SanityFileAsset | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Euroclear | Presentation | SanityFileAsset | Blog | News | WorkerItem | Worker | SpecializationItem | Detail | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: DETAILS_QUERY
@@ -374,6 +397,25 @@ export type NEWS_QUERYResult = Array<{
     _type: "image";
   } | null;
 }>;
+// Variable: BLOG_QUERY
+// Query: *[_type == "blog"]{    heading, caption, date, image}
+export type BLOG_QUERYResult = Array<{
+  heading: string | null;
+  caption: string | null;
+  date: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+}>;
 // Variable: PRESENTATIONS_QUERY
 // Query: *[_type == "presentation"]{    name, caption, file}
 export type PRESENTATIONS_QUERYResult = Array<{
@@ -416,6 +458,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"detail\" && name == '\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F']{\n    specialization[slug == $slug][0] {\n      _type, heading, list, mentions, advantages, icon, image, slug\n    }\n  }[0].specialization\n": SPECIALIZATIONS_QUERYResult;
     "\n  *[_type == \"worker\"]{\n    id, name, position, honors, education, career, other, image\n}": WORKERS_QUERYResult;
     "\n  *[_type == \"news\"]{\n    id, heading, caption, publisher, source, image\n}": NEWS_QUERYResult;
+    "\n  *[_type == \"blog\"]{\n    heading, caption, date, image\n}": BLOG_QUERYResult;
     "\n  *[_type == \"presentation\"]{\n    name, caption, file\n}": PRESENTATIONS_QUERYResult;
     "\n  *[_type == \"euroclear\"][0]{\n      heading, action, achievements, image\n    }\n": EUROCLEAR_QUERYResult;
   }

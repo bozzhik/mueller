@@ -23,6 +23,11 @@ export const NEWS_QUERY = defineQuery(`
     id, heading, caption, publisher, source, image
 }`)
 
+export const BLOG_QUERY = defineQuery(`
+  *[_type == "blog"]{
+    heading, caption, date, image
+}`)
+
 export const PRESENTATIONS_QUERY = defineQuery(`
   *[_type == "presentation"]{
     name, caption, file

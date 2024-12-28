@@ -5,9 +5,10 @@ import {QueryParams} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
-import {H2, H6} from '~/UI/Typography'
-
 import Contacts from '~~/specialization/Contacts'
+
+import {H2, H6} from '~/UI/Typography'
+import {PortableBlock} from '~/UI/PortableBlock'
 
 export default async function Page({params}: {params: Promise<QueryParams>}) {
   const {data: blog} = await sanityFetch({
@@ -19,15 +20,17 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
     return notFound()
   }
 
-  const {heading, date} = blog
+  const {heading, date, content} = blog
 
   return (
     <Container>
-      <div className="mt-14 px-7 sm:px-3">
+      <div className="mt-14 px-7 sm:px-3 space-y-9">
         <div className="flex justify-between items-end">
-          <H2>{heading}</H2>
+          <H2 className="max-w-[50ch] leading-[1.2]">{heading}</H2>
           <H6>{date}</H6>
         </div>
+
+        <PortableBlock value={content || []} />
       </div>
 
       <Contacts />

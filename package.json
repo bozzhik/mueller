@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@portabletext/react": "^3.2.0",
     "@react-email/components": "^0.0.28",
     "@sanity/asset-utils": "^2.2.0",
     "@sanity/client": "^6.22.4",

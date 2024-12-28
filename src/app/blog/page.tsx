@@ -1,14 +1,14 @@
 import {sanityFetch} from '@/sanity/lib/live'
-import {NEWS_QUERY} from '@/sanity/lib/queries'
+import {BLOG_QUERY} from '@/sanity/lib/queries'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
 import RunningLine from '~~/news/RunningLine'
-import NewsGrid from '~~/index/News/NewsGrid'
+import BlogGrid from '~~/euroclear/Blog/BlogGrid'
 
-export default async function MediaPage() {
+export default async function BlogPage() {
   const {data} = await sanityFetch({
-    query: NEWS_QUERY,
+    query: BLOG_QUERY,
   })
 
   if (!data) {
@@ -17,8 +17,8 @@ export default async function MediaPage() {
 
   return (
     <Container>
-      <RunningLine text="Мы в сми" />
-      <NewsGrid news={data} isIndex={false} />
+      <RunningLine text="Блог Mueller Wagner" />
+      <BlogGrid items={data} isEuroclear={false} />
     </Container>
   )
 }

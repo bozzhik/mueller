@@ -5,10 +5,10 @@ import {useEffect, useRef} from 'react'
 import {horizontalLoop} from '@/lib/gsap/horizontal-loop'
 import {H1} from '../../UI/Typography'
 
-const items = Array(7).fill('Мы в сми')
-
-export default function RunningLine() {
+export default function RunningLine({text}: {text: string}) {
   const marqueeRef = useRef<HTMLDivElement | null>(null)
+
+  const items = Array(7).fill(text)
 
   useEffect(() => {
     if (!marqueeRef.current) return

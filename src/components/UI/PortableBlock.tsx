@@ -9,7 +9,7 @@ export type Props = NonNullable<NonNullable<BLOG_ITEM_QUERYResult>['content']>[n
 
 export function PortableBlock({value, className}: {value: Props[]; className?: string}) {
   return (
-    <div className={cn(typoClasses.p, 'space-y-7 pb-14 max-w-[80ch]', className)}>
+    <div className={cn(typoClasses.p, 'space-y-7 pb-14', className)}>
       <PortableText value={value} />
     </div>
   )

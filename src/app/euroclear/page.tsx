@@ -5,6 +5,7 @@ import {notFound} from 'next/navigation'
 import Container from '~/Global/Container'
 
 import Hero from '~~/euroclear/Hero'
+import Blog from '~~/euroclear/Blog/Blog'
 import Contacts from '~~/specialization/Contacts'
 
 export default async function EuroclearPage() {
@@ -21,6 +22,7 @@ export default async function EuroclearPage() {
       {/* @ts-expect-error: Sanity type issues */}
       <Hero data={data} />
 
+      <Blog />
       <Contacts />
     </Container>
   )

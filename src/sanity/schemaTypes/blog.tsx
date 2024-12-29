@@ -31,7 +31,7 @@ export const blog = defineType({
       name: 'content',
       title: 'Контент',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [{type: 'block'}, {type: 'image'}],
       validation: (rule: Rule) => rule.required(),
     },
     {

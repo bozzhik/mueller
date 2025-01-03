@@ -46,16 +46,21 @@ export default function Hero({data}: HeroProps) {
 
         <section data-section="hero-achievements">
           <div className="p-10 text-white sm:px-5 sm:py-4 xl:py-8 bg-blue sm:space-y-2">
-            <H2 className="sm:max-w-[20ch]">Наши достижения</H2>
+            <H2 className="sm:max-w-[20ch]">Наши преимущества</H2>
           </div>
 
-          <div className="grid grid-cols-2 border-b border-l sm:border-l-0 sm:divide-y sm:grid-cols-1 divide-gray border-gray">
-            {achievements?.map((item: string, idx: number) => (
-              <div className={cn('flex p-7 pb-20 sm:pl-3 sm:pr-6 gap-6 xl:gap-4 xl:p-5 xl:pb-20 sm:py-7 border-gray border-r border-b', 'last-of-type:col-span-2 last-of-type:sm:col-span-1 last-of-type:border-b-0')} key={idx}>
-                <H6 className="text-3xl !leading-none xl:text-2xl sm:text-xl">{idx + 1}</H6>
-                <P className="text-[28px] !leading-[1.25]">{item}</P>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 border-b border-l sm:border-l-0 sm:grid-cols-1 divide-gray divide-x sm:divide-x-0 divide-y border-gray">
+            {achievements?.map((item: string, idx: number) => {
+              const isOdd = achievements.length % 2 !== 0
+              const conditionalClass = isOdd && idx === achievements.length - 1 && 'last-of-type:col-span-2 last-of-type:sm:col-span-1 last-of-type:border-b-0'
+
+              return (
+                <div className={cn('flex p-7 pb-20 sm:pl-3 sm:pr-6 gap-6 xl:gap-4 xl:p-5 xl:pb-20 sm:py-7 first-of-type:border-t first-of-type:border-l sm:first-of-type:border-l-0', conditionalClass)} key={idx}>
+                  <H6 className="text-3xl !leading-none xl:text-2xl sm:text-xl">{idx + 1}</H6>
+                  <P className="text-[28px] !leading-[1.25]">{item}</P>
+                </div>
+              )
+            })}
           </div>
         </section>
       </div>

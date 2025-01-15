@@ -2,7 +2,20 @@ import {BLOG_QUERYResult} from '#/sanity.types'
 import {NewsCard} from '~~/index/News/NewsCard'
 
 export default function BlogGrid({items, isEuroclear}: {items: BLOG_QUERYResult; isEuroclear: boolean}) {
-  const displayedItems = items.slice(0, isEuroclear ? 4 : items.length)
+  const parseDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('.').map(Number)
+    return new Date(year, month - 1, day)
+  }
+
+  const sortedItems = items
+    .filter((item) => item.date)
+    .sort((a, b) => {
+      const dateA = parseDate(a.date!)
+      const dateB = parseDate(b.date!)
+      return dateB.getTime() - dateA.getTime()
+    })
+
+  const displayedItems = sortedItems.slice(0, isEuroclear ? 4 : sortedItems.length)
 
   return (
     <section data-section="news-grid" className="grid grid-cols-4 border-t sm:grid-cols-1 border-gray">

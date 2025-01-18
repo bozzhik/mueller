@@ -19,9 +19,9 @@ export function Button({href, target = '_blank', label, className}: {href: strin
   const linkRef = useRef<HTMLAnchorElement>(null)
 
   return (
-    <Link ref={linkRef} href={href} target={target} className={cn('grid px-10 xl:px-7 text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5', className)}>
+    <Link ref={linkRef} href={href} target={target} className={cn('grid px-10 xl:px-7 text-[22px] sm:text-lg text-white bg-blue duration-500 hover:bg-blue/95 place-items-center -mt-0.5', className)}>
       <HoverText triggerRef={linkRef}>
-        <span className="block pb-1 text-[22px] sm:text-lg text-nowrap uppercase text-blue-500">{label}</span>
+        <span className="block pb-1 text-nowrap uppercase">{label}</span>
       </HoverText>
     </Link>
   )

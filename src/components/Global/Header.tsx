@@ -5,7 +5,7 @@ import {PRESENTATIONS_QUERY} from '@/sanity/lib/queries'
 import {DesktopHeader} from '~/Global/Header/DesktopHeader'
 import {MobileHeader} from '~/Global/Header/MobileHeader'
 
-type PRESENTATIONS_QUERYResultItem = PRESENTATIONS_QUERYResult[number]
+export type PRESENTATIONS_QUERYResultItem = PRESENTATIONS_QUERYResult[number]
 
 export type PresentationData = {
   presentation: PRESENTATIONS_QUERYResultItem

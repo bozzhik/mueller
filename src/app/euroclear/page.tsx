@@ -1,5 +1,5 @@
 import {sanityFetch} from '@/sanity/lib/live'
-import {EUROCLEAR_QUERY} from '@/sanity/lib/queries'
+import {EUROCLEAR_QUERY, PRESENTATIONS_QUERY} from '@/sanity/lib/queries'
 import {notFound} from 'next/navigation'
 
 import Container from '~/Global/Container'
@@ -9,18 +9,24 @@ import Blog from '~~/euroclear/Blog/Blog'
 import Contacts from '~~/specialization/Contacts'
 
 export default async function EuroclearPage() {
-  const {data} = await sanityFetch({
+  const {data: euroclear} = await sanityFetch({
     query: EUROCLEAR_QUERY,
   })
 
-  if (!data) {
+  const {data: presentations} = await sanityFetch({
+    query: PRESENTATIONS_QUERY,
+  })
+
+  if (!euroclear || !presentations) {
     return notFound()
   }
+
+  const euroclearPresentation = presentations.find(({name}) => name === 'Общая')
 
   return (
     <Container>
       {/* @ts-expect-error: Sanity type issues */}
-      <Hero data={data} />
+      <Hero data={euroclear} presentation={euroclearPresentation} />
 
       <Blog />
       <Contacts />

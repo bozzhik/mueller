@@ -21,7 +21,7 @@ export default async function EuroclearPage() {
     return notFound()
   }
 
-  const euroclearPresentation = presentations.find(({name}) => name === 'Общая')
+  const euroclearPresentation = presentations.find(({name}) => name === 'Ценные бумаги')
 
   return (
     <Container>

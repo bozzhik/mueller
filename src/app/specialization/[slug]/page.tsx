@@ -8,7 +8,7 @@ import Container from '~/Global/Container'
 
 import Hero from '~~/specialization/Hero'
 import HeroExtra from '~~/specialization/HeroExtra'
-// import News from '~~/specialization/News'
+import News from '~~/specialization/News'
 import Contacts from '~~/specialization/Contacts'
 
 export default async function Page({params}: {params: Promise<QueryParams>}) {
@@ -21,7 +21,7 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
     return notFound()
   }
 
-  const {heading, list, advantages, image} = specialization
+  const {heading, list, mentions, advantages, image} = specialization
 
   return (
     <Container>
@@ -33,7 +33,7 @@ export default async function Page({params}: {params: Promise<QueryParams>}) {
         <Hero heading={heading} list={list} image={image} />
       )}
 
-      {/* <News feed_url={mentions} /> */}
+      <News feed_urls={mentions} />
       <Contacts />
     </Container>
   )

@@ -4,30 +4,37 @@ import {H2, H6} from '~/UI/Typography'
 import NewsGrid from '~~/specialization/NewsGrid'
 
 type TFeedItem = {
-  url: string
   title: string
   content_text: string
-  image: {
-    src: string
-    alt: string
-  }
+  url: string
 }
 
-export default async function News({feed_url}: {feed_url: string | null}) {
-  const safeFeedUrl = feed_url || ''
+const WEBSITE_URL = process.env.NODE_ENV === 'production' ? 'https://muellerwagner.ru/' : 'http://localhost:2000'
 
-  const {data} = await axios.get(safeFeedUrl)
+export default async function News({feed_urls}: {feed_urls: string[] | null}) {
+  if (!feed_urls || feed_urls.length === 0) return null
 
-  const news = data?.items.map((item: TFeedItem) => ({
+  let data
+
+  try {
+    if (feed_urls.length === 1) {
+      const response = await axios.get(feed_urls[0])
+      data = response.data
+    } else {
+      const response = await axios.post(`${WEBSITE_URL}/api/parser`, {urls: feed_urls})
+      data = response.data
+    }
+  } catch (error) {
+    console.error('Error fetching news:', error)
+    return null
+  }
+
+  const items: TFeedItem[] = Array.isArray(data) ? data : data?.items || []
+
+  const news = items.map((item: TFeedItem) => ({
     heading: item.title,
     caption: item.content_text,
     source: item.url,
-    media: item.image
-      ? {
-          url: item.image,
-          alt: item.title,
-        }
-      : null,
   }))
 
   return (

@@ -1,25 +1,23 @@
 'use client'
 
-import {NEWS_QUERYResult} from '#/sanity.types'
 import {useMediaQuery} from '#/src/hooks/useMediaQuery'
-import {NewsCard} from '~~/index/News/NewsCard'
+import {NewsCard} from '~~/specialization/NewsCard'
 
-type NewsGridItem = {
-  media?: {
-    url: string
-    alt: string
-  }
-} & NEWS_QUERYResult[number]
+export type TNewsGridItem = {
+  heading: string
+  caption: string
+  source: string
+}
 
-export default function NewsGrid({news}: {news: NewsGridItem[]}) {
+export default function NewsGrid({news}: {news: TNewsGridItem[]}) {
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
-  const displayedNews = isDesktop ? news.slice(0, 12) : news.slice(0, 4)
+  const displayedNews = isDesktop ? news : news.slice(0, 4)
 
   return (
     <section data-section="news-grid" className="grid grid-cols-4 border-t xl:grid-cols-3 sm:grid-cols-1 border-gray">
       {displayedNews.map((item, index) => (
-        <NewsCard cms={false} index={index} key={index} {...item} />
+        <NewsCard index={index} key={index} {...item} />
       ))}
     </section>
   )

@@ -1,11 +1,11 @@
 'use client'
 
-import NewsImage1 from '$/news/1.jpg'
-import NewsImage2 from '$/news/2.jpg'
-import NewsImage3 from '$/news/3.jpg'
-import NewsImage4 from '$/news/4.jpg'
+import BlogImage1 from '$/news/1.jpg'
+import BlogImage2 from '$/news/2.jpg'
+import BlogImage3 from '$/news/3.jpg'
+import BlogImage4 from '$/news/4.jpg'
 
-import {NEWS_QUERYResult} from '#/sanity.types'
+import type {BLOG_QUERYResult} from '#/sanity.types'
 
 import {cn} from '#/src/lib/utils'
 import {useRef} from 'react'
@@ -16,13 +16,14 @@ import {H4, H6} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
 import ImageShader from '~/UI/ImageShader'
 
-type NEWS_QUERYResultItem = NEWS_QUERYResult[number]
+type BLOG_QUERYResultItem = BLOG_QUERYResult[number]
 
-type NewsCardProps = Partial<NEWS_QUERYResultItem> & {
+type BlogCardProps = Partial<BLOG_QUERYResultItem> & {
+  index: number
   className?: string
 }
 
-const fallbackImages = [NewsImage1, NewsImage2, NewsImage3, NewsImage4]
+const fallbackImages = [BlogImage1, BlogImage2, BlogImage3, BlogImage4]
 let currentImageIndex = 0
 
 function getNextImage(): string {
@@ -31,43 +32,23 @@ function getNextImage(): string {
   return image
 }
 
-export function NewsCard({heading, caption, publisher, source, image, className}: NewsCardProps & {index: number}) {
+export function BlogCard({heading, caption, date, slug, image, className}: BlogCardProps) {
   const cardRef = useRef<HTMLAnchorElement>(null)
 
   const imageUrl = image?.asset ? urlFor(image).url() : null
   const fallbackImageSrc = getNextImage()
 
-  const DOMAIN_NAME_MAP: Record<string, string> = {
-    'rbc.ru': 'РБК',
-    'kommersant.ru': 'Коммерсант',
-  }
-
-  function getPublisher(source?: string | null, publisher?: string | null) {
-    if (publisher) return publisher
-
-    if (source) {
-      function getBaseDomain(hostname: string): string {
-        const parts = hostname.split('.')
-        return parts.slice(-2).join('.')
-      }
-
-      const hostname = new URL(source).hostname.replace('www.', '')
-      const baseDomain = getBaseDomain(hostname)
-      return DOMAIN_NAME_MAP[baseDomain] || hostname
-    }
-  }
-
   const imageStyles = 'overflow-hidden border-b border-gray block w-full h-[40vh] xl:h-[35vh] sm:h-[40vh] object-cover'
 
   return (
-    <Link ref={cardRef} href={source || ''} className={cn('border-r border-b border-gray', className)}>
+    <Link ref={cardRef} href={`/blog/${slug?.current}`} className={cn('border-r border-b border-gray', className)}>
       <div className={imageStyles}>
         <ImageShader src={imageUrl || fallbackImageSrc} alt={image?.alt || 'Новость про Mueller Wagner'} />
       </div>
 
       <div className="px-6 pt-4 pb-16 space-y-5 xl:px-4 xl:pt-3 xl:pb-14 sm:pt-5 sm:pb-7 xl:space-y-2">
         <HoverText triggerRef={cardRef}>
-          <H6 className="uppercase">{getPublisher(source, publisher)}</H6>
+          <H6 className="uppercase">{date}</H6>
         </HoverText>
 
         <div className="space-y-2 xl:space-y-1.5">

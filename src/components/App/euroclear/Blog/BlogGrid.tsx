@@ -1,5 +1,5 @@
 import {BLOG_QUERYResult} from '#/sanity.types'
-import {NewsCard} from '~~/index/News/NewsCard'
+import {BlogCard} from '~~/euroclear/Blog/BlogCard'
 
 export default function BlogGrid({items, isEuroclear}: {items: BLOG_QUERYResult; isEuroclear: boolean}) {
   const parseDate = (dateString: string) => {
@@ -20,7 +20,7 @@ export default function BlogGrid({items, isEuroclear}: {items: BLOG_QUERYResult;
   return (
     <section data-section="news-grid" className="grid grid-cols-4 border-t sm:grid-cols-1 border-gray">
       {displayedItems.map((item, index) => (
-        <NewsCard type="blog" className={isEuroclear ? 'sm:[&:nth-of-type(3)]:hidden sm:[&:nth-of-type(4)]:hidden' : ''} cms={true} index={index} key={index} {...item} />
+        <BlogCard className={isEuroclear ? 'sm:[&:nth-of-type(3)]:hidden sm:[&:nth-of-type(4)]:hidden' : ''} index={index} key={index} {...item} />
       ))}
     </section>
   )

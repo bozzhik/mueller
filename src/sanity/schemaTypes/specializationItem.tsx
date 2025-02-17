@@ -21,9 +21,10 @@ export const specializationItem = defineType({
     {
       name: 'mentions',
       title: 'Упоминания',
-      type: 'string',
+      type: 'array',
+      of: [{type: 'string'}],
       validation: (Rule) => Rule.required(),
-      description: 'Ссылка на RSS Feed',
+      description: 'Ссылки на RSS Feed',
     },
     {
       name: 'advantages',

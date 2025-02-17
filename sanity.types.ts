@@ -235,7 +235,7 @@ export type SpecializationItem = {
   _type: "specializationItem";
   heading?: string;
   list?: Array<string>;
-  mentions?: string;
+  mentions?: Array<string>;
   advantages?: Array<string>;
   icon?: {
     asset?: {
@@ -352,7 +352,7 @@ export type SPECIALIZATIONS_QUERYResult = {
   _type: "specializationItem";
   heading: string | null;
   list: Array<string> | null;
-  mentions: string | null;
+  mentions: Array<string> | null;
   advantages: Array<string> | null;
   icon: {
     asset?: {

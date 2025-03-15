@@ -7,6 +7,7 @@ import Container from '~/Global/Container'
 import Hero from '~~/euroclear/Hero'
 import Blog from '~~/euroclear/Blog/Blog'
 import Contacts from '~~/specialization/Contacts'
+import Faq from '~~/euroclear/Faq'
 
 export default async function EuroclearPage() {
   const {data: euroclear} = await sanityFetch({
@@ -28,6 +29,7 @@ export default async function EuroclearPage() {
       {/* @ts-expect-error: Sanity type issues */}
       <Hero data={euroclear} presentation={euroclearPresentation} />
 
+      <Faq />
       <Blog />
       <Contacts />
     </Container>

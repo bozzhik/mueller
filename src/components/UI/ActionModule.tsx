@@ -14,11 +14,11 @@ type Props = {
   caption: string
   title: string
   link: string
-  showActionButton?: boolean
-  actionButtonText?: string
+  actionText: string
+  actionButtonText: string
 }
 
-export default function ActionModule({caption, title, link, showActionButton = true, actionButtonText}: Props) {
+export default function ActionModule({caption, title, link, actionText, actionButtonText}: Props) {
   const linkRef = useRef<HTMLAnchorElement>(null)
 
   return (
@@ -37,17 +37,15 @@ export default function ActionModule({caption, title, link, showActionButton = t
           <Link href={link} className="flex flex-col justify-between gap-20 p-8 xl:gap-12 group border-l border-gray" target="_blank">
             <Image className="w-12 xl:w-10 group-hover:scale-[1.07] duration-300" src={TelegramLogo} alt="Телеграм канал Санкционный дозор" />
 
-            <H3 className="leading-[1.1] border-b-2 border-transparent group-hover:border-foreground w-fit duration-300">Telegram</H3>
+            <H3 className="leading-[1.1] border-b-2 border-transparent group-hover:border-foreground w-fit duration-300">{actionText}</H3>
           </Link>
         </div>
 
-        {showActionButton && (
-          <Link ref={linkRef} href={link} className="block pt-5 pb-3.5 text-center text-white bg-blue">
-            <HoverText triggerRef={linkRef}>
-              <H3 className="mx-auto leading-tight w-fit">{actionButtonText}</H3>
-            </HoverText>
-          </Link>
-        )}
+        <Link ref={linkRef} href={link} className="block pt-5 pb-3.5 text-center text-white bg-blue">
+          <HoverText triggerRef={linkRef}>
+            <H3 className="mx-auto leading-tight w-fit">{actionButtonText}</H3>
+          </HoverText>
+        </Link>
       </div>
 
       <div data-section="mobile-blog-index" className="hidden sm:block">
@@ -65,11 +63,9 @@ export default function ActionModule({caption, title, link, showActionButton = t
               <H3 className="sm:text-lg">sanctionsexplained</H3>
             </Link>
 
-            {showActionButton && (
-              <Link href={link} className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue">
-                <H3 className="sm:text-lg">{actionButtonText}</H3>
-              </Link>
-            )}
+            <Link href={link} className="flex items-center justify-center gap-2 py-3.5 text-white bg-blue">
+              <H3 className="sm:text-lg">{actionButtonText}</H3>
+            </Link>
           </div>
         </div>
       </div>

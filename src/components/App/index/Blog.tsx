@@ -6,8 +6,8 @@ export default function Blog() {
       caption="Блог"
       title="Подпишитесь на наш телеграм-канал «Санкционный дозор»"
       link="https://t.me/sanctionsexplained"
-      showActionButton={true} // blue button
-      actionButtonText="Подписаться на канал"
+      actionText="Telegram" // big square button
+      actionButtonText="Подписаться на канал" // blue button
     />
   )
 }

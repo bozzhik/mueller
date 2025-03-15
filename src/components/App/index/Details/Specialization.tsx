@@ -44,11 +44,15 @@ export default function Specialization({data}: {data: SpecializationItem[]}) {
               )}
 
               <div className="sm:space-y-1">
-                {isHydrated && (
-                  <HoverText triggerRef={{current: itemRefs.current[idx]}}>
-                    <H3>{heading}</H3>
-                  </HoverText>
-                )}
+                <div className="flex gap-2.5 group">
+                  {isHydrated && (
+                    <HoverText triggerRef={{current: itemRefs.current[idx]}}>
+                      <H3>{heading}</H3>
+                    </HoverText>
+                  )}
+
+                  <div className="relative -z-20 text-2xl mt-[1px] font-bold opacity-0 -translate-x-3 group-hover:translate-x-1 group-hover:opacity-100 duration-300">→</div>
+                </div>
 
                 <div className="space-y-4 divide-y sm:space-y-3 divide-gray sm:divide-gray/30">
                   {list?.map((item, index) => (

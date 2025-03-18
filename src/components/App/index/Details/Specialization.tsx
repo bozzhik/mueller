@@ -4,6 +4,7 @@ import {SpecializationItem} from '#/sanity.types'
 
 import {useState, useEffect, useRef} from 'react'
 import {urlFor} from '#/src/sanity/lib/image'
+import {cn} from '@/lib/utils'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -34,27 +35,25 @@ export default function Specialization({data}: {data: SpecializationItem[]}) {
                 itemRefs.current[idx] = el
               }}
               href={`/specialization/${slug}`}
-              className="flex items-start gap-10 px-10 group sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7"
+              className={cn('flex items-start gap-10 px-10 group sm:gap-7 sm:pl-3 sm:pr-6 sm:flex-col py-14 xl:py-10 sm:py-7', 'hover:bg-blue hover:text-white duration-500')}
               key={idx}
             >
               {imageUrl && (
-                <div className="s-32 xl:s-20 sm:s-16 group-hover:scale-[1.07] duration-500">
+                <div className="s-32 xl:s-20 sm:s-16 group-hover:scale-[1.07] group-hover:brightness-[400] duration-300">
                   <Image className="block object-contain w-full h-full" src={imageUrl} alt={heading || ''} width={128} height={128} />
                 </div>
               )}
 
               <div className="sm:space-y-1">
-                <div className="flex gap-2.5 group">
+                <div className="flex gap-2.5">
                   {isHydrated && (
                     <HoverText triggerRef={{current: itemRefs.current[idx]}}>
                       <H3>{heading}</H3>
                     </HoverText>
                   )}
-
-                  <div className="relative -z-20 text-2xl mt-[1px] font-bold opacity-0 -translate-x-3 group-hover:translate-x-1 group-hover:opacity-100 duration-300">→</div>
                 </div>
 
-                <div className="space-y-4 divide-y sm:space-y-3 divide-gray sm:divide-gray/30">
+                <div className="space-y-4 divide-y sm:space-y-3 divide-gray sm:divide-gray/30 group-hover:divide-white-dirty">
                   {list?.map((item, index) => (
                     <H4 className="uppercase max-w-[40ch] pt-4 sm:pt-2.5" key={index}>
                       {item}

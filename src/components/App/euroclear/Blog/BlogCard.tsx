@@ -14,7 +14,8 @@ import {urlFor} from '#/src/sanity/lib/image'
 import Link from 'next/link'
 import {H4, H6} from '~/UI/Typography'
 import HoverText from '~/UI/HoverText'
-import ImageShader from '~/UI/ImageShader'
+// import ImageShader from '~/UI/ImageShader'
+import Image from 'next/image'
 
 type BLOG_QUERYResultItem = BLOG_QUERYResult[number]
 
@@ -43,7 +44,8 @@ export function BlogCard({heading, caption, date, slug, image, className}: BlogC
   return (
     <Link ref={cardRef} href={`/blog/${slug?.current}`} className={cn('border-r border-b border-gray', className)}>
       <div className={imageStyles}>
-        <ImageShader src={imageUrl || fallbackImageSrc} alt={image?.alt || 'Новость про Mueller Wagner'} />
+        {/* <ImageShader src={imageUrl || fallbackImageSrc} alt={image?.alt || 'Новость про Mueller Wagner'} /> */}
+        <Image src={imageUrl || fallbackImageSrc} alt={image?.alt || 'Новость про Mueller Wagner'} width={700} height={700} />
       </div>
 
       <div className="px-6 pt-4 pb-16 space-y-5 xl:px-4 xl:pt-3 xl:pb-14 sm:pt-5 sm:pb-7 xl:space-y-2">

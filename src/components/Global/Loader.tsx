@@ -4,14 +4,25 @@ import LogoMaxImage from '$/logo-max.svg'
 import {VolumeOff, Volume2} from 'lucide-react'
 
 import gsap from 'gsap'
-import {useEffect, useState, useRef} from 'react'
+import {useLayoutEffect, useEffect, useState, useRef} from 'react'
 import {useMediaQuery} from '@/hooks/useMediaQuery'
 
 import Image from 'next/image'
 import {H4} from '~/UI/Typography'
 
+const getInitialLoaderState = () => {
+  try {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('loaderShown') !== 'true'
+    }
+  } catch (e) {
+    console.warn('SessionStorage access failed:', e)
+  }
+  return false
+}
+
 export default function Loader() {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(getInitialLoaderState)
   const [isVideoHidden, setIsVideoHidden] = useState(false)
   const [showSkipButton, setShowSkipButton] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -25,7 +36,17 @@ export default function Loader() {
 
   const loaderDuration = 1.5
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!isVisible) {
+      try {
+        sessionStorage.setItem('loaderShown', 'true')
+      } catch (e) {
+        console.warn('SessionStorage write failed:', e)
+      }
+    }
+  }, [isVisible])
+
+  useLayoutEffect(() => {
     if (isVideoHidden) {
       stripeRefs.current.forEach((stripe, index) => {
         if (stripe) {
@@ -46,7 +67,7 @@ export default function Loader() {
     }
   }, [isVideoHidden])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isVisible) {
       document.documentElement.classList.add('no-scroll')
     } else {

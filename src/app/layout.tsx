@@ -21,6 +21,7 @@ const kaius = localFont({
 
 import Header from '~/Global/Header'
 import Notification from '~/Global/Notification'
+import Loader from '~/Global/Loader'
 import YandexMetrika from '~/Global/Analytics'
 
 export default function RootLayout({
@@ -31,6 +32,8 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <body className={`bg-white text-foreground font-playfair antialiased relative ${playfairDisplay.variable} ${kaius.variable}`}>
+        <Loader />
+
         <Notification />
         <Header />
         {children}

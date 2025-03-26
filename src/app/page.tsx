@@ -1,5 +1,4 @@
 import Container from '~/Global/Container'
-import Loader from '~/Global/Loader'
 
 import Hero from '~~/index/Hero'
 import Details from '~~/index/Details/Details'
@@ -11,7 +10,6 @@ import Contacts from '~~/index/Contacts'
 export default function HomePage() {
   return (
     <>
-      {process.env.NODE_ENV === 'production' && <Loader />}
       <Container>
         <Hero />
         <Details />

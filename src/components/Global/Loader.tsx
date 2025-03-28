@@ -177,13 +177,13 @@ export default function Loader() {
             <div className="grid w-full h-full opacity-100 duration-300 bg-blue">
               <div ref={videoContainerRef} className="w-full h-full aspect-video sm:aspect-[9/16] pointer-events-none">
                 <video ref={videoRef} autoPlay loop muted={isMuted} playsInline className="block object-cover w-full h-full bg-gray-light/25">
-                  <source src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} type="video/webm" />
+                  {/* <source src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} type="video/webm" /> */}
                   <source src={isDesktop ? '/loader/desktop.mp4' : '/loader/mobile.mp4'} type="video/mp4" />
                 </video>
               </div>
 
               {showSkipButton && (
-                <button className="absolute block px-10 pt-3 pb-4 text-white duration-200 rounded-md place-self-center xl:px-8 sm:py-3 sm:px-7 bottom-7 bg-blue/85 hover:bg-blue" onClick={handleSkip}>
+                <button className="absolute block px-10 pt-3 pb-4 text-white duration-200 rounded-md place-self-center xl:px-8 sm:py-3 sm:px-7 bottom-7 right-7 bg-blue/85 hover:bg-blue" onClick={handleSkip}>
                   <H4 className="sm:text-lg">Пропустить видео</H4>
                 </button>
               )}

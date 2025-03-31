@@ -6,10 +6,10 @@ import {PRESENTATIONS_QUERYResultItem} from '~/Global/Header'
 import {cn} from '#/src/lib/utils'
 import {notFound} from 'next/navigation'
 import {useScrollTrigger} from '#/src/hooks/useScrollTrigger'
-import {urlFor} from '#/src/sanity/lib/image'
+// import {urlFor} from '#/src/sanity/lib/image'
 import {urlForFile} from '#/src/sanity/lib/file'
 
-import Image from 'next/image'
+// import Image from 'next/image'
 import {H1, H2, H6, P} from '~/UI/Typography'
 import {Button} from '~/Global/Header/DesktopHeader'
 
@@ -23,18 +23,26 @@ export default function Hero({data, presentation}: HeroProps) {
 
   if (!data) return notFound
 
-  const {heading, action, achievements, image} = data
+  const {heading, action, achievements} = data // , image
 
-  const imageUrl = image ? urlFor(image).url() : ''
+  // const imageUrl = image ? urlFor(image).url() : ''
 
   return (
     <div className={cn('grid grid-cols-2 sm:flex sm:flex-col overflow-hidden')}>
       <>
         <div data-scroll-trigger="fixed-euroclear-image" className="sm:hidden">
-          {imageUrl && <Image quality={100} priority={true} className="block object-cover w-full h-screen" src={imageUrl} alt={heading || ''} width={1000} height={1000} />}
+          {/* {imageUrl && <Image quality={100} priority={true} className="block object-cover w-full h-screen" src={imageUrl} alt={heading || ''} width={1000} height={1000} />} */}
+          <video autoPlay loop muted playsInline className="block object-cover w-full h-screen">
+            <source src="/loader/desktop.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        <div className="hidden sm:block h-[45vh]">{imageUrl && <Image quality={100} priority={true} className="block object-cover w-full h-full" src={imageUrl} alt={heading || ''} width={1000} height={1000} />}</div>
+        <div className="hidden sm:block h-[45vh]">
+          {/* {imageUrl && <Image quality={100} priority={true} className="block object-cover w-full h-full" src={imageUrl} alt={heading || ''} width={1000} height={1000} />} */}
+          <video autoPlay loop muted playsInline className="block object-cover w-full h-full">
+            <source src="/loader/mobile.mp4" type="video/mp4" />
+          </video>
+        </div>
       </>
 
       <div>

@@ -2,6 +2,7 @@
 
 import LogoMaxImage from '$/logo-max.svg'
 import {VolumeOff, Volume2} from 'lucide-react'
+import Cookies from 'js-cookie'
 
 import gsap from 'gsap'
 import {useLayoutEffect, useEffect, useState, useRef} from 'react'
@@ -10,19 +11,8 @@ import {useMediaQuery} from '@/hooks/useMediaQuery'
 import Image from 'next/image'
 import {H4} from '~/UI/Typography'
 
-const getInitialLoaderState = () => {
-  try {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('loaderShown') !== 'true'
-    }
-  } catch (e) {
-    console.warn('SessionStorage access failed:', e)
-  }
-  return false
-}
-
 export default function Loader() {
-  const [isVisible, setIsVisible] = useState(getInitialLoaderState)
+  const [isVisible, setIsVisible] = useState(true)
   const [isVideoHidden, setIsVideoHidden] = useState(false)
   const [showSkipButton, setShowSkipButton] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -33,18 +23,40 @@ export default function Loader() {
   const stripeRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const isDesktop = useMediaQuery('(min-width: 768px)')
-
   const loaderDuration = 1.5
 
-  useLayoutEffect(() => {
-    if (!isVisible) {
-      try {
-        sessionStorage.setItem('loaderShown', 'true')
-      } catch (e) {
-        console.warn('SessionStorage write failed:', e)
-      }
+  useEffect(() => {
+    const hasSeenLoader = Cookies.get('hasSeenLoader')
+    const tl: gsap.core.Timeline = gsap.timeline({
+      onComplete: () => {
+        setShowVideo(true)
+      },
+    })
+
+    tl.to(
+      {},
+      {
+        duration: loaderDuration,
+        onUpdate: () => {
+          const prog = Math.round(tl.progress() * 100)
+          setProgress(prog)
+        },
+        onComplete: () => {
+          if (hasSeenLoader) {
+            setIsVisible(false)
+          }
+        },
+      },
+    )
+
+    if (!hasSeenLoader) {
+      Cookies.set('hasSeenLoader', 'true', {expires: 1})
     }
-  }, [isVisible])
+
+    return () => {
+      tl.kill()
+    }
+  }, [])
 
   useLayoutEffect(() => {
     if (isVideoHidden) {

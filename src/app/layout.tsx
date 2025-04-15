@@ -24,6 +24,9 @@ import Notification from '~/Global/Notification'
 import Loader from '~/Global/Loader'
 import YandexMetrika from '~/Global/Analytics'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 86400
+
 export default function RootLayout({
   children,
 }: Readonly<{

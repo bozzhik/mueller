@@ -165,7 +165,7 @@ export default function Loader() {
     }
   }
 
-  const screenHeight = 'h-screen !h-svh'
+  const screenHeight = 'h-screen'
 
   if (!isVisible) return null
 
@@ -186,9 +186,9 @@ export default function Loader() {
       ) : (
         <>
           {!isVideoHidden && (
-            <div className="grid w-full h-full opacity-100 duration-300 bg-blue">
-              <div ref={videoContainerRef} className="w-full h-full relative flex items-end">
-                <video ref={videoRef} autoPlay loop muted={isMuted} playsInline className="absolute bottom-0 w-full h-full object-cover object-bottom">
+            <div className="grid w-full sm:w-auto h-full opacity-100 duration-300 bg-blue">
+              <div ref={videoContainerRef} className="w-full sm:w-auto h-full relative flex items-end">
+                <video ref={videoRef} autoPlay loop muted={isMuted} playsInline className="absolute bottom-0 w-full sm:w-auto h-full object-cover object-bottom">
                   {/* <source src={isDesktop ? '/loader/desktop.webm' : '/loader/mobile.webm'} type="video/webm" /> */}
                   <source src={isDesktop ? '/loader/desktop.mp4' : '/loader/mobile.mp4'} type="video/mp4" />
                 </video>

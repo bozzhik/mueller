@@ -26,7 +26,7 @@ export default function Loader() {
   const loaderDuration = 1.5
 
   useEffect(() => {
-    const hasSeenLoader = Cookies.get('hasSeenLoader')
+    const hasSeenLoader = process.env.NODE_ENV === 'development' ? false : Cookies.get('hasSeenLoader')
     const tl: gsap.core.Timeline = gsap.timeline({
       onComplete: () => {
         setShowVideo(true)
@@ -49,7 +49,7 @@ export default function Loader() {
       },
     )
 
-    if (!hasSeenLoader) {
+    if (!hasSeenLoader && process.env.NODE_ENV !== 'development') {
       Cookies.set('hasSeenLoader', 'true', {expires: 1})
     }
 
@@ -195,12 +195,12 @@ export default function Loader() {
               </div>
 
               {showSkipButton && (
-                <button className="fixed bottom-7 sm:top-4 right-7 sm:right-4 block px-10 pt-3 pb-4 text-white duration-200 rounded-md xl:px-8 sm:pt-1.5 sm:pb-2 sm:px-7 bg-blue/85 sm:bg-blue/90 hover:bg-blue" onClick={handleSkip}>
+                <button className="fixed sm:s-fit bottom-7 sm:top-4 right-7 sm:right-4 block px-10 pt-3 pb-4 text-white duration-200 rounded-md xl:px-8 sm:pt-1.5 sm:pb-2 sm:px-7 bg-blue/85 sm:bg-blue/90 hover:bg-blue" onClick={handleSkip}>
                   <H4 className="sm:text-lg">Пропустить видео</H4>
                 </button>
               )}
 
-              <button onClick={handleMuteToggle} className="fixed top-6 right-6 sm:top-4 sm:left-4 bg-white text-blue py-2 px-2.5 rounded-md">
+              <button onClick={handleMuteToggle} className="fixed sm:s-fit top-6 right-6 sm:top-4 sm:left-4 bg-white text-blue py-2 px-2.5 rounded-md">
                 {isMuted ? <VolumeOff className="s-8 xl:s-6" strokeWidth={1.5} /> : <Volume2 className="s-8 xl:s-6" strokeWidth={1.5} />}
               </button>
             </div>

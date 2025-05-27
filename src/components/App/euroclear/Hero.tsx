@@ -33,14 +33,14 @@ export default function Hero({data, presentation}: HeroProps) {
         <div data-scroll-trigger="fixed-euroclear-image" className="sm:hidden">
           {/* {imageUrl && <Image quality={100} priority={true} className="block object-cover w-full h-screen" src={imageUrl} alt={heading || ''} width={1000} height={1000} />} */}
           <video autoPlay loop muted playsInline className="block object-cover w-full h-screen">
-            <source src="/loader/desktop.mp4" type="video/mp4" />
+            <source src="/euroclear.mp4" type="video/mp4" />
           </video>
         </div>
 
         <div className="hidden sm:block h-[45vh]">
           {/* {imageUrl && <Image quality={100} priority={true} className="block object-cover w-full h-full" src={imageUrl} alt={heading || ''} width={1000} height={1000} />} */}
           <video autoPlay loop muted playsInline className="block object-cover w-full h-full">
-            <source src="/loader/mobile.mp4" type="video/mp4" />
+            <source src="/euroclear.mp4" type="video/mp4" />
           </video>
         </div>
       </>

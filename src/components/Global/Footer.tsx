@@ -24,7 +24,7 @@ export default function Footer() {
       <div className="flex flex-col justify-between col-span-1 p-6 sm:px-3 sm:pt-5 sm:pb-0 sm:gap-2">
         <Image src={MuellerLogo} className="object-contain w-[80%] sm:w-[66%]" alt="Mueller Wagner logo" />
 
-        <SPAN className="sm:hidden text-gray-light">2024, все права защищены</SPAN>
+        <SPAN className="sm:hidden text-gray-light">2025, все права защищены</SPAN>
       </div>
 
       <div className="grid grid-cols-3 col-span-3 gap-4 px-6 py-5 sm:gap-1.5 sm:px-3 sm:py-0 sm:grid-cols-1">
@@ -69,9 +69,9 @@ export default function Footer() {
                   </HoverText>
                 </Link>
 
-                <Link href="tel:+79647152222" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
+                <Link href="tel:+79773209436" className="block sm:hidden w-fit text-gray-light hover:border-gray-light">
                   <HoverText>
-                    <SPAN>+7 (964) 715 22-22</SPAN>
+                    <SPAN>+7 (977) 320 94-36</SPAN>
                   </HoverText>
                 </Link>
               </div>
@@ -101,14 +101,14 @@ export default function Footer() {
           </HoverText>
 
           <HoverText>
-            <Link href="mailto:+ 7 (964) 715 22 22" className="text-gray-light border-gray-light w-fit">
-              <SPAN>+7 (964) 715 22-22</SPAN>
+            <Link href="tel:+79773209436" className="text-gray-light border-gray-light w-fit">
+              <SPAN>+7 (977) 320 94-36</SPAN>
             </Link>
           </HoverText>
         </div>
 
         <div className="flex flex-col gap-2">
-          <SPAN className="sm:text-sm text-gray-light">2024, все права защищены</SPAN>
+          <SPAN className="sm:text-sm text-gray-light">2025, все права защищены</SPAN>
 
           <Link href="https://yandex.ru/maps/-/CHEARNn3" target="_blank">
             <SPAN className="sm:text-sm text-gray-light sm:leading-[1.1]">БЦ &#34;Вивальди Плаза&#34; ул. Летниковская, 2 к.1, Москва, Россия, 115114</SPAN>
